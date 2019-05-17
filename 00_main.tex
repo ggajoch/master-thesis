@@ -1,0 +1,114 @@
+\documentclass[pdflatex,en,11pt]{aghdpl}
+\usepackage[english]{babel}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+
+\usepackage[backend=bibtex,
+style=numeric,
+%bibencoding=ascii,
+%style=reading
+giveninits=true
+]{biblatex}
+\renewbibmacro{in:}{%
+    \ifentrytype{article}{}{\printtext{\bibstring{in}\intitlepunct}}}
+
+\addbibresource{bibliografia.bib}
+
+\DeclareNameAlias{sortname}{last-first}
+\DeclareNameAlias{default}{last-first}
+
+% dodatkowe pakiety
+\usepackage{enumerate}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{siunitx}
+\usepackage{hyperref}
+\usepackage[acronym,nomain,toc]{glossaries}
+
+% \lstloadlanguages{TeX}
+
+\lstset{
+  literate={ą}{{\k{a}}}1
+           {ć}{{\'c}}1
+           {ę}{{\k{e}}}1
+           {ó}{{\'o}}1
+           {ń}{{\'n}}1
+           {ł}{{\l{}}}1
+           {ś}{{\'s}}1
+           {ź}{{\'z}}1
+           {ż}{{\.z}}1
+           {Ą}{{\k{A}}}1
+           {Ć}{{\'C}}1
+           {Ę}{{\k{E}}}1
+           {Ó}{{\'O}}1
+           {Ń}{{\'N}}1
+           {Ł}{{\L{}}}1
+           {Ś}{{\'S}}1
+           {Ź}{{\'Z}}1
+           {Ż}{{\.Z}}1
+}
+
+\newcommand{\rad}{\radian}
+\newcommand{\iic}{$I^2C$ }
+\newcommand{\uA}{\micro\ampere}
+\newcommand{\mA}{\milli\ampere}
+\newcommand{\uV}{\micro\volt}
+\newcommand{\mV}{\milli\volt}
+
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\makeatletter
+\let\ps@plain\ps@fancy
+\makeatother
+
+%---------------------------------------------------------------------------
+
+\author{Grzegorz Gajoch}
+\shortauthor{G. Gajoch}
+
+\course{Elektronika i Telekomunikacja}
+
+\titlePL{}
+\titleEN{}
+
+\shorttitlePL{} % skrócona wersja tytułu jeśli jest bardzo długi
+\shorttitleEN{}
+
+\thesistypePL{Praca dyplomowa magisterska}
+\thesistypeEN{Master Thesis}
+
+\supervisorPL{dr inż. Cezary Worek}
+\supervisorEN{Cezary Worek Ph.D}
+
+\date{2019}
+
+\departmentPL{Katedra Elektroniki}
+\departmentEN{Department of Electronics}
+
+\facultyPL{Wydział Informatyki, Elektroniki i Telekomunikacji}
+\facultyEN{Faculty of Computer Science, Electronics and Telecommunications}
+
+\acknowledgements{}
+
+\setlength{\cftsecnumwidth}{10mm}
+
+
+%---------------------------------------------------------------------------
+
+\begin{document}
+
+\titlepages
+
+\tableofcontents
+%\clearpage
+
+
+
+
+\appendix
+\printbibliography
+
+\end{document}
