@@ -21,7 +21,7 @@ giveninits=true
 \usepackage{enumerate}
 \usepackage{listings}
 \usepackage{float}
-\usepackage{siunitx}
+\usepackage[binary-units=true]{siunitx}
 \usepackage{hyperref}
 \usepackage[acronym,nomain,toc]{glossaries}
 
@@ -54,6 +54,9 @@ giveninits=true
 \newcommand{\mA}{\milli\ampere}
 \newcommand{\uV}{\micro\volt}
 \newcommand{\mV}{\milli\volt}
+\newcommand{\MHz}{\mega\hertz}
+\DeclareSIUnit{\belmilliwatt}{Bm}
+\DeclareSIUnit{\dBm}{\deci\belmilliwatt}
 
 \usepackage{array}
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
