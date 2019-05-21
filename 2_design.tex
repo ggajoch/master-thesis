@@ -1,6 +1,8 @@
 \chapter{System design}
 
-In this chapter, component selection and design is described. 
+In this chapter, component selection and design is described.
+
+During the design process, multiple iteration of component selection, validation and link budget calculation were made, this chapter describes the final result of the link design. 
 
 \section{Space segment}
 Space segment is a part of the satellite communication system that resides on the satellite itself. It is divided into two main parts: communication subsystem (COMM) and antennas (ANTs) connected with two coaxial cables.
@@ -10,9 +12,9 @@ Space segment is critical in system operation and reliability - there is no poss
 Because of the mentioned requirements it was decided to choose commercially available and flight-proven Cubesat components to increase the reliability of the system.
 
 \subsection{Frequency band selection}
-Data throughput requirements and communication session scheme were described in the \ref{introduction} chapter, but it summarizes to about \SI{1}{\kilo\byte / \second}.
+Data throughput requirements and communication session scheme were described in the \ref{introduction} chapter, but it summarizes to about \SI{1}{\kbps}.
 
-As mentioned in section \ref{???} the most common radio bands used in Cubesat designs are VHF, UHF and S-band. S-band is usually used when high data rate (~\SI{10}{\mega\bits / \second}) are necessary. Typical designs for low-rate data link are full-duplex combo or simplex VHF/UHF radio.
+As mentioned in section \ref{aa} the most common radio bands used in Cubesat designs are VHF, UHF and S-band. S-band is usually used when high data rate (~\SI{10}{\Mbps}) are necessary. Typical designs for low-rate data link are full-duplex combo or simplex VHF/UHF radio.
 
 PW-Sat1 (first polish satellite, built on Warsaw University of Technology) - (link)??? used full-duplex VHF-downlink and UHF-uplink radio. During its mission, uplink stability was an issue. The cause was narrowed down to very high level of noise and interference in the UHF band on the orbit, which probably is caused by over-the-horizon radars. Therefore, UHF-uplink was discarded.
 
@@ -30,7 +32,7 @@ When the subsystem was ordered, the choice of available products was very limite
 \begin{tabular}{cc}
         \includegraphics[width=0.4\paperwidth]{img/2/ISIS-radio-UHF-VHF-min.png}
     & 
-        \includegraphics[width=0.3\paperwidth]{img/2/ISIS_TRXvU_block_diagram.eps}
+        %\includegraphics[width=0.3\paperwidth]{img/2/ISIS_TRXvU_block_diagram.eps}
 \end{tabular}
 \label{ISIS_TRXvU}
 \caption{ISIS VHF uplink/UHF downlink Full Duplex Transceiver. Source: \cite{???}}
@@ -46,7 +48,7 @@ Basic characteristics:
      \si{430}-\SI{450}{\MHz} frequency range & \si{140}-\SI{150}{\MHz} frequency range \\
      \SI{0.5}{\watt} downlink power & \SI{-98}{\dBm} sensitivity for \si{10^-5}~BER \\
      \si{1.2} - \SI{9.6}{\kilo\bit / \second} bitrate & \SI{1.2}{\kilo\bit / \second} bitrate \\ 
-     BPSK modulation with G3RUH scrambling & F<-modulated AFSK \\ 
+     BPSK modulation with G3RUH scrambling & FM-modulated AFSK \\ 
 \end{tabular}
 
 
@@ -77,10 +79,86 @@ This system is deployable by the command from on-board computer. Thermal knife (
 
 
 \section{Communication link parameters}
-Selected satellite radio module imposes the modulation used in the communication. This section briefly describes used modulations, frame formats and implications to the ground segment of the system.
+Selected satellite radio module imposes the modulation and data packets used in the communication. This section briefly describes used modulations, frame formats and implications to the ground segment of the system.
 
-\subsection{Downlink}
-Downlink signal is modulated using Binary Phase Shift Keying (BPSK). The data rate can be changed dynamically by the on-board computer, in range \si{1.2} - \SI{9.6}{\kilo\bit / \second}, allowing to improve the link quality when necessary. S
+\subsection{Downlink modulation}
+Downlink signal is modulated using Binary Phase Shift Keying (BPSK). The data rate can be changed dynamically by the on-board computer, in range \si{1.2} - \SI{9.6}{\kilo\bit / \second}, allowing to improve the link quality when necessary. Baseband signal is also filtered using Raised Root Cosine filter, to reduce side lobes power. Signal bandwidth varies between \SI{2.4}{\kHz} (for \SI{1.2}{\kbps}) and \SI{19.2}{\kHz} (for \SI{9.6}{\kbps}). 
+
+% TODO: rysunek BPSK
 
 \subsection{Uplink}
 Uplink modulation is two-staged: first, data is modulated using Audio Frequency Shift Keying (chaning 0s and 1s to wave of frequencies, in order, \SI{1200}{\hertz} and \SI{2200}{\hertz}), later to be Frequency Modulated to the RF carrier (with frequency deviation of $\pm\SI{5}{\kilo\hertz}$).
+
+% TODO: schemat modulatora
+
+\subsection{Frame format}
+Physical layer data format is reduced-functionality AX.25 packet \cite{AX25_standard}. Only connectionless transmission mode and UI frames are supported. Packet framing is the same as in SwissCube CubeSat \cite{SwissCube_AX25}.
+
+Basic frame format is shown in the table \ref{AX25_frame}. All the fields except flags are bit-stuffed to ensure that the \textit{Flag} field does not appear in the data: if there are six '1' bits to be send, transmitter inserts '0' bit before the last one. Adressing in this system in inherent, but unused - this is point-to-point connection, therefore adresses are fixed. Frame-Check Sequence is a CRC (CITT standard) of the whole frame (without \textit{Flags}). \textit{Information Field} is variable-length, between \si{4} and \SI{256}{\byte} length is the place for the actual data transmitted by the On-Board Computer.
+
+\begin{table}
+\small
+\centering
+\caption{AX.25 frame format}
+\label{AX25_frame}
+\arrayrulecolor{black}
+\begin{tabular}{l|c|c|c|c|c|c|c|c|} 
+\hhline{~|-|----|-|-|-|}
+\multirow{2}{*}{}                                                              & \multirow{2}{*}{Flag } & \multicolumn{4}{c|}{AX.25 Transfer Frame Header (128 bits)}                                                                                                                                                                                   & {\cellcolor[rgb]{0.753,0.753,0.753}}                                                                                                                  & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Frame-\\Check\\Sequence\end{tabular}} & \multirow{2}{*}{Flag}  \\ 
+\hhline{~|~|-|-|-|-|>{\arrayrulecolor[rgb]{0.753,0.753,0.753}}->{\arrayrulecolor{black}}|~|~|}
+                                                                               &                        & \begin{tabular}[c]{@{}c@{}}Destination\\Address\end{tabular} & \begin{tabular}[c]{@{}c@{}}Source\\Address\end{tabular} & \begin{tabular}[c]{@{}c@{}}Control\\Bits\end{tabular} & \begin{tabular}[c]{@{}c@{}}Protocol\\Identifier\end{tabular} & \multirow{-2}{*}{{\cellcolor[rgb]{0.753,0.753,0.753}}\begin{tabular}[c]{@{}>{\cellcolor[rgb]{0.753,0.753,0.753}}c@{}}Information\\Field\end{tabular}} &                                                                                  &                        \\ 
+\hline
+\multicolumn{1}{|c|}{\begin{tabular}[c]{@{}c@{}}Length\\{[}bits]\end{tabular}} & 8                      & 56                                                           & 56                                                      & 8                                                     & 8                                                            & {\cellcolor[rgb]{0.753,0.753,0.753}}32-2048                                                                                                           & 16                                                                               & 8                      \\ 
+\hline
+\multicolumn{1}{|c|}{Value}                                                    & 01111110               & PWSAT2-0                                                     & PWSAT2-0                                                & 00000011                                              & 11110000                                                     & {\cellcolor[rgb]{0.753,0.753,0.753}}                                                                                                                  & CRC-CITT                                                                         & 01111110               \\
+\hline
+\end{tabular}
+\end{table}
+
+
+Additionally, downlink data is scrambled using G3RUH scrambling polynomial to maximize randomness and ensure proper bit synchronization.
+
+%% -------------------------------------------------------------------------------------------
+
+\section{Ground station design}
+Ground station design should complement the space segment, with large antenna gains and output power to allow the budget link to close.
+
+As the system is full-duplex, both uplink and downlink channels are separate.
+
+\subsection{Antennas}
+Space communication antennas require very large gain due to the distance between the stations. 
+
+Typical design consist of two Yagi-Uda antennas, one for uplink (VHF) and one for downlink (UHF). Their length, therefore directivity was constrained by available space, antenna mast height, antenna rotator strength and positioning accuracy.
+
+PW-Sat2 is transmitting radio signals with linear polarization, nevertheless ground station  polarization should be circular, due to the random tumbling of the satellite. To achieve this, Cross-Yagi antennas were selected, and to linear planes antennas were phased using coaxial cable and symmetrical splitters/combiners.
+
+
+
+\subsection{Uplink}
+Due to the low sensitivity of the satellite receiver (\SI{-98}{\dBm}) uplink EIRP has to be very large.
+\subsubsection{Transmitter}
+Uplink signal is an FM-modulated AFSK, so standard analog audio FM transceiver can be used to generate RF signal. Audio signal can be generated by the Terminal Node Controller or by software running on the PC.
+
+During PW-Sat1 project, the Icom 910H amateur radio transceiver \ref{Icom_910H_ref} was used for both uplink and downlink, therefore it was proposed to use the the same radio.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\paperwidth]{img/2/icom910h.jpg}
+    \caption{Icom 910H. Source: \cite{ICOM_910H_pic}}
+    %%% https://www.isispace.nl/product/dipole-antenna-system/
+    \label{Icom_910H_ref}
+\end{figure}
+
+Radio VHF FM transmit characteristics:
+
+\begin{tabular}{c|c}
+    Frequency & \si{144} - \SI{148}{\MHz} \\
+    Frequency stability &  \SI{\pm 3}{\ppm} \\
+    Output power & \SI{100}{\watt} \\
+    Audio input & analog jack \\
+\end{tabular}
+
+This radio is connected to the computer, which controls the audio to transmit and Push-To-Talk (PTT, transmission enable) signal. 
+
+
+

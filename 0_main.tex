@@ -24,6 +24,9 @@ giveninits=true
 \usepackage[binary-units=true]{siunitx}
 \usepackage{hyperref}
 \usepackage[acronym,nomain,toc]{glossaries}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{hhline}
 
 % \lstloadlanguages{TeX}
 
@@ -54,9 +57,15 @@ giveninits=true
 \newcommand{\mA}{\milli\ampere}
 \newcommand{\uV}{\micro\volt}
 \newcommand{\mV}{\milli\volt}
+\newcommand{\Hz}{\hertz}
+\newcommand{\kHz}{\kilo\hertz}
 \newcommand{\MHz}{\mega\hertz}
+\newcommand{\bps}{\bit / \second}
+\newcommand{\kbps}{\kilo\bps}
+\newcommand{\Mbps}{\mega\bps}
 \DeclareSIUnit{\belmilliwatt}{Bm}
 \DeclareSIUnit{\dBm}{\deci\belmilliwatt}
+\DeclareSIUnit{\ppm}{ppm}
 
 \usepackage{array}
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
@@ -78,7 +87,7 @@ giveninits=true
 \titleEN{PW-Sat2 satellite communication subsystem}
 
 \shorttitlePL{System komunikacji satelity PW-Sat2} % skrócona wersja tytułu jeśli jest bardzo długi
-\shorttitleEN{PW-Sat2 satellite communication subsystem}
+\shorttitleEN{PW-Sat2 satellite communication system}
 
 \thesistypePL{Praca dyplomowa magisterska}
 \thesistypeEN{Master Thesis}
