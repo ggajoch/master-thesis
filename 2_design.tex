@@ -76,6 +76,17 @@ This system is deployable by the command from on-board computer. Thermal knife (
 
 \subsubsection{Deployable elements influence on the antenna pattern}
 
+On-board PW-Sat2 are two main deployables: solar panels and deorbitation sail.
+
+During design stage, influence of the solar panels was discussed with antenna manufacturer - the outcome was to place longed dipoles (VHF) along the solar panels, and shorter ones orthogonally to it, as shown in the figure \ref{???}
+
+% TODO: zdjęcie z otwartymi panelami i antenami
+
+The influence of the deorbit sail was also simulated during Critical Design stage.
+
+Deorbitation sail is made by very thin (\SI{5}{\micro\meter}) mylar foil with aluminium coating. Using % TODO
+simulation tool, it was shown that the sail will increase directivity of the cubesat antennas, acting as a reflector.
+% TODO: jakieś zdjęcie z symulacji, wynik o ile dB się pogorszyło
 
 
 \section{Communication link parameters}
@@ -130,8 +141,18 @@ Space communication antennas require very large gain due to the distance between
 
 Typical design consist of two Yagi-Uda antennas, one for uplink (VHF) and one for downlink (UHF). Their length, therefore directivity was constrained by available space, antenna mast height, antenna rotator strength and positioning accuracy.
 
-PW-Sat2 is transmitting radio signals with linear polarization, nevertheless ground station  polarization should be circular, due to the random tumbling of the satellite. To achieve this, Cross-Yagi antennas were selected, and to linear planes antennas were phased using coaxial cable and symmetrical splitters/combiners.
+PW-Sat2 is transmitting radio signals with linear polarization, nevertheless ground station  polarization should be circular, due to the random tumbling of the satellite. To achieve this, Cross-Yagi antennas were selected, and two linear planes antennas were phased using coaxial cable and symmetrical splitters/combiners. Coaxial cables length was calculated to achieve \SI{90}{\degree} shift between two dipols.
 
+% TODO: schemat anten w GS
+
+Antennas were selected to be the longest possible, limited by mast height. I turned out that they are one of the longest commercially available. 
+
+Antenna characteristics:
+
+\begin{tabular}{c|c}
+     \textbf{Downlink} & \textbf{Uplink} \\ \hline
+     Tonna & Tonna \\
+\end{tabular}
 
 
 \subsection{Uplink}
@@ -160,5 +181,74 @@ Radio VHF FM transmit characteristics:
 
 This radio is connected to the computer, which controls the audio to transmit and Push-To-Talk (PTT, transmission enable) signal. 
 
+\subsubsection{Standing Wave Ratio meter}
+To check proper antenna connection and ensure long-term monitoring a SWR (Standing Wave Ratio) meter should be installed. This instrument measures ratio of reflected power, thus providing information about antenna impedance matching.
 
+% TODO: zdjęcie/zrzut z kamerki SWR metera
+
+
+
+% ------------------------------------------------------------
+% ------------------------- DOWNLINK -------------------------
+% ------------------------------------------------------------
+
+\subsection{Downlink}
+Receiving Signals from maximal range of about \SI{3000}{\kilo\meter} from a \SI{0.5}{\watt} transmitter requires very high processing gain and low noise factor of the system. Another factor to take into account is Doppler effect, which has to be taken into account. On UHF frequencies, it reaches up to about \SI{15}{\kHz}.
+
+\subsubsection{Signal front-end processing}
+First stage processing has two main purposes - to lower the system noise (amplify the signal) and eliminate intermodulation (filtering).
+
+Downlink system block diagram is shown in the figure \ref{Downln}.
+
+% TODO SCHEMAT DOWNLINKU
+
+Amplifier, installed close to the antenna reduces influence of the long cable to the receiver, reducing total system noise factor. However, strong signals in the proximity of the signal can be intermodulated in the LNA, resulting in variety of issues: from reduced gain to completely distorted signal.
+
+As an amplifier, a high-level Low Noise Amplifier Mini-Circuits PGA-103+ was used, with additional SAW filter to reduce unwanted signals. Schematic and pcb layout of the designed board are shown in the figure \ref{LNA}
+
+% TODO: LNA
+
+Narrowband filter should be installed before the LNA. However, this requires the filter to have the lower loss possible, as the in-band loss in the filter directly affects noise figure of the system. For this purpose, cavity filter was selected. This, reasonably narrow band filter (\SI{1}{\MHz}), has very low insertion loss ($<$\SI{1}{\dB}).
+
+Front-end signal processing was installed as close to the antenna as possible \ref{elka_skrzynka}.
+
+% TODO: elka_skrzynka
+
+
+
+To receive BPSK signals, radio amateurs commonly use transceiver with Single SideBand  (SSB) mode. In this mode radio acts as a multi-stage down-converter, allowing to receive baseband with audio card from PC. However, due to audio main purpose, typical radios have a bandpass filters about \SI{3}{\kHz} wide, effectively blocking wider transmissions. Using SSB mode for receiving PW-Sat2 is possible, however only for \SI{1.2}{\kbps} bitrate.
+
+Another options of BPSK receiver is to use integrated transceiver in one chip. This solution is not possible for this system, as no off-the-shelf chips provide AX.25 support.
+
+The proposed receiver so
+
+
+
+\section{Ground support software}
+Due to the Software-Defined Radio based architecture, apart from typical frame processing chain, additional software related to modulation and de-modulation is required.
+
+There are multiple signal processing toolboxes to simplify digital signal processing, such as Matlab/Octave \cite{Matlab}, SciPy \cite{Scipy} and GNUradio \cite{Gnuradio}. GNUradio however, simplifies connecting to physical hardware and programming, by allowing to integrate system in block diagrams.
+
+\subsection{GNUradio}
+% TODO
+
+\subsection{Data flow chain}
+Basic assumption of the data flow was to separate frame building (byte-oriented) from signal processing (sample-oriented). Frame building was written in Python, whereas signal processing was built using GNUradio blocks and self-written custom out-of-tree modules. Communication between the layers was implemented using ZeroMQ asynchronous messaging library. Data flow is shown in the figure \ref{data_flow}.
+
+% TODO: data_flow
+
+
+\subsection{Uplink}
+Uplink baseband signal (AFSK) has generated, to be later FM-modulated and transmitted using conventional radio.
+
+AFSK signal was generated using software Voltage Controlled Oscillator (VCO), by generating tone (\si{1200} or \SI{2200}{\hertz}) according to the bit value (\si{0} or \si{1}, respectively).  Block diagram of the uplink modulator is shown in the figure \ref{uplink_block}.
+
+
+\subsection{Downlink}
+The aim of the downlink module is to fully process incoming IQ data from SDR to baseband data (frames).
+
+
+
+
+\subsection{Satellite operation}
 
