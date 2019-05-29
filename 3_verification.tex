@@ -1,0 +1,71 @@
+\part{Component and system verification}
+
+% In this chapter, whole system design verification is described. 
+
+
+\chapter{Space segment verification}
+
+Satellite communication subsystem have to be thoroughly tested on the ground, as once sent nothing can be changed or fixed. High quality measurements are required to verify functionality of the system in the changing environment.
+
+\section{Flatsat}
+
+Most of the tests were performed on Flatsat (an abbreviation from Flat Satellite), an electronic test bench, which consist of mix of flight models, engineering models of the instruments and Electrical Ground Support Equipment (EGSE). EGSE are the test instruments and/or mocks (fake) instruments, which allow testing without the need for actual hardware.
+
+PW-Sat2 Flatsat was integrated in Space Research Centre in Warsaw. Flatsat is shown in the figure \ref{TODO}.
+
+\subsection{Flatsat Ground Station mock}
+To perform the communication tests a Ground Station mock was created of flatsat. It was built using to Software-Defined Radios: one, as downlink receiver, same as to be installed in the Ground Station (Funcube Pro+), and the second (PlutoSDR) to generate uplink signals. Use of SDR instead of analogue radio transceiver greatly simplified the tests performed. Ground station mock is shown in the figure \ref{TODO}. 
+
+
+\section{Transceiver measurement}
+Transceiver was tested separately for its uplink and downlink capabilities. Tests are critical to make sure that radio parameters are maintained in the system, and to verify manufacturers' data.
+
+\subsection{Uplink}
+The most important parameter of the radio receiver is the sensitivity. Blocking immunity (intermodulation), is not critical, as the system is remote from most of the external strong radio signals.
+
+\subsubsection{Sensitivity}
+Sensitivity was measured by the setup shown in the figure \ref{TODO}. Test procedure:
+\begin{itemize}
+    \item measuring output power of PlutoSDR using spectrum analyzer with wide RBW filter (\SI{1}{\MHz})
+    \item increasing attenuation up to the point when PER is noticeable (\SI{1}{\percent})
+    \item calculating signal input power
+\end{itemize}
+
+The result of this test was the sensitivity of TODO.
+
+\subsubsection{Doppler}
+Doppler effect is caused when fast-moving object is emitting/receiving radio waves. For uplink frequency (VHF band) Doppler effect influence can shift frequency up to about \SI{5}{\kHz}. The receiver bandwidth should be measured to estimate allowable frequency inaccuracies.
+
+Test setup is the same as in previous setup, shown in the figure \ref{TODO}. During the test the PER was measured for a range of frequency shift from center. The result is shown in the chart \ref{TODO}.
+
+
+\subsection{Downlink}
+Downlink parameters of the radio module were also measured. An important parameter is the output power and the spectrum of the signal.
+
+\subsubsection{Output power}
+Output power was measured using spectrum analyser with wide resolution bandswidth (\SI{1}{\MHz}). Output power was measured to be \SI{27}{\dBm}. TODO
+
+\subsubsection{Spectrum}
+
+
+% ------------------------------------------------------
+% ------------------------------------------------------
+% ------------------------------------------------------
+
+\chapter{Ground segment verification}
+The design of the ground segment had to be also verified to make sure that the assumed requirements were met.
+
+\section{Antenna measurement}
+After the assembly, antennas should be measured to make sure of the correct assembly. The simplest method is to measure the impedance of the antennas.
+
+Each antenna consist of two dipoles (with vertical and horizontal polarizations) phased with a combiner. Measurements of the dipoles and the phased antenna were perfomed, and the result is shown in the table \ref{TODO}.
+
+
+\section{Uplink}
+As the uplink was built using conventional HAM radio transceiver, only the modulation and output power should be measured. As the physical layer is the typical FM-modulated AFSK and frame protocol is typical AX.25 there is a lot of free software to verify the correctness of the frame and modulation.
+
+\subsection{Output power}
+The power of the power amplifier (built in the transceiver) was measured using an SWR \& Power Meter TODO, and by connecting radio output to the antenna. The measured output and SWR was equal to TODO. Those parameters are continuously monitored during the mission to monitor the cables and radio health.
+
+\subsection{Spectrum \& Watchdogs}
+The spectrum and output modulation correctness in constantly monitored using so-called watchdogs built using
