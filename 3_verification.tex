@@ -38,6 +38,13 @@ Doppler effect is caused when fast-moving object is emitting/receiving radio wav
 
 Test setup is the same as in previous setup, shown in the figure \ref{TODO}. During the test the PER was measured for a range of frequency shift from center. The result is shown in the chart \ref{TODO}.
 
+\section{Satellite antennas}
+After deployment on the orbit, antennas have to deploy. During the test campaign antenna deployment procedure was executed three times. Deployed antennas are shown in the figure \ref{TODO}.
+
+Reflected power from antenna is measured by the radio module during radio frame transmission. Correct antenna deployment can be assured by using the telemetry and comparing the reflected power with measured during the ground test campain. 
+Reflected and forward power chart captured during second antenna opening are shown in the figure \ref{TODO}. 
+
+
 
 \subsection{Downlink}
 Downlink parameters of the radio module were also measured. An important parameter is the output power and the spectrum of the signal.
@@ -58,7 +65,7 @@ The design of the ground segment had to be also verified to make sure that the a
 \section{Antenna measurement}
 After the assembly, antennas should be measured to make sure of the correct assembly. The simplest method is to measure the impedance of the antennas.
 
-Each antenna consist of two dipoles (with vertical and horizontal polarizations) phased with a combiner. Measurements of the dipoles and the phased antenna were perfomed, and the result is shown in the table \ref{TODO}.
+Each antenna consist of two dipoles (with vertical and horizontal polarizations) phased with a combiner. Measurements of the dipoles and the phased antenna were performed, and the result is shown in the table \ref{TODO}.
 
 
 \section{Uplink}
@@ -68,4 +75,47 @@ As the uplink was built using conventional HAM radio transceiver, only the modul
 The power of the power amplifier (built in the transceiver) was measured using an SWR \& Power Meter TODO, and by connecting radio output to the antenna. The measured output and SWR was equal to TODO. Those parameters are continuously monitored during the mission to monitor the cables and radio health.
 
 \subsection{Spectrum \& Watchdogs}
-The spectrum and output modulation correctness in constantly monitored using so-called watchdogs built using
+The spectrum and output modulation correctness in constantly monitored using so-called watchdogs built using another Software Defined Radios (PlutoSDR, RTL-SDR) placed in the proximity of the main antennas.
+By demodulating uplink signal and comparing it in the real time with transmitted frames the correctness of the transmission is guaranteed. Watchdog flowchart and graphical view are shown in the figure \ref{TODO}.
+
+
+
+\section{Downlink}
+Downlink radio flow is shown in the figure \ref{TODO}. Radio chain verification was performed step-by-step, starting from Low-Noise Amplifier and ending on receiver sensitivity.
+
+\subsection{Band pass filter}
+Cavity filter was tuned to the required frequency to minimize insertion loss and bandwidth. Signal bandwidth is very narrow compared to the filter frequency range.
+The insertion loss and band pass range was measured using Network Analyser. S-parameters are shown in the figure \ref{TODO} and the filter parameters are summarised in the table \ref{TODO}.
+
+
+\subsection{Low Noise Amplifier}
+Designed Low Noise Amplifier is shown in the figure \ref{TODO}. Its S-parameters were tested using Rohde\& Schwarz ZVL. Results are shown in the figure \ref{TODO}. Gain and frequency were as expected and are shown in the table \ref{TODO}.
+
+
+
+\subsection{Receiver measurements}
+Receiver block diagram is shown in the figure \ref{TODO}. The most important blocks for testing are the demodulator itself and frequency correction block.
+
+\subsubsection{Frequency correction block}
+Frequency correction block was tested using already flying satellites, verifying stability of frequency after correction.
+
+
+\subsubsection{Demodulator}
+The demodulator was designed for two major cases:
+\begin{itemize}
+    \item wide bandwidth and large frequency correction (when orbit Keppler data is not well-known, resulting in unpredicted Doppler shift),
+    \item wide bandwidth and no frequency correction (when orbit Keppler data is well-known resulting in negligible frequency inaccuracies).
+\end{itemize}
+
+Depending on the case, different parameters of the Costa's loop were determined. Both test-cases were implemented and the sensitivity and maximum frequency shift were determined.
+
+The test setup for measuring demodulator is shown in the figure \ref{TODO}, and consist of:
+\begin{itemize}
+    \item PlutoSDR - transmitter of the frames with regulated center frequency and output power,
+    \item attenuators
+    \item Funcube Pro+ SDR - receiver used in the ground station
+\end{itemize}
+
+Frames to be transmitted were recorded with Software-Defined Radio during flatsat campaign and replayed during sensitivity tests. This ensures that all the important inadequacies transmitted by the radio transmitter were also taken into account.
+With the test setup, sensitivity was automatically measured by varying output power of the transmitter (in \SI{0.25}{\dB} steps) and PER was recorded for each point. During the process, different parameters of the demodulator were tuned to increase the sensitivity. Final results are shown in the table \ref{TODO} and figures \ref{TODO} - \ref{TODO}.
+

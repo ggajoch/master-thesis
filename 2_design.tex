@@ -1,18 +1,17 @@
 \part{System design}
-\chapter{System design}
 
 In this chapter, component selection and design is described.
 
 During the design process, multiple iteration of component selection, validation and link budget calculation were made, this chapter describes the final result of the link design. 
 
-\section{Space segment}
+\chapter{Space segment}
 Space segment is a part of the satellite communication system that resides on the satellite itself. It is divided into two main parts: communication subsystem (COMM) and antennas (ANTs) connected with two coaxial cables.
 
 Space segment is critical in system operation and reliability - there is no possibility to carry out any repairs. It is exposed to the space environment - thermal cycling, cosmic radiation and vacuum.
 
 Because of the mentioned requirements it was decided to choose commercially available and flight-proven Cubesat components to increase the reliability of the system.
 
-\subsection{Frequency band selection}
+\section{Frequency band selection}
 Data throughput requirements and communication session scheme were described in the \ref{introduction} chapter, but it summarizes to about \SI{1}{\kbps}.
 
 As mentioned in section \ref{aa} the most common radio bands used in Cubesat designs are VHF, UHF and S-band. S-band is usually used when high data rate (~\SI{10}{\Mbps}) are necessary. Typical designs for low-rate data link are full-duplex combo or simplex VHF/UHF radio.
@@ -21,7 +20,7 @@ PW-Sat1 (first polish satellite, built on Warsaw University of Technology) - (li
 
 Concluding, the selected band for operation were either simplex VHF or VHF-up, UHF-down full-duplex.
 
-\subsection{Communication subsystem}
+\section{Communication subsystem}
 Communication subsystem of the satellite is responsible of transmitting and receiving radio signals, modulating/demodulating them and providing data link for the On Board Computer. It has to be compatible with selected mechanical configuration, available data interfaces and the antennas to be installed.
 
 Cubesat standard, with which PW-Sat2 is compliant, defines PC/104 connector, which is the main data bus for all satellite subsystems. Radio should use \iic bus to send and receive data from the on-board computer.
@@ -54,7 +53,7 @@ Basic characteristics:
 
 
 
-\subsection{Antennas}
+\section{Antennas}
 Because of the selected radio system, two antennas has to be installed - one for uplink (VHF) and one for downlink (UHF).
 
 Antennas for this frequencies has to be larger than CubeSat structure - hence  they have to be deployed after release from launcher vehicle. They should be omnidirectional, as PW-Sat2 does not have a pointing possibility and random tumbling is assumed. Typically satellites operate with circular polarization (this is favorable due to satellite rotation), but due to size and weight constraints antenna can have linear polarization.
@@ -75,7 +74,7 @@ This system is deployable by the command from on-board computer. Thermal knife (
     \end{figure}
 
 
-\subsubsection{Deployable elements influence on the antenna pattern}
+\subsection{Deployable elements influence on the antenna pattern}
 
 On-board PW-Sat2 are two main deployables: solar panels and deorbitation sail.
 
@@ -90,20 +89,20 @@ simulation tool, it was shown that the sail will increase directivity of the cub
 % TODO: jakieś zdjęcie z symulacji, wynik o ile dB się pogorszyło
 
 
-\section{Communication link parameters}
+\chapter{Communication link parameters}
 Selected satellite radio module imposes the modulation and data packets used in the communication. This section briefly describes used modulations, frame formats and implications to the ground segment of the system.
 
-\subsection{Downlink modulation}
+\section{Downlink modulation}
 Downlink signal is modulated using Binary Phase Shift Keying (BPSK). The data rate can be changed dynamically by the on-board computer, in range \si{1.2} - \SI{9.6}{\kilo\bit / \second}, allowing to improve the link quality when necessary. Baseband signal is also filtered using Raised Root Cosine filter, to reduce side lobes power. Signal bandwidth varies between \SI{2.4}{\kHz} (for \SI{1.2}{\kbps}) and \SI{19.2}{\kHz} (for \SI{9.6}{\kbps}). 
 
 % TODO: rysunek BPSK
 
-\subsection{Uplink}
+\section{Uplink}
 Uplink modulation is two-staged: first, data is modulated using Audio Frequency Shift Keying (chaning 0s and 1s to wave of frequencies, in order, \SI{1200}{\hertz} and \SI{2200}{\hertz}), later to be Frequency Modulated to the RF carrier (with frequency deviation of $\pm\SI{5}{\kilo\hertz}$).
 
 % TODO: schemat modulatora
 
-\subsection{Frame format}
+\section{Frame format}
 Physical layer data format is reduced-functionality AX.25 packet \cite{AX25_standard}. Only connectionless transmission mode and UI frames are supported. Packet framing is the same as in SwissCube CubeSat \cite{SwissCube_AX25}.
 
 Basic frame format is shown in the table \ref{AX25_frame}. All the fields except flags are bit-stuffed to ensure that the \textit{Flag} field does not appear in the data: if there are six '1' bits to be send, transmitter inserts '0' bit before the last one. Adressing in this system in inherent, but unused - this is point-to-point connection, therefore adresses are fixed. Frame-Check Sequence is a CRC (CITT standard) of the whole frame (without \textit{Flags}). \textit{Information Field} is variable-length, between \si{4} and \SI{256}{\byte} length is the place for the actual data transmitted by the On-Board Computer.
@@ -132,12 +131,12 @@ Additionally, downlink data is scrambled using G3RUH scrambling polynomial to ma
 
 %% -------------------------------------------------------------------------------------------
 
-\section{Ground station design}
+\chapter{Ground station design}
 Ground station design should complement the space segment, with large antenna gains and output power to allow the budget link to close.
 
 As the system is full-duplex, both uplink and downlink channels are separate.
 
-\subsection{Antennas}
+\section{Antennas}
 Space communication antennas require very large gain due to the distance between the stations. 
 
 Typical design consist of two Yagi-Uda antennas, one for uplink (VHF) and one for downlink (UHF). Their length, therefore directivity was constrained by available space, antenna mast height, antenna rotator strength and positioning accuracy.
@@ -156,9 +155,9 @@ Antenna characteristics:
 \end{tabular}
 
 
-\subsection{Uplink}
+\section{Uplink}
 Due to the low sensitivity of the satellite receiver (\SI{-98}{\dBm}) uplink EIRP has to be very large.
-\subsubsection{Transmitter}
+\subsection{Transmitter}
 Uplink signal is an FM-modulated AFSK, so standard analog audio FM transceiver can be used to generate RF signal. Audio signal can be generated by the Terminal Node Controller or by software running on the PC.
 
 During PW-Sat1 project, the Icom 910H amateur radio transceiver \ref{Icom_910H_ref} was used for both uplink and downlink, therefore it was proposed to use the the same radio.
@@ -182,7 +181,7 @@ Radio VHF FM transmit characteristics:
 
 This radio is connected to the computer, which controls the audio to transmit and Push-To-Talk (PTT, transmission enable) signal. 
 
-\subsubsection{Standing Wave Ratio meter}
+\subsection{Standing Wave Ratio meter}
 To check proper antenna connection and ensure long-term monitoring a SWR (Standing Wave Ratio) meter should be installed. This instrument measures ratio of reflected power, thus providing information about antenna impedance matching.
 
 % TODO: zdjęcie/zrzut z kamerki SWR metera
@@ -193,10 +192,10 @@ To check proper antenna connection and ensure long-term monitoring a SWR (Standi
 % ------------------------- DOWNLINK -------------------------
 % ------------------------------------------------------------
 
-\subsection{Downlink}
+\section{Downlink}
 Receiving Signals from maximal range of about \SI{3000}{\kilo\meter} from a \SI{0.5}{\watt} transmitter requires very high processing gain and low noise factor of the system. Another factor to take into account is Doppler effect, which has to be taken into account. On UHF frequencies, it reaches up to about \SI{15}{\kHz}.
 
-\subsubsection{Signal front-end processing}
+\subsection{Signal front-end processing}
 First stage processing has two main purposes - to lower the system noise (amplify the signal) and eliminate intermodulation (filtering).
 
 Downlink system block diagram is shown in the figure \ref{Downln}.
@@ -225,31 +224,31 @@ The proposed receiver so
 
 
 
-\section{Ground support software}
+\chapter{Ground support software}
 Due to the Software-Defined Radio based architecture, apart from typical frame processing chain, additional software related to modulation and de-modulation is required.
 
 There are multiple signal processing toolboxes to simplify digital signal processing, such as Matlab/Octave \cite{Matlab}, SciPy \cite{Scipy} and GNUradio \cite{Gnuradio}. GNUradio however, simplifies connecting to physical hardware and programming, by allowing to integrate system in block diagrams.
 
-\subsection{GNUradio}
+\section{GNUradio}
 % TODO
 
-\subsection{Data flow chain}
+\section{Data flow chain}
 Basic assumption of the data flow was to separate frame building (byte-oriented) from signal processing (sample-oriented). Frame building was written in Python, whereas signal processing was built using GNUradio blocks and self-written custom out-of-tree modules. Communication between the layers was implemented using ZeroMQ asynchronous messaging library. Data flow is shown in the figure \ref{data_flow}.
 
 % TODO: data_flow
 
 
-\subsection{Uplink}
+\section{Uplink}
 Uplink baseband signal (AFSK) has generated, to be later FM-modulated and transmitted using conventional radio.
 
 AFSK signal was generated using software Voltage Controlled Oscillator (VCO), by generating tone (\si{1200} or \SI{2200}{\hertz}) according to the bit value (\si{0} or \si{1}, respectively).  Block diagram of the uplink modulator is shown in the figure \ref{uplink_block}.
 
 
-\subsection{Downlink}
+\section{Downlink}
 The aim of the downlink module is to fully process incoming IQ data from SDR to baseband data (frames).
 
 
 
 
-\subsection{Satellite operation}
+\section{Satellite operation}
 
