@@ -64,7 +64,9 @@ giveninits=true
 \newcommand{\kbps}{\kilo\bps}
 \newcommand{\Mbps}{\mega\bps}
 \DeclareSIUnit{\belmilliwatt}{Bm}
+\DeclareSIUnit{\belisotropic}{Bi}
 \DeclareSIUnit{\dBm}{\deci\belmilliwatt}
+\DeclareSIUnit{\dBi}{\deci\belisotropic}
 \DeclareSIUnit{\ppm}{ppm}
 
 \usepackage{array}
@@ -84,7 +86,7 @@ giveninits=true
 \course{Elektronika i Telekomunikacja}
 
 \titlePL{System komunikacji satelity PW-Sat2}
-\titleEN{PW-Sat2 satellite communication subsystem}
+\titleEN{PW-Sat2 satellite communication system}
 
 \shorttitlePL{System komunikacji satelity PW-Sat2} % skrócona wersja tytułu jeśli jest bardzo długi
 \shorttitleEN{PW-Sat2 satellite communication system}
@@ -112,17 +114,18 @@ giveninits=true
 
 \begin{document}
 
-%\titlepages
-%\tableofcontents
-%\clearpage
+\titlepages
+\tableofcontents
+\clearpage
 
 \include{1_introduction}
-%\include{2_design}
-%\include{3_verification}
-%\include{4_results}
+\include{2_review}
+\include{3_design}
+\include{4_verification}
+\include{5_results}
 
 
-%\appendix
-%\printbibliography
+\appendix
+\printbibliography
 
 \end{document}
