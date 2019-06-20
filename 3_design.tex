@@ -1,8 +1,8 @@
-\part{System design}
+\chapter{System design}
 
 In this chapter, design of the radio link and component selection are described. During the design process, multiple iteration of component selection, validation and link budget calculation were made, this chapter describes the final result of the design.
 
-\chapter{Communication sessions}
+\section{Communication sessions}
 PW-Sat2 was designed to be deployed on \SI{600}{\kilo\meter}, Sun-synchronous, polar orbit. Due to the Earts rotation, ground station coverage is bounded, and communication with the satellite is limited to communication session during satellite overpass.
 
 Simulations performed using Gpredict software \cite{gpredict_website} shown that communication sessions will happen \si{5}-\si{6} times per day, \si{5}-\SI{10}{\minute} each. This summarizes to the total communication time to average \SI{30}{\minute} per day. Typical radio coverage of the satellite is shown in the figure \ref{gpredict_pass}.
@@ -15,7 +15,7 @@ Simulations performed using Gpredict software \cite{gpredict_website} shown that
 \end{figure}
 
 
-\chapter{Communication design requirements}
+\section{Communication design requirements}
 PW-Sat2 have couple of data sources to be sent to the ground:
 \begin{itemize}
     \item housekeeping telemetry (satellite health information, such as temperatures, bus and solar panel voltages and currents, subsystem status etc. Telemetry is \SI{230}{\byte} frame and should be transmitted every \SI{1}{\minute} (average \SI{30}{\bps}),
@@ -26,7 +26,7 @@ PW-Sat2 have couple of data sources to be sent to the ground:
 
 Data throughput requirement for PW-Sat2 mission sums up to about \SI{1}{\kbps}.
 
-\chapter{Frequency band selection}
+\section{Frequency band selection}
 The most common radio bands used in CubeSat designs are VHF, UHF and S-band. S-band is usually used when high data rate (~\SI{10}{\Mbps}) are necessary. Typical designs for low-rate data link are full-duplex combo or simplex VHF/UHF radio.
 
 PW-Sat1 \cite{pwsat1_website_ska} used full-duplex VHF-downlink and UHF-uplink radio. During its mission, operation team was reporting uplink stability issues, which was caused by very low Signal to Noise ratio on the satellite. The design team narrowed down the issue to very high level of interference in the UHF band on the orbit, which probably is caused by the high power signal sources on the ground, such as radars.
@@ -34,14 +34,14 @@ PW-Sat1 \cite{pwsat1_website_ska} used full-duplex VHF-downlink and UHF-uplink r
 The selected bands for PW-Sat2 operation were either simplex VHF or full-duplex: VHF-up, UHF-down.
 
 
-\chapter{Space segment}
+\section{Space segment}
 Space segment is a part of the satellite communication system that resides on the satellite itself. It is divided into two main parts: communication subsystem (COMM) and antennas (ANTs) connected with two coaxial cables.
 
 Space segment is critical in system operation and reliability - there is no possibility to carry out any repairs, perform maintenance or adjustment once on orbit. It is exposed to the space environment - wide temperature range, thermal cycling, cosmic radiation and vacuum.
 
 Because of the mentioned requirements it was decided to choose commercially available and flight-proven CubeSat components to increase the overall reliability of the system.
 
-\section{Communication subsystem}
+\subsection{Communication subsystem}
 CubeSat design specification \cite{cubesat_spec}, with which PW-Sat2 is compliant, defines common PC/104 connector, which is the main data bus for all satellite subsystems. On the connector, two \iic and two CAN buses are defined and most of the components are compatible to each other. However, due to the lack of CAN interface on On-Board Computer (CubeComputer from CubeSpace \cite{cubespace_website}) radio should use \iic communication bus.
 
 When the subsystem was ordered (in year \si{2014}), the choice of available products was very limited, and the only radio which was compliant with above mentioned requirements was \texttt{ISIS VHF uplink/UHF downlink Full Duplex Transceiver}. Its view and block diagram is shown in the figure \ref{ISIS_TRXvU}
@@ -69,7 +69,7 @@ Basic characteristics: \\
 \end{tabular}
 
 
-\section{Antennas}
+\subsection{Antennas}
 Because of the selected radio system, two antennas has to be installed - one for uplink (VHF) and one for downlink (UHF). Antennas should be omnidirectional, as PW-Sat2 does not have an nadir-pointing capability and random tumbling during operation is assumed.
 
 Self-made dipole antenna was considered at the design stage, but due to mechanical and time constraints, satellite antenna was decided to be bought as well. Innovative Solutions In Space company sells antenna with with the transceiver as CubeSat communication Kit \texttt{CubeSat dipole antenna system}. Both elements are compatibile and the whole system (transceiver + antenna) is tuned for specific communication frequency and mounting option.
@@ -88,7 +88,7 @@ This system is deployable by the command from the on-board computer. Thermal kni
 \end{figure*}
 
 
-% \subsection{Deployable elements influence on the antenna pattern}
+% \subsubsection{Deployable elements influence on the antenna pattern}
 % TODO
 
 % On-board PW-Sat2 are two main deployables: solar panels and deorbitation sail.
@@ -104,20 +104,20 @@ This system is deployable by the command from the on-board computer. Thermal kni
 % % TODO: jakieś zdjęcie z symulacji, wynik o ile dB się pogorszyło
 
 
-\chapter{Communication link parameters}
+\section{Communication link parameters}
 Selected satellite radio module imposes the modulation and data packets used in the communication. This section briefly describes used modulations, frame formats and implications to the ground segment of the system.
 
-\section{Downlink modulation}
+\subsection{Downlink modulation}
 Downlink signal is modulated using Binary Phase Shift Keying (BPSK). The data rate can be changed dynamically by the spacecraft On-Board Computer, in range \si{1.2} - \SI{9.6}{\kbps}, allowing to improve the link quality when necessary. Baseband signal is also filtered using Raised Root Cosine filter, to reduce side lobes power. Signal bandwidth varies between \SI{2.4}{\kHz} (for \SI{1.2}{\kbps}) and \SI{19.2}{\kHz} (for \SI{9.6}{\kbps}).
 
 % TODO: rysunek BPSK
 
-\section{Uplink}
+\subsection{Uplink}
 Uplink modulation is two-staged: first, data is modulated using Audio Frequency Shift Keying (chaning 0s and 1s to wave of frequencies, in order, \SI{1200}{\hertz} and \SI{2200}{\hertz}), later to be Frequency Modulated to the RF carrier (with frequency deviation of $\pm\SI{5}{\kilo\hertz}$).
 
 % TODO: schemat modulatora
 
-\section{Frame format}
+\subsection{Frame format}
 Physical layer data format is reduced-functionality AX.25 packet \cite{AX25_standard}. Only connectionless transmission mode and UI frames are supported. Packet framing is the same as in SwissCube CubeSat \cite{SwissCube_AX25}.
 
 Basic frame format is shown in the table \ref{AX25_frame}. All the fields except flags are bit-stuffed to ensure that the \textit{Flag} field does not appear in the data: if there are six '1' bits to be send, transmitter inserts '0' bit before the last one. Adressing in this system in inherent, but unused - this is point-to-point connection, therefore adresses are fixed. Frame-Check Sequence is a CRC (CITT standard) of the whole frame (without \textit{Flags}). \textit{Information Field} is variable-length, between \si{4} and \SI{256}{\byte} length is the place for the actual data transmitted by the On-Board Computer.
@@ -146,7 +146,7 @@ Additionally, downlink data is scrambled using G3RUH scrambling polynomial to ma
 
 %% -------------------------------------------------------------------------------------------
 
-\chapter{Ground station design}
+\section{Ground station design}
 Ground station design should complement the space segment, with large antenna gains and output power to allow the budget link to close. As the system is full-duplex, both uplink and downlink channels are separate and the design should allow to simultaneously operate transmit and receive. Block diagram of the designed ground station is shown in the figure \ref{gs_block_diagram}.
 Due to the low sensitivity of the satellite receiver (\SI{-98}{\dBm}) uplink EIRP has to be very large, this is achieved by using high-power amplifier and antennas with high directional gain. For downlink, ground station has to compensate low transmit power of the satellite, by using high gain antennas and very sensitive receiver.
 
@@ -162,7 +162,7 @@ Ground station consists of not only the hardware but also software. Many parts o
 \end{figure}
 
 
-\section{Antennas}
+\subsection{Antennas}
 PW-Sat2 is transmitting radio signals with linear polarization, nevertheless ground station  polarization should be circular, due to the random tumbling of the satellite. This will reduce the gain of the antennas, but the signal strength will be constant regardless of the satellite rotation. Cross-Yagi antennas were selected, and two linear planes antennas were phased with coaxial cable and symmetrical splitters/combiners. Coaxial cables length was calculated to achieve \SI{90}{\degree} shift between two dipoles.
 
 Antennas were selected to be the longest possible, limited by the antenna mast height. Selected antenna characteristics:
@@ -179,8 +179,8 @@ Antennas were selected to be the longest possible, limited by the antenna mast h
 Additionally, two combiners were selected for antenna phasing: Tonna 31202 for VHF and Tonna 31270 for UHF. Antennas are also protected by the Coaxial lightning surge protection, to minimise risk of damaging indoor equipment.
 
 
-\section{Uplink}
-\subsection{Transmitter}
+\subsection{Uplink}
+\subsubsection{Transmitter}
 Uplink signal is an FM-modulated AFSK, so standard analog audio FM transceiver can be used to generate RF signal. The frequency deviation of the de-modulator was selected to allow to use radio amateur voice transceivers. Audio signal (before FM-modulation) is generated by the software running on the PC.
 
 During PW-Sat1 project, the Icom 910H amateur radio transceiver was used for both uplink and downlink, therefore it was proposed to use the the same radio as it do comply with all the requirements. Radio is shown in the figure \ref{Icom_910H_ref}.
@@ -202,7 +202,7 @@ Radio VHF FM transmit characteristics:
     Audio bandwidth & \SI{4}{\kHz} \\
 \end{tabular}
 
-\subsection{Data flow}
+\subsubsection{Data flow}
 This radio is connected to the computer, which controls the audio to transmit and Push-To-Talk (PTT, transmission enable) signal. Uplink baseband signal (AFSK) has generated by the GNURadio framework, to be later FM-modulated and transmitted using conventional radio. Block diagram of uplink data chain is shown in the figure \ref{uplink_data_flow}
 
 \begin{figure}[H]
@@ -217,7 +217,7 @@ AFSK signal generation GNURadio flowgraph is shown in the figure \ref{uplink_flo
 % TODO: uplink_flowgraph
 
 
-\subsection{Standing Wave Ratio meter}
+\subsubsection{Standing Wave Ratio meter}
 To check proper antenna connection and ensure long-term monitoring a SWR (Standing Wave Ratio) was installed. This instrument measures ratio of reflected power, thus providing information about antenna impedance matching. In case of antenna break
 
 % TODO: zdjęcie/zrzut z kamerki SWR metera
@@ -228,10 +228,10 @@ To check proper antenna connection and ensure long-term monitoring a SWR (Standi
 % ------------------------- DOWNLINK -------------------------
 % ------------------------------------------------------------
 
-\section{Downlink}
+\subsection{Downlink}
 Receiving Signals from maximal slant range of about \SI{3000}{\kilo\meter} from a \SI{0.5}{\watt} transmitter requires very high processing gain and low noise factor of the system. System also needs to compensate for Doppler effect and ground interferences.
 
-\subsection{Signal front-end processing}
+\subsubsection{Signal front-end processing}
 Radio front-end has two main purposes - to lower the system noise figure (by amplifying the signal with Low Noise Amplifier) and eliminate intermodulation with another signals (filtering). Low Noise Amplifier, installed close to the antenna reduces influence of the long cable to the receiver and reduces the noise added by receiver, reducing total system noise factor. Noise factor is limited by the attenuation between the antenna and Low Noise Amplifier and the Noise Factor of the amplifier itself. However, strong signals in the frequency proximity of the signal can intermodulate in the LNA, resulting in variety of issues: from reduced gain to completely distorted signal.
 
 Narrow-band filter should be installed before the LNA. However, this requires the filter to have the lower loss possible, as the insertion loss of the filter directly affects noise figure of the system. For this purpose, cavity filter was selected. This, narrow band filter (\SI{1}{\MHz}), has very low insertion loss as shown in the measurement chapter. After the filter, Low Noise Amplifier is mounted.
@@ -250,7 +250,7 @@ Front-end signal processing is installed as close to the antenna as possible as 
 \end{figure*}
 
 
-\subsection{Low noise amplifier design}
+\subsubsection{Low noise amplifier design}
 A dedicated Low Noise Amplifier was designed. It should eliminate out-of-band signals and amplify the required downlink frequency by at least \SI{20}{\dB}. As the main active component, a high-level Low Noise Amplifier: Mini-Circuits PGA-103+ \cite{lna_pga_datasheet} was used. Additional \SI{433}{\MHz} SAW filter was placed before the amplifier to reduce out of band interferences signals. Bias of the amplifier is created by RF Low Dropout Regulator Texas Instruments TPS7A47 \cite{lna_ldo_datasheet}. Amplifier was designed to support two-stage configuration, but for PW-Sat2 only first stage was populated. Schematic, PCD layout and the picture of the designed board are shown in the figures: \ref{lna_schematic} and \ref{lna_pcb}. The design is open source and all the source files can be found at \cite{lna_github}
 
 \begin{figure}[H]
@@ -274,7 +274,7 @@ A dedicated Low Noise Amplifier was designed. It should eliminate out-of-band si
 
 
 
-\subsection{Receiver}
+\subsubsection{Receiver}
 Due to the custom packet format no commercially available integrated circuits were able to correctly receive packets, therefore a custom solution was required for de-modulation and packet recovery.
 To receive BPSK signals, the phase recovery is necessary. One of the methods of the synchronous detection is the use of Costas loop \cite{costas_loop}. Most simple solution is to implement full signal chain: Costas loop, bit recovery and packet formatting into software, therefore requiring down-conversion of the signal and data transfer to the PC. 
 
