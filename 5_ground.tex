@@ -4,6 +4,8 @@ Due to the low sensitivity of the satellite receiver (\SI{-98}{\dBm}) uplink EIR
 
 Ground station consists of not only the hardware but also software. Many parts of the system use Digital Signal Processing and Software-Defined Radio for data modulation/de-modulation, packet transmission etc. For the DSP tasks, GNUradio \cite{gnuradio} was selected and the tool for sampling-based signal processing.
 
+Ground station is located on the building of Faculty of Electronics and Information Technology, Warsaw University of Technology.
+
 
 
 \begin{figure}[H]
@@ -13,33 +15,136 @@ Ground station consists of not only the hardware but also software. Many parts o
     \label{gs_block_diagram}
 \end{figure}
 
+\section{Antenna mast \& equipment}
+Antenna mast \& rotator were already installed from previous experiments with satellite transmission. Main parameters: \SI{3}{\meter} height, SPID rotator with azimuth-elevator control. Mast with installed antennas is shown in the figure \ref{elka_antena_mast} and the antenna rotator is shown in the figure \ref{elka_antenna_rotator}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\paperwidth]{img/5/elka_antena_mast.jpg}
+    \caption{Ground station picture}
+    \label{elka_antena_mast}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\paperwidth]{img/5/elka_antenna_rotator.jpg}
+    \caption{Antenna rotator and boom}
+    \label{elka_antenna_rotator}
+\end{figure}
+
+Coaxial lightning surge protector SP3000W installed on the mast is shown in the figure \ref{coax_surge_protection}. This elemnent discharges any high voltage pulses which can happen suring the lightning by the cost of insertion loss (declared \SI{0.2}{\dB}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\paperwidth]{img/5/coax_surge_protection.jpg}
+    \caption{Diamond SP3000W coaxial lightning surge protector}
+    \label{coax_surge_protection}
+\end{figure}
+
+
 
 \section{Antennas}
-PW-Sat2 is transmitting radio signals with linear polarization, nevertheless ground station  polarization should be circular, due to the random tumbling of the satellite. This will reduce the gain of the antennas, but the signal strength will be constant regardless of the satellite rotation. Cross-Yagi antennas were selected, and two linear planes antennas were phased with coaxial cable and symmetrical splitters/combiners. Coaxial cables length was calculated to achieve \SI{90}{\degree} shift between two dipoles.
+PW-Sat2 is transmitting radio signals with linear polarization, nevertheless ground station  polarization should be circular, due to the random tumbling of the satellite. This will reduce the gain of the antennas, but the signal strength will be constant regardless of the satellite rotation. Cross-Yagi antennas were selected, and two linear planes antennas were phased with coaxial cable and symmetrical splitters/combiners. The diagram of the antenna phasing is shown in the figure \ref{antenna_phasing_diagram}. The length of the cables between the splitter/combiner and the dipoles should, with the dipole shift on the boom, create a \SI{90}{\degree} shift to create circular polarization. Two splitters/combiners were selected for antenna phasing: Tonna 31202 for VHF and Tonna 31270 for UHF.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\paperwidth]{img/5/antenna_phasing_diagram.png}
+    \caption{Antenna phasing}
+    \label{antenna_phasing_diagram}
+\end{figure}
+
+
+Radiation patterns of the antennas are shown in the figures \ref{radiation_144} and \ref{radiation_435} as declared by the manufacturer.
+
 
 Antennas were selected to be the longest possible, limited by the antenna mast height. Selected antenna characteristics:
 
 \begin{tabular}{c|c}
      \textbf{Downlink} & \textbf{Uplink} \\ \hline
      Tonna 220938 & Tonna 20818 \\
-     2x 19 elements & 2x 9 elements \\
+     UHF 2x 19 elements & VHF 2x 9 elements \\
      loop dipole & linear dipole \\
      \SI{16.2}{\dBi} gain & \SI{13.2}{\dBi} gain \\
      \SI{30}{\degree} beamwidth & \SI{40}{\degree} beamwidth
 \end{tabular}
 
-Additionally, two combiners were selected for antenna phasing: Tonna 31202 for VHF and Tonna 31270 for UHF. Antennas are also protected by the Coaxial lightning surge protection, to minimise risk of damaging indoor equipment.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\paperwidth]{img/5/radiation_144.png}
+    \caption{VHF antenna radiation patter - E and H plane.}
+    \label{radiation_144}
+\end{figure}
 
-\subsection{Measurements}
-After the assembly, antennas should be measured to make sure of the correct assembly. The simplest method is to measure the impedance of the antennas.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\paperwidth]{img/5/radiation_435.png}
+    \caption{UHF antenna radiation patter - E and H plane.}
+    \label{radiation_435}
+\end{figure}
 
-Each antenna consist of two dipoles (with vertical and horizontal polarization) phased with a combiner. Measurements of the dipoles and the phased antenna were performed, and the result is shown in the table \ref{TODO}.
+
+
+\subsection{Splitters/combiners measurements}
+Splitters/combiners were tested prior to its mounting. The most important parameters of the splitter is the insertion loss, amplitude and phase imbalance between the paths and the isolation of the splitter. All of the parameters were tested using Rohde \& Schwarz ZVL Vector Network Analyser, in the configurations shown in the figure \ref{splitter_measurement_diagram}. The results of the insertion loss (Fig. \ref{splitter_amplitude}) show that it is negligible - unmeasurable within tolerances of the VNA. Amplitude imbalance is also very good - much less than \SI{0.1}{\dB}. The phase imbalance is also very good for both splitters (Fig. \ref{splitter_phase}) - less than \SI{1}{\degree}. The isolation (Fig. \ref{splitter_isolation}) is the worst parameter of the measured splitters (only about \SI{6}{\dB}), but in the case when both antennas work together it is not an issue.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\paperwidth]{img/5/splitter_measurement_diagram.eps}
+    \caption{Splitter/combiner measurement block diagram for through and isolation measurement}
+    \label{splitter_measurement_diagram}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\paperwidth]{img/5/splitter_amplitude.pdf}
+    \caption{Splitters/combiners insertion loss}
+    \label{splitter_amplitude}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\paperwidth]{img/5/splitter_phase.pdf}
+    \caption{Splitters/combiners phase shift imbalance}
+    \label{splitter_phase}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\paperwidth]{img/5/splitter_isolation.pdf}
+    \caption{Splitters/combiners isolation}
+    \label{splitter_isolation}
+\end{figure}
+
+
+\subsection{Antenna Measurements}
+After the assembly, antennas were measured for their impedance matching and resonance. As the antennas are Yagi-Uda type, the most important element for matching is the dipole itself. Each antenna consist of two dipoles (with vertical and horizontal polarization) phased with a combiner. Measurements of the dipoles and the phased antenna were performed, and the result is shown in the table \ref{TODO}.
+
+
+\section{Uplink data flow}
+Block diagram of uplink data chain is shown in the figure \ref{uplink_data_flow}. The telecommands issued by the operator are converted to the radio frames (\textbf{0}s and \textbf{1}s bits), later FSK modulated using GNUradio, finally to be FM-modulated, up-converted and power amplified by conventional voice transceiver.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\paperwidth]{img/5/uplink_data_flow.eps}
+    \caption{Uplink data flow}
+    \label{uplink_data_flow}
+\end{figure}
+
+\section{Uplink baseband generation}
+AFSK signal is generated by the GNURadio flowgraph shown in the figure \ref{uplink_flowgraph}. First, the telecommand is received by ZeroMQ slot, the packet is formatted and is is changed to the stream of bits. Each bit of the signal controls the frequency of the Voltage Controlled Oscillator (VCO) (\SI{1200}{\hertz} or \SI{2200}{\hertz} for \textbf{0} and \textbf{1}, respectively). During packet transmission, the transmit signal of the radio is enabled, and the audio signal is then generated by the audio card.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\paperwidth]{img/5/uplink_flowgraph.png}
+    \caption{Uplink GNURadio companion flowchart}
+    \label{uplink_flowgraph}
+\end{figure}
 
 
 \section{Uplink - transmitter}
-Uplink signal is an FM-modulated AFSK, so standard analog audio FM transceiver can be used to generate RF signal. The frequency deviation of the de-modulator was selected to allow to use radio amateur voice transceivers. Audio signal (before FM-modulation) is generated by the software running on the PC.
+Analog audio FM transceiver can be used to generate RF signal. The frequency deviation of the modulation was selected to allow to use radio amateur voice transceivers. Audio FSK signal (before FM-modulation) is generated by the software running on the PC. Radio is connected to the computer, which controls the audio to transmit and Push-To-Talk (PTT, transmission enable) signal.
 
-During PW-Sat1 project, the Icom 910H amateur radio transceiver was used for both uplink and downlink, therefore it was proposed to use the the same radio as it do comply with all the requirements. Radio is shown in the figure \ref{Icom_910H_ref}.
+During PW-Sat1 project, the Icom 910H amateur radio transceiver was used for both uplink and downlink, therefore it was proposed to use the the same radio as it do comply with all the requirements. Radio is shown in the figure \ref{Icom_910H_ref}. In case or need of larger output power the high-power amplifier can be connected to the output of the radio.
 
 \begin{figure}[H]
     \centering
@@ -58,36 +163,30 @@ Radio VHF FM transmit characteristics:
     Audio bandwidth & \SI{4}{\kHz} \\
 \end{tabular}
 
-\subsection{Data flow}
-This radio is connected to the computer, which controls the audio to transmit and Push-To-Talk (PTT, transmission enable) signal. Uplink baseband signal (AFSK) has generated by the GNURadio framework, to be later FM-modulated and transmitted using conventional radio. Block diagram of uplink data chain is shown in the figure \ref{uplink_data_flow}
+\subsection{Standing Wave Ratio meter}
+To check proper antenna connection and ensure long-term monitoring a SWR (Standing Wave Ratio) was installed. This instrument measures ratio of reflected power, thus providing information about antenna impedance matching. In case of antenna cracks or bending due to the high wind, any anomalies in the matching can be detected. SWR meter during the transmission is shown in the figure \ref{swr_meter_photo}, indicating that the VSWR of the antennas is lower than \si{1.05}. The output power is measured along the VSWR, and during the transmission it was equal to \SI{80}{\watt}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\paperwidth]{img/5/uplink_data_flow.eps}
-    \caption{Uplink data flow}
-    \label{uplink_data_flow}
+    \includegraphics[width=0.6\paperwidth]{img/5/swr_meter_photo.jpg}
+    \caption{Standing Wave Ratio meter during transmission}
+    \label{swr_meter_photo}
 \end{figure}
 
-AFSK signal generation GNURadio flowgraph is shown in the figure \ref{uplink_flowgraph}. Audio signal is generated by software Voltage Controlled Oscillator (VCO), and the frequency is controlled by the actual bit value (\SI{1200}{\hertz} or \SI{2200}{\hertz}).
 
-% TODO: uplink_flowgraph
-
-
-\subsection{Standing Wave Ratio meter}
-To check proper antenna connection and ensure long-term monitoring a SWR (Standing Wave Ratio) was installed. This instrument measures ratio of reflected power, thus providing information about antenna impedance matching. In case of antenna break
-
-% TODO: zdjęcie/zrzut z kamerki SWR metera
-
-
-\subsection{Measurements}
-As the uplink was built using conventional HAM radio transceiver, only the modulation and output power should be measured. As the physical layer is the typical FM-modulated AFSK and frame protocol is typical AX.25 there is a lot of free software to verify the correctness of the frame and modulation.
-
-\subsubsection{Output power}
-The power of the power amplifier (built in the transceiver) was measured using an SWR \& Power Meter TODO, and by connecting radio output to the antenna. The measured output and SWR was equal to TODO. Those parameters are continuously monitored during the mission to monitor the cables and radio health.
+% \subsection{Measurements}
+% As the uplink was built using conventional HAM radio transceiver, only the modulation and output power should be measured. As the physical layer is the typical FM-modulated AFSK and frame protocol is typical AX.25 there is a lot of free software to verify the correctness of the frame and modulation.
 
 \subsubsection{Spectrum \& Watchdogs}
-The spectrum and output modulation correctness in constantly monitored using so-called watchdogs built using another Software Defined Radios (PlutoSDR, RTL-SDR) placed in the proximity of the main antennas.
-By demodulating uplink signal and comparing it in the real time with transmitted frames the correctness of the transmission is guaranteed. Watchdog flowchart and graphical view are shown in the figure \ref{TODO}.
+The spectrum and output modulation correctness in constantly monitored using so-called watchdog built using another Software Defined Radios (PlutoSDR, RTL-SDR) placed in the proximity of the main antennas.
+By demodulating uplink signal and comparing it in the real time with transmitted frames the correctness of the transmission is guaranteed. Watchdog flowchart and graphical view are shown in the figure \ref{uplink_watchdog_flowgraph}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\paperwidth]{img/5/uplink_watchdog_flowgraph.png}
+    \caption{Uplink watchdog GNURadio flowgraph}
+    \label{uplink_watchdog_flowgraph}
+\end{figure}
 
 
 
