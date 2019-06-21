@@ -25,18 +25,21 @@ Because of the mentioned requirements it was decided to choose commercially avai
 \label{section:comm_design}
 CubeSat design specification \cite{cubesat_spec}, with which PW-Sat2 is compliant, defines common PC/104 connector, which is the main data bus for all satellite subsystems. On the connector, two \iic and two CAN buses are defined and most of the components are compatible to each other. However, due to the lack of CAN interface on On-Board Computer (CubeComputer from CubeSpace \cite{cubespace_website}) radio should use \iic communication bus.
 
-When the subsystem was ordered (in year \si{2014}), the choice of available products was very limited, and the only radio which was compliant with above mentioned requirements was \texttt{ISIS VHF uplink/UHF downlink Full Duplex Transceiver}. Its view and block diagram is shown in the figure \ref{ISIS_TRXvU}
+When the subsystem was ordered (in year \si{2014}), the choice of available products was very limited, and the only radio which was compliant with above mentioned requirements was \texttt{ISIS VHF uplink/UHF downlink Full Duplex Transceiver}. Its view and block diagram is shown in the figures \ref{ISIS_TRXvU_photo} and \ref{ISIS_TRXvU_block_diagram}.
 
-\begin{figure*}
-   \centering
-\begin{tabular}{cc}
-        \includegraphics[width=0.3\paperwidth]{img/4/ISIS-radio-UHF-VHF-min.png}
-    & 
-        \includegraphics[width=0.4\paperwidth]{img/4/ISIS_TRXvU_block_diagram.eps}
-\end{tabular}
-\label{ISIS_TRXvU}
-\caption{ISIS VHF uplink/UHF downlink Full Duplex Transceiver. Source: \cite{isis_trxvu}}
-\end{figure*}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\paperwidth]{img/4/ISIS-radio-UHF-VHF-min.png}
+    \caption{ISIS VHF uplink/UHF downlink Full Duplex Transceiver photo. Source: \cite{isis_trxvu}}
+    \label{ISIS_TRXvU_photo}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\paperwidth]{img/4/ISIS_TRXvU_block_diagram.eps}
+    \caption{ISIS VHF uplink/UHF downlink Full Duplex Transceiver block diagram. Source: \cite{isis_trxvu}}
+    \label{ISIS_TRXvU_block_diagram}
+\end{figure}
 
 Basic characteristics: \\
 \begin{tabular}{c|c}
@@ -51,31 +54,51 @@ Basic characteristics: \\
 
 Transceiver was tested separately for its uplink and downlink capabilities. Tests are critical to make sure that radio parameters are maintained in the system, and to verify manufacturers' data.
 
-\subsection{Uplink measurements}
-The most important parameter of the radio receiver is the sensitivity. Blocking immunity (intermodulation), is not critical, as the system is remote from most of the external strong radio signals.
+\subsection{Sensitivity measurement}
+Sensitivity was measured by the setup shown in the figure \ref{4_uplink_sensitivity}. Test procedure:
 
-\subsubsection{Sensitivity}
-Sensitivity was measured by the setup shown in the figure \ref{TODO}. Test procedure:
 \begin{itemize}
-    \item measuring output power of PlutoSDR using spectrum analyzer with wide RBW filter (\SI{1}{\MHz})
-    \item increasing attenuation up to the point when PER is noticeable (\SI{1}{\percent})
-    \item calculating signal input power
+    \item measuring output power of PlutoSDR using spectrum analyzer with wide RBW filter (\SI{1}{\MHz}),
+    \item calculating input power to the Communications module,
+    \item PER is calculated by transmitting data frames using PlutoSDR (with GNUradio) and receing them by On-Board Computer connected to the PC,
+    \item decreasing output power of PlutoSDR and measuring PER for each point (\si{1000}~frames).
 \end{itemize}
 
-The result of this test was the sensitivity of TODO.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\paperwidth]{img/4/uplink_sensitivity.eps}
+    \caption{Uplink sensitivity measurement block diagram.}
+    \label{4_uplink_sensitivity}
+\end{figure}
 
-\subsubsection{Doppler}
+Measured PER chart is shown in the figure \ref{4_uplink_sensitivity_graph}. It is compared to the ideal BFSK curve. For usable PER of about \SI{1}{\percent} the sensitivity of the communication module is \SI{-95}{\dBm}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\paperwidth]{img/4/uplink_per.eps}
+    \caption{Uplink sensitivity measurement.}
+    \label{4_uplink_sensitivity_graph}
+\end{figure}
+
+
+\subsection{Doppler effect influence on uplink}
 Doppler effect is caused when fast-moving object is emitting/receiving radio waves. For uplink frequency (VHF band) Doppler effect influence can shift frequency up to about \SI{5}{\kHz}. The receiver bandwidth should be measured to estimate allowable frequency inaccuracies.
 
-Test setup is the same as in previous setup, shown in the figure \ref{TODO}. During the test the PER was measured for a range of frequency shift from center. The result is shown in the chart \ref{TODO}.
+Test setup is the same as in previous setup, shown in the figure \ref{4_uplink_sensitivity}. During the test the PER was measured for a range of frequency offsets from the center frequency of the module. The input power to the module was set to \SI{3}{\dB} above sensitivity level (\SI{-92}{\dBm}) and for each point the number of packets sent was \si{500}.  The result is shown in the chart \ref{TODO}.
 
-\subsection{Downlink measurements}
-Downlink parameters of the radio module were also measured. An important parameter is the output power and the spectrum of the signal.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\paperwidth]{img/4/uplink_doppler.eps}
+    \caption{Uplink Doppler effect influence measurement.}
+    \label{4_uplink_doppler_measurement}
+\end{figure}
 
-\subsubsection{Output power}
-Output power was measured using spectrum analyser with wide resolution bandswidth (\SI{1}{\MHz}). Output power was measured to be \SI{27}{\dBm}. TODO
 
-\subsubsection{Spectrum}
+\subsection{Transmitter spectrum and output power}
+Output power was measured using spectrum analyzer with wide resolution bandwidth. Output power was measured to be \SI{28}{\dBm}, which is in the manufacturers specification.
+The spectrum of the signal was recorded, showing significant side lobes (first lobe TODO\SI{10}{\dB} lower than main carrier).
+TODO
+
 
 
 
@@ -106,10 +129,51 @@ This system is deployable by the command from the on-board computer. Thermal kni
 
 
 \subsection{Measurements}
-After deployment on the orbit, antennas have to deploy. During the test campaign antenna deployment procedure was executed three times. Deployed antennas are shown in the figure \ref{TODO}.
+First automatic task of the satellite it to deploy the antennas. During the test campaign antenna deployment procedure was executed four times, due to the issues with Antenna opening. Satellite during antenna deployment is shown in the figure \ref{pwsat_with_deployed_antennas}.
 
-Reflected power from antenna is measured by the radio module during radio frame transmission. Correct antenna deployment can be assured by using the telemetry and comparing the reflected power with measured during the ground test campain. 
-Reflected and forward power chart captured during second antenna opening are shown in the figure \ref{TODO}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\paperwidth]{img/4/pwsat_with_deployed_antennas.JPG}
+    \caption{PW-Sat2 with deployed solar panels during antenna verification.}
+    \label{pwsat_with_deployed_antennas}
+\end{figure}
+
+Manufacturer of the antennas provide a test report with the measured antennas matchins ($s_{11}$ parameter), for VHF and UHF frequencies they are shown in the figures \ref{isis_s11_vhf} and  \ref{isis_s11_uhf}, respectively.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\paperwidth]{img/4/isis_s11_vhf.png}
+    \caption{VHF antenna matching.}
+    \label{isis_s11_vhf}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\paperwidth]{img/4/isis_s11_uhf.png}
+    \caption{UHF antenna matching}
+    \label{isis_s11_uhf}
+\end{figure}
+
+
+Both forward and reflected power from the antenna are measured by the radio module during radio frame transmission. Correct antenna deployment can be verified also by using the telemetry. During the test antenna deployment both forward and reflected power were captured. Average measured value of the forward power: \textbf{\SI{28.8}{\dBm} $\pm$ \SI{0.43}{\dBm}} and reflected power: \textbf{\SI{19.6}{\dBm} $\pm$ \SI{0.54}{\dBm}}. This means that the antenna matching for UHF frequencies is: SWR~$= 2.1$, $s_{11} = -9.2~dB$. This means that the power lost in the mismatch is \SI{0.5}{\dB}. Measured value is similar to measured by the manufacturer ($s_{11} = \SI{-14}{\dB}$).
+
+\subsection{Antennas on orbit}
+Reflected and forward power are being captured during the mission, the chart of the reflected and forward power, from the ground testing up to mission completion is shown in the figure \ref{4_rf_power_comm}. This shows that VSWR of the antenna didn't change much during the mission, however Sail and Solar Arrays deploments are clearly seen on the measurements. Picture of the shadow of the satellite on the Sail, showing opened antennas is shown in the figure \ref{antennas_deployed_orbit}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\paperwidth]{img/4/rf_power_comm.eps}
+    \caption{RF power during mission.}
+    \label{4_rf_power_comm}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\paperwidth]{img/4/antennas_deployed_orbit.jpg}
+    \caption{On-Board photo from PW-Sat2 showing opened antennas.}
+    \label{antennas_deployed_orbit}
+\end{figure}
+
 
 % -----------------------------------------------------------------------------------------------------------
 % -----------------------------------------------------------------------------------------------------------
