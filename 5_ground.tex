@@ -8,7 +8,7 @@ Ground station is located on the building of Faculty of Electronics and Informat
 
 
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.8\paperwidth]{img/5/gs_block_diagram.eps}
     \caption{Ground station block diagram}
@@ -18,14 +18,14 @@ Ground station is located on the building of Faculty of Electronics and Informat
 \section{Antenna mast \& equipment}
 Antenna mast \& rotator were already installed from previous experiments with satellite transmission. Main parameters: \SI{3}{\meter} height, SPID rotator with azimuth-elevator control. Mast with installed antennas is shown in the figure \ref{elka_antena_mast} and the antenna rotator is shown in the figure \ref{elka_antenna_rotator}.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.5\paperwidth]{img/5/elka_antena_mast.jpg}
     \caption{Ground station picture}
     \label{elka_antena_mast}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.75\paperwidth]{img/5/elka_antenna_rotator.jpg}
     \caption{Antenna rotator and boom}
@@ -34,7 +34,7 @@ Antenna mast \& rotator were already installed from previous experiments with sa
 
 Coaxial lightning surge protector SP3000W installed on the mast is shown in the figure \ref{coax_surge_protection}. This elemnent discharges any high voltage pulses which can happen suring the lightning by the cost of insertion loss (declared \SI{0.2}{\dB}).
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.5\paperwidth]{img/5/coax_surge_protection.jpg}
     \caption{Diamond SP3000W coaxial lightning surge protector}
@@ -46,7 +46,7 @@ Coaxial lightning surge protector SP3000W installed on the mast is shown in the 
 \section{Antennas}
 PW-Sat2 is transmitting radio signals with linear polarization, nevertheless ground station  polarization should be circular, due to the random tumbling of the satellite. This will reduce the gain of the antennas, but the signal strength will be constant regardless of the satellite rotation. Cross-Yagi antennas were selected, and two linear planes antennas were phased with coaxial cable and symmetrical splitters/combiners. The diagram of the antenna phasing is shown in the figure \ref{antenna_phasing_diagram}. The length of the cables between the splitter/combiner and the dipoles should, with the dipole shift on the boom, create a \SI{90}{\degree} shift to create circular polarization. Two splitters/combiners were selected for antenna phasing: Tonna 31202 for VHF and Tonna 31270 for UHF.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.5\paperwidth]{img/5/antenna_phasing_diagram.png}
     \caption{Antenna phasing}
@@ -68,14 +68,14 @@ Antennas were selected to be the longest possible, limited by the antenna mast h
      \SI{30}{\degree} beamwidth & \SI{40}{\degree} beamwidth
 \end{tabular}
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.75\paperwidth]{img/5/radiation_144.png}
     \caption{VHF antenna radiation patter - E and H plane.}
     \label{radiation_144}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.75\paperwidth]{img/5/radiation_435.png}
     \caption{UHF antenna radiation patter - E and H plane.}
@@ -87,28 +87,28 @@ Antennas were selected to be the longest possible, limited by the antenna mast h
 \subsection{Splitters/combiners measurements}
 Splitters/combiners were tested prior to its mounting. The most important parameters of the splitter is the insertion loss, amplitude and phase imbalance between the paths and the isolation of the splitter. All of the parameters were tested using Rohde \& Schwarz ZVL Vector Network Analyser, in the configurations shown in the figure \ref{splitter_measurement_diagram}. The results of the insertion loss (Fig. \ref{splitter_amplitude}) show that it is negligible - unmeasurable within tolerances of the VNA. Amplitude imbalance is also very good - much less than \SI{0.1}{\dB}. The phase imbalance is also very good for both splitters (Fig. \ref{splitter_phase}) - less than \SI{1}{\degree}. The isolation (Fig. \ref{splitter_isolation}) is the worst parameter of the measured splitters (only about \SI{6}{\dB}), but in the case when both antennas work together it is not an issue.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.75\paperwidth]{img/5/splitter_measurement_diagram.eps}
     \caption{Splitter/combiner measurement block diagram for through and isolation measurement}
     \label{splitter_measurement_diagram}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.6\paperwidth]{img/5/splitter_amplitude.pdf}
     \caption{Splitters/combiners insertion loss}
     \label{splitter_amplitude}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.6\paperwidth]{img/5/splitter_phase.pdf}
     \caption{Splitters/combiners phase shift imbalance}
     \label{splitter_phase}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.6\paperwidth]{img/5/splitter_isolation.pdf}
     \caption{Splitters/combiners isolation}
@@ -123,7 +123,7 @@ After the assembly, antennas were measured for their impedance matching and reso
 \section{Uplink data flow}
 Block diagram of uplink data chain is shown in the figure \ref{uplink_data_flow}. The telecommands issued by the operator are converted to the radio frames (\textbf{0}s and \textbf{1}s bits), later FSK modulated using GNUradio, finally to be FM-modulated, up-converted and power amplified by conventional voice transceiver.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.6\paperwidth]{img/5/uplink_data_flow.eps}
     \caption{Uplink data flow}
@@ -133,7 +133,7 @@ Block diagram of uplink data chain is shown in the figure \ref{uplink_data_flow}
 \section{Uplink baseband generation}
 AFSK signal is generated by the GNURadio flowgraph shown in the figure \ref{uplink_flowgraph}. First, the telecommand is received by ZeroMQ slot, the packet is formatted and is is changed to the stream of bits. Each bit of the signal controls the frequency of the Voltage Controlled Oscillator (VCO) (\SI{1200}{\hertz} or \SI{2200}{\hertz} for \textbf{0} and \textbf{1}, respectively). During packet transmission, the transmit signal of the radio is enabled, and the audio signal is then generated by the audio card.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.8\paperwidth]{img/5/uplink_flowgraph.png}
     \caption{Uplink GNURadio companion flowchart}
@@ -146,7 +146,7 @@ Analog audio FM transceiver can be used to generate RF signal. The frequency dev
 
 During PW-Sat1 project, the Icom 910H amateur radio transceiver was used for both uplink and downlink, therefore it was proposed to use the the same radio as it do comply with all the requirements. Radio is shown in the figure \ref{Icom_910H_ref}. In case or need of larger output power the high-power amplifier can be connected to the output of the radio.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.6\paperwidth]{img/5/icom910h.jpg}
     \caption{Icom 910H. Source: \cite{ICOM_910H_pic}}
@@ -189,7 +189,6 @@ By demodulating uplink signal and comparing it in the real time with transmitted
 \end{figure}
 
 
-
 % ------------------------------------------------------------
 % ------------------------- DOWNLINK -------------------------
 % ------------------------------------------------------------
@@ -221,7 +220,7 @@ Front-end signal processing is installed as close to the antenna as possible as 
 \end{figure*}
 
 \subsection{Cavity filter}
-Strong signals in the band of the amplifier can intermodulate, resulting in variety of issues: from reduced gain to completely distorted signal. Narrow-band cavity filter installed before the LNA to filter out out-of-band signals. Cavity filter due to its construction has very low insertion loss and regulated, narrow pass bandwidth in the cost of filter size and weight. Filter, shown in the figure \ref{cavity_filter_during_tuning} was tuned to the frequency of the PW-Sat2, with as narrow band as possible. After the tuning, the filter insertion loss is \SI{1.1}{\dB}, \SI{3}{\dB} bandwidth \SI{600}{\kHz} and \SI{20}{\dB} bandwidth - \SI{2}{\MHz}. Cavity filter has exceptionally good return loss - better than \SI{20}{\dB} in the passband. The insertion loss and return loss are shown in the figure \ref{cavity_s_params}.
+Strong signals in the band of the amplifier can intermodulate, resulting in variety of issues: from reduced gain to completely distorted signal. Narrow-band cavity filter installed before the LNA to filter out out-of-band signals. Cavity filter due to its construction has very low insertion loss and regulated, narrow pass bandwidth in the cost of filter size and weight. Filter, shown in the figure \ref{cavity_filter_during_tuning} was tuned to the frequency of the PW-Sat2, with as narrow band as possible. After the tuning, the filter insertion loss is \SI{1.1}{\dB}, \SI{3}{\dB} bandwidth \SI{600}{\kHz} and \SI{20}{\dB} bandwidth - \SI{2}{\MHz}. Cavity filter has exceptionally good return loss - better than \SI{20}{\dB} in the passband. The insertion loss and return loss are shown in the figures \ref{cavity_filter_insertion_loss} and \ref{cavity_filter_return_loss}.
 
 \begin{figure}
     \centering
@@ -230,21 +229,19 @@ Strong signals in the band of the amplifier can intermodulate, resulting in vari
     \label{cavity_filter_during_tuning}
 \end{figure}
 
-\begin{figure*}
-   \centering
-\begin{tabular}{cc}
-        \includegraphics[width=0.35\paperwidth]{img/5/FilterLossG.pdf}
-    & 
-        \includegraphics[width=0.35\paperwidth]{img/5/FilterMatchG.pdf}
-\end{tabular}
-\label{cavity_s_params}
-\caption{Cavity filter S-parameters}
-\end{figure*}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\paperwidth]{img/5/FilterLossG.pdf}
+    \caption{Cavity filter insertion loss}
+    \label{cavity_filter_insertion_loss}
+\end{figure}
 
-
-
-
-
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\paperwidth]{img/5/FilterMatchG.pdf}
+    \caption{Cavity filter return loss}
+    \label{cavity_filter_return_loss}
+\end{figure}
 
 
 
@@ -255,12 +252,14 @@ A dedicated Low Noise Amplifier was designed. As the main active component, a hi
 
 S-parameters of the LNA were tested using Rohde\& Schwarz ZVL Vector Network Analyser. Results are shown in the figure \ref{lna_s_params}. Achieved single-stage gain: \SI{17.5}{\dB} with \SI{8}{\MHz} bandwidth.
 
+\begin{landscape}
 \begin{figure}
     \centering
-    \includegraphics[width=0.75\paperwidth]{img/5/lna_schematic.eps}
+    \includegraphics[width=1.2\paperwidth]{img/5/lna_schematic.eps}
     \caption{Low Noise Amplifier Schematic}
     \label{lna_schematic}
 \end{figure}
+\end{landscape}
 
 \begin{figure*}
    \centering
