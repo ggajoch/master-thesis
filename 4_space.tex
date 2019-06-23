@@ -27,14 +27,14 @@ CubeSat design specification \cite{cubesat_spec}, with which PW-Sat2 is complian
 
 When the subsystem was ordered (in year \si{2014}), the choice of available products was very limited, and the only radio which was compliant with above mentioned requirements was \texttt{ISIS VHF uplink/UHF downlink Full Duplex Transceiver}. Its view and block diagram is shown in the figures \ref{ISIS_TRXvU_photo} and \ref{ISIS_TRXvU_block_diagram}.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.5\paperwidth]{img/4/ISIS-radio-UHF-VHF-min.png}
     \caption{ISIS VHF uplink/UHF downlink Full Duplex Transceiver photo. Source: \cite{isis_trxvu}}
     \label{ISIS_TRXvU_photo}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.8\paperwidth]{img/4/ISIS_TRXvU_block_diagram.eps}
     \caption{ISIS VHF uplink/UHF downlink Full Duplex Transceiver block diagram. Source: \cite{isis_trxvu}}
@@ -64,7 +64,7 @@ Sensitivity was measured by the setup shown in the figure \ref{4_uplink_sensitiv
     \item decreasing output power of PlutoSDR and measuring PER for each point (\si{1000}~frames).
 \end{itemize}
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.6\paperwidth]{img/4/uplink_sensitivity.eps}
     \caption{Uplink sensitivity measurement block diagram.}
@@ -73,7 +73,7 @@ Sensitivity was measured by the setup shown in the figure \ref{4_uplink_sensitiv
 
 Measured PER chart is shown in the figure \ref{4_uplink_sensitivity_graph}. It is compared to the ideal BFSK curve. For usable PER of about \SI{1}{\percent} the sensitivity of the communication module is \SI{-95}{\dBm}.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.8\paperwidth]{img/4/uplink_per.pdf}
     \caption{Uplink sensitivity measurement.}
@@ -86,7 +86,7 @@ Doppler effect is caused when fast-moving object is emitting/receiving radio wav
 
 Test setup is the same as in previous setup, shown in the figure \ref{4_uplink_sensitivity}. During the test the PER was measured for a range of frequency offsets from the center frequency of the module. The input power to the module was set to \SI{3}{\dB} above sensitivity level (\SI{-92}{\dBm}) and for each point the number of packets sent was \si{500}.  The result is shown in the chart \ref{TODO}.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.6\paperwidth]{img/4/uplink_doppler.pdf}
     \caption{Uplink Doppler effect influence measurement.}
@@ -131,7 +131,7 @@ This system is deployable by the command from the on-board computer. Thermal kni
 \subsection{Measurements}
 First automatic task of the satellite it to deploy the antennas. During the test campaign antenna deployment procedure was executed four times, due to the issues with Antenna opening. Satellite during antenna deployment is shown in the figure \ref{pwsat_with_deployed_antennas}.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.6\paperwidth]{img/4/pwsat_with_deployed_antennas.JPG}
     \caption{PW-Sat2 with deployed solar panels during antenna verification.}
@@ -140,14 +140,14 @@ First automatic task of the satellite it to deploy the antennas. During the test
 
 Manufacturer of the antennas provide a test report with the measured antennas matchins ($s_{11}$ parameter), for VHF and UHF frequencies they are shown in the figures \ref{isis_s11_vhf} and  \ref{isis_s11_uhf}, respectively.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.8\paperwidth]{img/4/isis_s11_vhf.png}
     \caption{VHF antenna matching.}
     \label{isis_s11_vhf}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.8\paperwidth]{img/4/isis_s11_uhf.png}
     \caption{UHF antenna matching}
@@ -160,14 +160,14 @@ Both forward and reflected power from the antenna are measured by the radio modu
 \subsection{Antennas on orbit}
 Reflected and forward power are being captured during the mission, the chart of the reflected and forward power, from the ground testing up to mission completion is shown in the figure \ref{4_rf_power_comm}. This shows that VSWR of the antenna didn't change much during the mission, however Sail and Solar Arrays deploments are clearly seen on the measurements. Picture of the shadow of the satellite on the Sail, showing opened antennas is shown in the figure \ref{antennas_deployed_orbit}.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.6\paperwidth]{img/4/rf_power_comm.pdf}
     \caption{RF power during mission.}
     \label{4_rf_power_comm}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.7\paperwidth]{img/4/antennas_deployed_orbit.jpg}
     \caption{On-Board photo from PW-Sat2 showing opened antennas.}

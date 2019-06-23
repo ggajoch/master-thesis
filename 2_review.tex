@@ -6,7 +6,7 @@ There are number of commercially available solutions and subsystems. Usually the
 \subsection{Cubesat commmunication diagram}
 Typical Low Earth Orbit satellite communication systems is shown in the figure \ref{comm_diagram}.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.7\paperwidth]{img/2/comm_diagram.eps}
     \caption{General communication system diagram}
@@ -28,7 +28,7 @@ It consists of:
 \subsection{Cubesat antennas}
 Cubesat dimensions are strict and defined in the CubeSat Design Specification \cite{cubesat_spec} as \si{100}x\si{100}~mm square \ref{CubeSat_max_dim}. This poses a requirement of antenna unfolding for antennas larger than side width. Usually this is required for all sub-GHz band, such as considered VHF and UHF bands. Higher bands, such an S-band, usually use patch antennas mounted on the wall.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.5\paperwidth]{img/2/cubesat_dimensions.eps}
     \caption{CubeSat maximum dimensions, top view. Source \cite{cubesat_spec}.}.
@@ -39,21 +39,21 @@ Antennas are usually unfolded by the spring action of the antennas itself and th
 
 Typical unidirectional VHF/UHF antennas are dipoles, monopoles or turnstille. Selecting one depends on the mission requirements and link budget. Turnstille antenna, providing best link budget and circular polarization require that radiation elements are mounted on two sides of the CubeSat. Dipole option uses two elements is not as dependent on the ground reference (main structure) as the monopole antenna.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.5\paperwidth]{img/2/antenna_stiff.png}
     \caption{Deployed stiff antenna. In the stowed configuration they are along the solar panels. Source \cite{stiff_antenna_paper}.}.
     \label{stiff_antenna_pic}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.5\paperwidth]{img/2/m-cubed.jpg}
     \caption{Tape measure antenna in the stowed configuration. Flat spring action forces antenna to deploy itself after its release. Source \cite{m_cubed}.}.
     \label{m_cubed}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.5\paperwidth]{img/2/isis_dipole.png}
     \caption{Flat spring antennas rolled inside the CubeSat square. Released by the thermal knife burning the lock of the antenna doors. Source \cite{isis_dipole_antenna}.}.
@@ -71,7 +71,7 @@ Due to the directivity of the antennas, their half-power beam width is around \s
 
 In the figure \ref{isis_gs} the commercially available ISIS VHF/UHF ground station is shown, which employs two cross-yagi antennas (VHF, UHF), antenna mast and rotator and rotator controller.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.5\paperwidth]{img/2/isis_gs.jpg}
     \caption{ISIS Ground Station. Source \cite{isis_gs}.}.
@@ -134,7 +134,7 @@ Depending on the required output power, high-power amplifier can be used to furt
 \subsubsection{Receiver}
 The receiver on the ground has to complement the space segment. Due to relatively low transmit power on the satellite, the receiver sensitivity should be very high. Additionally, receiver intermodulation performance should withstand possible blocking signals which are present on the ground.
 
-To increase the sensitivity, Low Noise Amplifier has to be installed close to the antenna, such as LNA SSB-70 for UHF band (Fig. \ref{TODO}), which has Noise Figure of about \SI{0.35}{\dB}. Intermodulation and blocking is provided at the first stage by placing low-loss filter before the LNA, such as Cavity filters (Fig. \ref{cavity_uhf}).
+To increase the sensitivity, Low Noise Amplifier has to be installed close to the antenna, such as LNA SSB-70 for UHF band (Fig. \ref{ssb_lna70}), which has Noise Figure of about \SI{0.35}{\dB}. Intermodulation and blocking is provided at the first stage by placing low-loss filter before the LNA, such as Cavity filters (Fig. \ref{cavity_uhf}).
 
 \begin{minipage}{\linewidth}
     \centering
@@ -150,12 +150,13 @@ To increase the sensitivity, Low Noise Amplifier has to be installed close to th
     \begin{minipage}{0.45\linewidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.1\paperwidth]{img/2/cavity_uhf.jpg}
+            \includegraphics[width=10cm]{img/2/cavity_uhf.jpg}
             \caption{LBQ-450 3-cavity UHF bandpass filter. Source: \cite{cavity_uhf}}
             \label{cavity_uhf}
         \end{figure}
     \end{minipage}
 \end{minipage}
+
 
 Radio signal, pre-amplified by the low-noise amplifier is down-converted to the baseband and de-modulated. This can be performed by the integrated radio transceiver (same as the transmitter, this emposes the same modulation constraints as for the transmitter) or by the software-defined radio, such as an NI-USRP 2901 (Fig. \ref{ni_2901}) or FUNCube Dongle Pro+ (which was specifically designed for the FUNCube CubeSat - Fig. \ref{funcube}).
 
@@ -182,7 +183,7 @@ Radio signal, pre-amplified by the low-noise amplifier is down-converted to the 
 
 After down-conversion baseband signal has to be de-modulated, which is done by the Terminal Network Controller. This can be implemeneted as a custom hardware solution (analog-to-digital converter and custom digital signal processor, for example TNC-X shown in the figure \ref{tncx}) or by pure software. Software solution has more flexibility but require a PC to perform signal processing, as is the only option for software-defined radio. One of the available TNC software using audio card is the Direwolf \cite{direwolf}.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.3\paperwidth]{img/2/tncx.jpg}
     \caption{Terminal Network Controller TNC-X. Source: \cite{tncx}}
