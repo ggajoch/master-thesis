@@ -1,5 +1,6 @@
 \chapter{Introduction}
 In satellite applications, radio communication is the most important method for controlling the satellite state and issuing any commands to it.
+COŚ TUTAJ WIECEJ TYLKO NIE MAM POJĘCIA CO
 
 
 \section{Scope of the thesis}
@@ -26,6 +27,15 @@ The primary mission of PW-Sat2 is to test the innovative deorbit technology - th
 \end{figure}
 
 
+\subsection{Secondary mission goals}
+PW-Sat2 have also three secondary experiments, executed by the command from the operators on the ground. Those experiments will be ran according when the link and power budget will allow to. Secondary experiments include:
+\begin{itemize}
+    \item RadFET - ionising radiation sensor, which will measure threshold voltages on P-MOS transistors to estimate the TID absorbed by the satellite.
+    \item Sun Sensor -  it will provide an orientation data which will be compared with the commercial system readings. During the experiment, \si{12} Ambient Light Sensors will provide information about their illumination, allowing the software to calculate angles to the Sun.
+    \item Cameras - two VGA-resolution (\si{640}x\si{480}~px) on-board cameras with small and non-complicated optics which will allow to observe some parts of the deorbitation sail during its opening, monitor the sail condition during deorbitation phase and to take photos of the Earth.
+\end{itemize}
+
+
 \subsection{Solar array deployment}
 PW-Sat2 have two solar panels which are deployed by the command from the On-Board Computer on the request of the satellite operator from the ground. Solar panels are mounted on two opposite directions, open and create one large panel as seen on the figure \ref{PW-Sat_solar_panels}. The wings, on which solar panels are mounted, are made from aluminum, therefore their deployment can change the antennas parameters.
 \begin{figure}
@@ -34,8 +44,6 @@ PW-Sat2 have two solar panels which are deployed by the command from the On-Boar
     \caption{PW-Sat2 with opened solar panels. Source: \cite{PW_sat2_photo}}
     \label{PW-Sat_solar_panels}
 \end{figure}
-
-
 
 \subsection{Attitude Determination and Control Subsystem}
 Attitude Determination and Control Subsystem (ADCS) is responsible for controlling the satellite orientation. PW-Sat2 implement magnetic control of the orientation using magnetorquers, special type of an electromagnet, designed to interact with Earths' magnetic field. The currents of the magnetorquers are controlled by the subsystem. For PW-Sat2, the only implemented ADCS mode is detumbling - the algorithm to reduce the random tumbling of the satellite to a very low rotational rate (in the order of degrees/second). Therefore, the very slow random tumbling of the satellite is assumed, which forces to use omnidirectional antennas, as the pointing is not possible.
@@ -48,9 +56,6 @@ Electrical Power System is responsible for power conversion from the solar panel
     \caption{PW-Sat2 energy distribution. Source: \cite{PW_sat2_photo}}
     \label{pwsat_eps_distribution}
 \end{figure}
-
-
-\subsection{Secondary mission goals}
 
 \subsection{Mission plan and system lifetime}
 PW-Sat2 mission is divided into two phases:

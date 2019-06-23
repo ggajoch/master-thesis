@@ -25,7 +25,7 @@ Because of the mentioned requirements it was decided to choose commercially avai
 \label{section:comm_design}
 CubeSat design specification \cite{cubesat_spec}, with which PW-Sat2 is compliant, defines common PC/104 connector, which is the main data bus for all satellite subsystems. On the connector, two \iic and two CAN buses are defined and most of the components are compatible to each other. However, due to the lack of CAN interface on On-Board Computer (CubeComputer from CubeSpace \cite{cubespace_website}) radio should use \iic communication bus.
 
-When the subsystem was ordered (in year \si{2014}), the choice of available products was very limited, and the only radio which was compliant with above mentioned requirements was \texttt{ISIS VHF uplink/UHF downlink Full Duplex Transceiver}. Its view and block diagram is shown in the figures \ref{ISIS_TRXvU_photo} and \ref{ISIS_TRXvU_block_diagram}.
+When the subsystem was ordered (in year \si{2014}), the choice of available products was very limited, and the only radio which was compliant with above mentioned requirements was ISIS VHF uplink/UHF downlink Full Duplex Transceiver. Its view and block diagram is shown in the figures \ref{ISIS_TRXvU_photo} and \ref{ISIS_TRXvU_block_diagram}.
 
 \begin{figure}
     \centering
@@ -44,7 +44,7 @@ When the subsystem was ordered (in year \si{2014}), the choice of available prod
 Basic characteristics: \\
 \begin{tabular}{c|c}
      \textbf{downlink} & \textbf{uplink} \\ \hline
-     \multicolumn{2}{c}{dual-\iic communication standard} \\
+     \multicolumn{2}{c}{dual-\iic ~communication standard} \\
      \multicolumn{2}{c}{AX.25 frame format} \\
      \si{430}-\SI{450}{\MHz} frequency range & \si{140}-\SI{150}{\MHz} frequency range \\
      \SI{0.5}{\watt} downlink power & \SI{-98}{\dBm} sensitivity for \si{10^-5}~BER \\

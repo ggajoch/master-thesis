@@ -17,7 +17,7 @@ Simulations performed using Gpredict software \cite{gpredict_website} shown that
 
 
 \section{Data link budget}
-PW-Sat2 have couple of data sources to be sent to the ground:
+PW-Sat2 have couple of data sources to be sent to the ground, and each of them needs to be taken into account for estimating the required transmission throughput. For each data source the average throughtput during ground station coverage is calculated, assuming \SI{30}{\minute} contact per day.
 \begin{itemize}
     \item housekeeping telemetry (satellite health information, such as temperatures, bus and solar panel voltages and currents, subsystem status etc. Telemetry is \SI{230}{\byte} frame and should be transmitted every \SI{1}{\minute} (average \SI{30}{\bps}),
     \item archival housekeeping telemetry (gathered during orbit, when no ground station is in range), telemetry should be downloaded in \SI{5}{\minute} step from the whole operational time, which sums up to \SI{64}{\kilo\byte} per day (average \SI{300}{\bps}),
@@ -25,9 +25,11 @@ PW-Sat2 have couple of data sources to be sent to the ground:
     \item Sail deployment procedure, which transmits experiment data on-line (during the experiment). Estimated data to be transmitted (sail deployment indicator, photos and gyroscopes) is about \SI{1}{\kbps}.
 \end{itemize}
 
-Data throughput requirement for PW-Sat2 mission sums up to about \SI{1}{\kbps}.
+Data downlink throughput requirement for PW-Sat2 mission sums up to about \SI{1}{\kbps}.
+For uplink, the telecommands sent from the ground are relatively short (less than \SI{200}{\byte} each) and the rate of thelecommands is low. Therefore, no specific requirement was created, with minimal usable rate of about \SI{100}{\bps}.
 
 \section{Frequency band selection}
+For non-commercial, radio amateur CubeSats
 The most common radio bands used in CubeSat designs are VHF, UHF and S-band. S-band is usually used when high data rate (~\SI{10}{\Mbps}) are necessary. Typical designs for low-rate data link are full-duplex combo or simplex VHF/UHF radio.
 
 PW-Sat1 \cite{pwsat1_website_ska} used full-duplex VHF-downlink and UHF-uplink radio. During its mission, operation team was reporting uplink stability issues, which was caused by very low Signal to Noise ratio on the satellite. The design team narrowed down the issue to very high level of interference in the UHF band on the orbit, which probably is caused by the high power signal sources on the ground, such as radars.
