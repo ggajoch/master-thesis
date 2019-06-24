@@ -1,8 +1,7 @@
 \chapter{Radio communication with the nanosatellites - state of the art}
 
 \section{Frequency allocation}
-TODO
-% For non-commercial, radio amateur CubeSats
+For non-commercial, radio amateur CubeSats
 % The most common radio bands used in CubeSat designs are VHF, UHF and S-band. S-band is usually used when high data rate (~\SI{10}{\Mbps}) are necessary. Typical designs for low-rate data link are full-duplex combo or simplex VHF/UHF radio.
 
 % PW-Sat1 \cite{pwsat1_website_ska} used full-duplex VHF-downlink and UHF-uplink radio. During its mission, operation team was reporting uplink stability issues, which was caused by very low Signal to Noise ratio on the satellite. The design team narrowed down the issue to very high level of interference in the UHF band on the orbit, which probably is caused by the high power signal sources on the ground, such as radars.
@@ -18,7 +17,7 @@ Typical Low Earth Orbit satellite communication systems is shown in the figure \
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\paperwidth]{img/2/comm_diagram.eps}
+    \includegraphics[width=0.7\paperwidth]{img/4/comm_diagram.eps}
     \caption{General communication system diagram}
     \label{comm_diagram}
 \end{figure}
@@ -40,7 +39,7 @@ Cubesat dimensions are strict and defined in the CubeSat Design Specification \c
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\paperwidth]{img/2/cubesat_dimensions.eps}
+    \includegraphics[width=0.5\paperwidth]{img/4/cubesat_dimensions.eps}
     \caption{CubeSat maximum dimensions, top view. Source \cite{cubesat_spec}.}.
     \label{CubeSat_max_dim}
 \end{figure}
@@ -51,21 +50,21 @@ Typical unidirectional VHF/UHF antennas are dipoles, monopoles or turnstille. Se
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\paperwidth]{img/2/antenna_stiff.png}
+    \includegraphics[width=0.5\paperwidth]{img/4/antenna_stiff.png}
     \caption{Deployed stiff antenna. In the stowed configuration they are along the solar panels. Source \cite{stiff_antenna_paper}.}.
     \label{stiff_antenna_pic}
 \end{figure}
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\paperwidth]{img/2/m-cubed.jpg}
+    \includegraphics[width=0.5\paperwidth]{img/4/m-cubed.jpg}
     \caption{Tape measure antenna in the stowed configuration. Flat spring action forces antenna to deploy itself after its release. Source \cite{m_cubed}.}.
     \label{m_cubed}
 \end{figure}
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\paperwidth]{img/2/isis_dipole.png}
+    \includegraphics[width=0.5\paperwidth]{img/4/isis_dipole.png}
     \caption{Flat spring antennas rolled inside the CubeSat square. Released by the thermal knife burning the lock of the antenna doors. Source \cite{isis_dipole_antenna}.}.
     \label{isis_dipole_antenna}
 \end{figure}
@@ -83,7 +82,7 @@ In the figure \ref{isis_gs} the commercially available ISIS VHF/UHF ground stati
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\paperwidth]{img/2/isis_gs.jpg}
+    \includegraphics[width=0.5\paperwidth]{img/4/isis_gs.jpg}
     \caption{ISIS Ground Station. Source \cite{isis_gs}.}.
     \label{isis_gs}
 \end{figure}
@@ -96,7 +95,7 @@ Communication subsystem of the satellite is responsible of transmitting and rece
     \begin{minipage}{0.45\linewidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.32\paperwidth]{img/2/clyde_comm.jpg}
+            \includegraphics[width=0.32\paperwidth]{img/4/clyde_comm.jpg}
             \caption{CPUT UTRX from Clyde Space. Source: \cite{clyde_comm}}
             \label{clyde_comm}
         \end{figure}
@@ -105,7 +104,7 @@ Communication subsystem of the satellite is responsible of transmitting and rece
     \begin{minipage}{0.45\linewidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.35\paperwidth]{img/2/gomspace_sdr.png}
+            \includegraphics[width=0.35\paperwidth]{img/4/gomspace_sdr.png}
             \caption{Space qualified Software Defined Radio (SDR) Platform. Source: \cite{gomspace_comm}}
             \label{gomspace_comm}
         \end{figure}
@@ -125,7 +124,7 @@ Depending on the required output power, high-power amplifier can be used to furt
     \begin{minipage}{0.45\linewidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.35\paperwidth]{img/2/kenwood_ts2000.jpg}
+            \includegraphics[width=0.35\paperwidth]{img/4/kenwood_ts2000.jpg}
             \caption{KENWOOD TS-2000 E all mode transceiver. Source: \cite{kenwood_ts2000}}
             \label{kenwood_ts2000}
         \end{figure}
@@ -134,7 +133,7 @@ Depending on the required output power, high-power amplifier can be used to furt
     \begin{minipage}{0.45\linewidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.35\paperwidth]{img/2/vhf_1500w_pa.jpg}
+            \includegraphics[width=0.35\paperwidth]{img/4/vhf_1500w_pa.jpg}
             \caption{\SI{1500}{\watt} VHF power amplifier. Source: \cite{vhf_1500w_pa}}
             \label{vhf_1500w_pa}
         \end{figure}
@@ -151,7 +150,7 @@ To increase the sensitivity, Low Noise Amplifier has to be installed close to th
     \begin{minipage}{0.45\linewidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.3\paperwidth]{img/2/ssb_lna70.jpg}
+            \includegraphics[width=0.3\paperwidth]{img/4/ssb_lna70.jpg}
             \caption{LNA SSB-70 Low Noise Amplifier for UHF band. Source: \cite{ssb_lna70}}
             \label{ssb_lna70}
         \end{figure}
@@ -160,7 +159,7 @@ To increase the sensitivity, Low Noise Amplifier has to be installed close to th
     \begin{minipage}{0.45\linewidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.3\paperwidth]{img/2/cavity_uhf.jpg}
+            \includegraphics[width=0.3\paperwidth]{img/4/cavity_uhf.jpg}
             \caption{LBQ-450 3-cavity UHF bandpass filter. Source: \cite{cavity_uhf}}
             \label{cavity_uhf}
         \end{figure}
@@ -175,7 +174,7 @@ Radio signal, pre-amplified by the low-noise amplifier is down-converted to the 
     \begin{minipage}{0.45\linewidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.3\paperwidth]{img/2/ni_2901.png}
+            \includegraphics[width=0.3\paperwidth]{img/4/ni_2901.png}
             \caption{USRP-2901 Software Defined Radio Device. Source: \cite{ni_2901}}
             \label{ni_2901}
         \end{figure}
@@ -184,7 +183,7 @@ Radio signal, pre-amplified by the low-noise amplifier is down-converted to the 
     \begin{minipage}{0.45\linewidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.3\paperwidth]{img/2/funcube.jpg}
+            \includegraphics[width=0.3\paperwidth]{img/4/funcube.jpg}
             \caption{FUNcube Dongle Pro+. Source: \cite{funcube}}
             \label{funcube}
         \end{figure}
@@ -195,7 +194,7 @@ After down-conversion baseband signal has to be de-modulated, which is done by t
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.3\paperwidth]{img/2/tncx.jpg}
+    \includegraphics[width=0.3\paperwidth]{img/4/tncx.jpg}
     \caption{Terminal Network Controller TNC-X. Source: \cite{tncx}}
     \label{tncx}
 \end{figure}
@@ -217,7 +216,7 @@ PW-Sat and its ground station antennas are shown in the figures \ref{PW-Sat1_pic
     \begin{minipage}{0.45\linewidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.32\paperwidth]{img/2/camk_pic.jpg}
+            \includegraphics[width=0.32\paperwidth]{img/4/camk_pic.jpg}
             \caption{Nicolaus Copernicus Astronomical Center in Warsaw. PW-Sat antennas on the right. Source: \cite{camk_pic}}
             \label{CAMK_pic}
         \end{figure}
@@ -226,7 +225,7 @@ PW-Sat and its ground station antennas are shown in the figures \ref{PW-Sat1_pic
     \begin{minipage}{0.45\linewidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.32\paperwidth]{img/2/pw-sat1.jpg}
+            \includegraphics[width=0.32\paperwidth]{img/4/pw-sat1.jpg}
             \caption{PW-Sat1. Source: \cite{pwsat1_website_ska}}
             \label{PW-Sat1_pic}
         \end{figure}
@@ -243,7 +242,7 @@ SwissCube use two Ground Stations, one at EPFL, and one at HE-Fribourg. The HE-F
     \begin{minipage}{0.45\linewidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.32\paperwidth]{img/2/swisscube_stowed.png}
+            \includegraphics[width=0.32\paperwidth]{img/4/swisscube_stowed.png}
             \caption{SwissCube antennas in the stowed configuration. Source: \cite{swisscube_stowed}}
             \label{swisscube_stowed}
         \end{figure}
@@ -252,7 +251,7 @@ SwissCube use two Ground Stations, one at EPFL, and one at HE-Fribourg. The HE-F
     \begin{minipage}{0.45\linewidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.32\paperwidth]{img/2/swisscube_groundstation.png}
+            \includegraphics[width=0.32\paperwidth]{img/4/swisscube_groundstation.png}
             \caption{SwissCube EPFL ground station antennas. Source: \cite{swisscube_groundstation}}
             \label{PW-swisscube_groundstation}
         \end{figure}
