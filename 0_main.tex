@@ -113,45 +113,13 @@ giveninits=true
 \acknowledgements{}
 
 \setlength{\cftsecnumwidth}{10mm}
-
-
-\makeatletter
-\newcommand*{\marker}[1][]{%
-  \begingroup
-    \edef\x{\the\pdfelapsedtime}%
-    \count@\x\relax
-    \divide\count@\p@
-    \edef\s{\the\count@}%
-    \count@\s\relax
-    \divide\count@ 60 %
-    \edef\m{\the\count@}%
-    \count@\m\relax
-    \divide\count@ 60 %
-    \edef\h{\the\count@}%
-    \edef\s{\the\numexpr\x-65536*60*\m}%
-    \dimen@\s sp %
-    \edef\s{\ifdim\dimen@<10pt 0\fi\strip@pt\dimen@}%
-    \edef\m{\the\numexpr\m-60*\h}%
-    \edef\m{\ifnum\m<10 0\fi\m}%
-    \edef\timestamp{\h:\m:\s}%
-    \immediate\write16{%
-      [\timestamp] #1%
-    }%
-  \endgroup
-}
-\makeatother
-
 %---------------------------------------------------------------------------
 
 \begin{document}
 
-\marker[timetimetime-00-begin]
-
 \titlepages
 \tableofcontents
 \clearpage
-
-\marker[timetimetime-0-before]
 
 \include{1_abbreviations}
 \include{2_introduction}
@@ -165,7 +133,5 @@ giveninits=true
 
 \appendix
 \printbibliography
-
-\marker[timetimetime-7-end]
 
 \end{document}
