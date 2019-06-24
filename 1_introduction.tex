@@ -1,7 +1,5 @@
 \chapter{Introduction}
-In satellite applications, radio communication is the most important method for controlling the satellite state and issuing any commands to it.
-COŚ TUTAJ WIECEJ TYLKO NIE MAM POJĘCIA CO
-
+In satellite applications, radio communication is usually the only way of communications between a spacecraft and the control systems here on Earth. This means that all the commands issued by the operator and the telemetry and experiment data we can gather has to go through the radio link. Also the satellite housekeeping data, important for the estimation of the satellites' health are required to be download to the operator via radio link. For many missions, lack of radio communication with satellite causes the mission to fail, as there is no possibility to download experiment data, even if they can be carried out automatically.
 
 \section{Scope of the thesis}
 The aim of this thesis was to design, verify, validate and deploy the communication system for second Polish satellite, PW-Sat2. The design covers all aspects of communication link design from the system point of view: the link design, space and ground segments and testing all the subsystems. Thesis should describe the choices and the practical design of the low-cost satellite link using both off-the-shelf hardware, custom designed components and Software Defined Radio, with custom digital signal processing. The designed system should provide a two-way data link between the operator and the satellite. Finally, the system was tested on the orbit, proving its parameters and reliability.
@@ -30,7 +28,7 @@ The primary mission of PW-Sat2 is to test the innovative deorbit technology - th
 \subsection{Secondary mission goals}
 PW-Sat2 have also three secondary experiments, executed by the command from the operators on the ground. Those experiments will be ran according when the link and power budget will allow to. Secondary experiments include:
 \begin{itemize}
-    \item RadFET - ionising radiation sensor, which will measure threshold voltages on P-MOS transistors to estimate the TID absorbed by the satellite.
+    \item RadFET - ionizing radiation sensor, which will measure threshold voltages on P-MOS transistors to estimate the TID absorbed by the satellite.
     \item Sun Sensor -  it will provide an orientation data which will be compared with the commercial system readings. During the experiment, \si{12} Ambient Light Sensors will provide information about their illumination, allowing the software to calculate angles to the Sun.
     \item Cameras - two VGA-resolution (\si{640}x\si{480}~px) on-board cameras with small and non-complicated optics which will allow to observe some parts of the deorbitation sail during its opening, monitor the sail condition during deorbitation phase and to take photos of the Earth.
 \end{itemize}
