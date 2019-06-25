@@ -1,24 +1,22 @@
 \chapter{Ground segment}
 Ground station design should complement the space segment, with large antenna gains and output power to allow the budget link to close. As the system is full-duplex, both uplink and downlink channels are separate and the design should allow to simultaneously operate transmit and receive. Block diagram of the designed ground station is shown in the figure \ref{gs_block_diagram}.
-Due to the low sensitivity of the satellite receiver (\SI{-98}{\dBm}) uplink EIRP has to be very large, this is achieved by using high-power amplifier and antennas with high directional gain. For downlink, ground station has to compensate low transmit power of the satellite, by using high gain antennas and very sensitive receiver.
+Due to the low sensitivity of the satellite receiver (\SI{-97}{\dBm}) uplink EIRP has to be very large. This is achieved by using high-power amplifier and antennas with high directional gain. For downlink, ground station has to compensate low transmit power of the satellite, by using high gain antennas and very sensitive receiver.
 
 Ground station consists of not only the hardware but also software. Many parts of the system use Digital Signal Processing and Software-Defined Radio for data modulation/de-modulation, packet transmission etc. For the DSP tasks, GNUradio \cite{gnuradio} was selected and the tool for sampling-based signal processing.
 
 Ground station is located on the building of Faculty of Electronics and Information Technology, Warsaw University of Technology.
 
-
-
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\paperwidth]{img/7/gs_block_diagram.eps}
+    \includegraphics[width=0.7\paperwidth]{img/7/gs_block_diagram.eps}
     \caption{Ground station block diagram}
     \label{gs_block_diagram}
 \end{figure}
 
 \section{Antenna mast \& equipment}
-Antenna mast \& rotator were already installed from previous experiments with satellite transmission. Main parameters: \SI{3}{\meter} height, SPID rotator with azimuth-elevator control. Mast with installed antennas is shown in the figure \ref{elka_antena_mast} and the antenna rotator is shown in the figure \ref{elka_antenna_rotator}.
+Antenna mast \& rotator were already installed from previous experiments with satellite transmission. Main parameters: \SI{3}{\meter} height, SPID rotator with azimuth-elevator control and PC interface. Mast with installed antennas is shown in the figure \ref{elka_antena_mast} and the antenna rotator with nearby elements is shown in the figure \ref{elka_antenna_rotator}. Coaxial lightning surge protector SP3000W installed on the mast is shown in the figure \ref{coax_surge_protection}. This elemnent discharges any high voltage pulses which can happen suring the lightning by the cost of insertion loss (declared \SI{0.2}{\dB}).
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\paperwidth]{img/7/elka_antena_mast.jpg}
     \caption{Ground station picture}
@@ -31,8 +29,6 @@ Antenna mast \& rotator were already installed from previous experiments with sa
     \caption{Antenna rotator and boom}
     \label{elka_antenna_rotator}
 \end{figure}
-
-Coaxial lightning surge protector SP3000W installed on the mast is shown in the figure \ref{coax_surge_protection}. This elemnent discharges any high voltage pulses which can happen suring the lightning by the cost of insertion loss (declared \SI{0.2}{\dB}).
 
 \begin{figure}
     \centering
@@ -54,8 +50,7 @@ PW-Sat2 is transmitting radio signals with linear polarization, nevertheless gro
 \end{figure}
 
 
-Radiation patterns of the antennas are shown in the figures \ref{radiation_144} and \ref{radiation_435} as declared by the manufacturer.
-
+Radiation patterns of the antennas are shown in the figures \ref{radiation_144} and \ref{radiation_435} as declared by the manufacturer. 
 
 Antennas were selected to be the longest possible, limited by the antenna mast height. Selected antenna characteristics:
 
@@ -85,7 +80,7 @@ Antennas were selected to be the longest possible, limited by the antenna mast h
 
 
 \subsection{Splitters/combiners measurements}
-Splitters/combiners were tested prior to its mounting. The most important parameters of the splitter is the insertion loss, amplitude and phase imbalance between the paths and the isolation of the splitter. All of the parameters were tested using Rohde \& Schwarz ZVL Vector Network Analyser, in the configurations shown in the figure \ref{splitter_measurement_diagram}. The results of the insertion loss (Fig. \ref{splitter_amplitude}) show that it is negligible - unmeasurable within tolerances of the VNA. Amplitude imbalance is also very good - much less than \SI{0.1}{\dB}. The phase imbalance is also very good for both splitters (Fig. \ref{splitter_phase}) - less than \SI{1}{\degree}. The isolation (Fig. \ref{splitter_isolation}) is the worst parameter of the measured splitters (only about \SI{6}{\dB}), but in the case when both antennas work together it is not an issue.
+Splitters/combiners were tested prior to its mounting. The most important parameters of the splitter is the insertion loss, amplitude and phase imbalance between the paths and the isolation of the splitter. All of the parameters were tested using Rohde \& Schwarz ZVL Vector Network Analyser, in the configurations shown in the figure \ref{splitter_measurement_diagram}. The results of the insertion loss (Fig. \ref{splitter_amplitude}) show that it is negligible - unmeasurable within tolerances of the VNA. Amplitude imbalance is also very good - much less than \SI{0.1}{\dB}. The phase imbalance is also very good for both splitters (Fig. \ref{splitter_phase}) - less than \SI{1}{\degree}. The isolation (Fig. \ref{splitter_isolation}) is the worst parameter of the measured splitters (only about \SI{6}{\dB}), but in the case when both antennas receive the same signal it is not an issue.
 
 \begin{figure}
     \centering
@@ -119,11 +114,12 @@ Splitters/combiners were tested prior to its mounting. The most important parame
 % \subsection{Antenna Measurements}
 % After the assembly, antennas were measured for their impedance matching and resonance. As the antennas are Yagi-Uda type, the most important element for matching is the dipole itself. Each antenna consist of two dipoles (with vertical and horizontal polarization) phased with a combiner. Measurements of the dipoles and the phased antenna were performed, and the result is shown in the table \ref{TODO}.
 
+\newpage
 
 \section{Uplink data flow}
 Block diagram of uplink data chain is shown in the figure \ref{uplink_data_flow}. The telecommands issued by the operator are converted to the radio frames (\textbf{0}s and \textbf{1}s bits), later FSK modulated using GNUradio, finally to be FM-modulated, up-converted and power amplified by conventional voice transceiver.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\paperwidth]{img/7/uplink_data_flow.eps}
     \caption{Uplink data flow}
@@ -146,7 +142,7 @@ Analog audio FM transceiver can be used to generate RF signal. The frequency dev
 
 During PW-Sat1 project, the Icom 910H amateur radio transceiver was used for both uplink and downlink, therefore it was proposed to use the the same radio as it do comply with all the requirements. Radio is shown in the figure \ref{Icom_910H_ref}. In case or need of larger output power the high-power amplifier can be connected to the output of the radio.
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.6\paperwidth]{img/7/icom910h.jpg}
     \caption{Icom 910H. Source: \cite{ICOM_910H_pic}}
@@ -163,30 +159,30 @@ Radio VHF FM transmit characteristics:
     Audio bandwidth & \SI{4}{\kHz} \\
 \end{tabular}
 
+\newpage
+
 \subsection{Standing Wave Ratio meter}
 To check proper antenna connection and ensure long-term monitoring a SWR (Standing Wave Ratio) was installed. This instrument measures ratio of reflected power, thus providing information about antenna impedance matching. In case of antenna cracks or bending due to the high wind, any anomalies in the matching can be detected. SWR meter during the transmission is shown in the figure \ref{swr_meter_photo}, indicating that the VSWR of the antennas is lower than \si{1.05}. The output power is measured along the VSWR, and during the transmission it was equal to \SI{80}{\watt}.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\paperwidth]{img/7/swr_meter_photo.jpg}
+    \includegraphics[width=0.5\paperwidth]{img/7/swr_meter_photo.jpg}
     \caption{Standing Wave Ratio meter during transmission}
     \label{swr_meter_photo}
 \end{figure}
 
-
-% \subsection{Measurements}
-% As the uplink was built using conventional HAM radio transceiver, only the modulation and output power should be measured. As the physical layer is the typical FM-modulated AFSK and frame protocol is typical AX.25 there is a lot of free software to verify the correctness of the frame and modulation.
-
-\subsubsection{Spectrum \& Watchdogs}
+\subsection{Uplink watchdogs}
 The spectrum and output modulation correctness in constantly monitored using so-called watchdog built using another Software Defined Radios (PlutoSDR, RTL-SDR) placed in the proximity of the main antennas.
 By demodulating uplink signal and comparing it in the real time with transmitted frames the correctness of the transmission is guaranteed. Watchdog flowchart and graphical view are shown in the figure \ref{uplink_watchdog_flowgraph}.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\paperwidth]{img/7/uplink_watchdog_flowgraph.png}
     \caption{Uplink watchdog GNURadio flowgraph}
     \label{uplink_watchdog_flowgraph}
 \end{figure}
+
+\newpage
 
 
 % ------------------------------------------------------------
@@ -196,7 +192,7 @@ By demodulating uplink signal and comparing it in the real time with transmitted
 \section{Downlink}
 Receiving Signals from maximal slant range of about \SI{3000}{\kilo\meter} from a \SI{0.5}{\watt} transmitter requires very high processing gain and low noise factor of the system. System also needs to compensate for Doppler effect and ground interferences. The block diagram of the signal flow is shown in the figure \ref{downlink_diagram}.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\paperwidth]{img/7/downlink_diagram.pdf}
     \caption{Downlink diagram}
@@ -204,23 +200,21 @@ Receiving Signals from maximal slant range of about \SI{3000}{\kilo\meter} from 
 \end{figure}
 
 \section{Signal front-end processing}
-Radio front-end has two main purposes - to lower the system noise figure (by amplifying the signal with Low Noise Amplifier) and eliminate intermodulation with another signals (filtering). Its design consists of three stages: low loss cavity pass band filter, low noise amplifier and pass band SAW filter. 
+Radio front-end has two main purposes - to lower the system noise figure (by amplifying the signal with Low Noise Amplifier) and eliminate intermodulation with another signals (filtering). Its design consists of three stages: low loss cavity pass band filter, low noise amplifier and pass band SAW filter. Front-end signal processing is installed as close to the antenna as possible as shown in the figure \ref{elka_skrzynka}.
 
-Front-end signal processing is installed as close to the antenna as possible as shown in the figure \ref{elka_skrzynka}.
-
-\begin{figure*}
+\begin{figure*}[h]
    \centering
 \begin{tabular}{cc}
-        \includegraphics[width=0.3\paperwidth]{img/7/elka_view.jpg}
+        \includegraphics[width=0.35\paperwidth]{img/7/elka_view.jpg}
     & 
-        \includegraphics[width=0.3\paperwidth]{img/7/elka_skrzynka.jpg}
+        \includegraphics[width=0.35\paperwidth]{img/7/elka_skrzynka.jpg}
 \end{tabular}
 \label{elka_skrzynka}
 \caption{PW-Sat2 ground station view and front-end processing.}
 \end{figure*}
 
 \subsection{Cavity filter}
-Strong signals in the band of the amplifier can intermodulate, resulting in variety of issues: from reduced gain to completely distorted signal. Narrow-band cavity filter installed before the LNA to filter out out-of-band signals. Cavity filter due to its construction has very low insertion loss and regulated, narrow pass bandwidth in the cost of filter size and weight. Filter, shown in the figure \ref{cavity_filter_during_tuning} was tuned to the frequency of the PW-Sat2, with as narrow band as possible. After the tuning, the filter insertion loss is \SI{1.1}{\dB}, \SI{3}{\dB} bandwidth \SI{600}{\kHz} and \SI{20}{\dB} bandwidth - \SI{2}{\MHz}. Cavity filter has exceptionally good return loss - better than \SI{20}{\dB} in the passband. The insertion loss and return loss are shown in the figures \ref{cavity_filter_insertion_loss} and \ref{cavity_filter_return_loss}.
+Strong signals in the band of the amplifier can intermodulate in the receiver, resulting in variety of issues: from reduced gain to completely distorted signal of interest. Narrow-band cavity filter installed before the LNA to filter out out-of-band signals. Cavity filter due to its construction has very low insertion loss and regulated, narrow pass bandwidth in the cost of filter size and weight. Filter, shown in the figure \ref{cavity_filter_during_tuning} was tuned to the frequency of the PW-Sat2, with as narrow band as possible. After the tuning, the filter insertion loss is \SI{1.1}{\dB}, \SI{3}{\dB} bandwidth \SI{600}{\kHz} and \SI{20}{\dB} bandwidth - \SI{2}{\MHz}. Cavity filter has exceptionally good return loss - better than \SI{20}{\dB} in the passband. The insertion loss and return loss are shown in the figures \ref{cavity_filter_insertion_loss} and \ref{cavity_filter_return_loss}.
 
 \begin{figure}
     \centering
@@ -248,9 +242,9 @@ Strong signals in the band of the amplifier can intermodulate, resulting in vari
 \subsection{Low noise amplifier}
 Low Noise Amplifier, installed close to the antenna reduces influence of the long cable attenuation between the antenna and the receiver and is designed to have low noise figure. According to the Friis formula, the total noise figure of the system will mostly depend on the insertion loss between the antenna and the noise figure of the Low Noise Amplifier. 
 
-A dedicated Low Noise Amplifier was designed. As the main active component, a high-level Low Noise Amplifier: Mini-Circuits PGA-103+ \cite{lna_pga_datasheet} was used. Additional \SI{433}{\MHz} SAW filter was placed after the amplifier to reduce out of band harmonics and other unwanted products. Bias of the amplifier is created by RF Low Dropout Regulator Texas Instruments TPS7A47 \cite{lna_ldo_datasheet}. Amplifier was designed to support two-stage configuration, but for PW-Sat2 only first stage was populated. Schematic, PCB layout and the picture of the designed board are shown in the figures: \ref{lna_schematic} and \ref{lna_pcb}. The design is open source and all the source files can be found at \cite{lna_github}.
+A dedicated Low Noise Amplifier was designed. As the main active component, a high-level Low Noise Amplifier: Mini-Circuits PGA-103+ \cite{lna_pga_datasheet} was used. Additional \SI{433}{\MHz} SAW filter was placed after the amplifier to reduce out of band harmonics and other unwanted products of amplification. Bias of the amplifier is created by RF Low Dropout Regulator Texas Instruments TPS7A47 \cite{lna_ldo_datasheet}. Amplifier was designed to support two-stage configuration, but for PW-Sat2 only first stage was populated. Schematic, PCB layout and the picture of the designed board are shown in the figures: \ref{lna_schematic} and \ref{lna_pcb}. The design is open source and all the source files can be found at \cite{lna_github}.
 
-S-parameters of the LNA were tested using Rohde\& Schwarz ZVL Vector Network Analyser. Results are shown in the figure \ref{lna_s_params}. Achieved single-stage gain: \SI{17.5}{\dB} with \SI{8}{\MHz} bandwidth.
+S-parameters of the LNA were tested using Rohde\& Schwarz ZVL Vector Network Analyser. Results are shown in the figures \ref{lna_gain} and \ref{lna_match}. Achieved single-stage gain: \SI{17.5}{\dB} with \SI{8}{\MHz} bandwidth.
 
 \begin{landscape}
 \begin{figure}
@@ -261,7 +255,7 @@ S-parameters of the LNA were tested using Rohde\& Schwarz ZVL Vector Network Ana
 \end{figure}
 \end{landscape}
 
-\begin{figure*}
+\begin{figure*}[h]
    \centering
 \begin{tabular}{cc}
         \includegraphics[width=0.4\paperwidth]{img/7/lna_pcb.pdf}
@@ -271,18 +265,18 @@ S-parameters of the LNA were tested using Rohde\& Schwarz ZVL Vector Network Ana
 \label{lna_pcb}
 \caption{Low Noise Amplifier PCB layout and assembled picture}
 \end{figure*}
-
-\begin{figure*}
-   \centering
-\begin{tabular}{cc}
-        \includegraphics[width=0.35\paperwidth]{img/7/LnaGain.pdf}
-    & 
-        \includegraphics[width=0.35\paperwidth]{img/7/LnaMatch.pdf}
-\end{tabular}
-\label{lna_s_params}
-\caption{Low Noise Amplifier S-parameters}
-\end{figure*}
-
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.42\paperwidth]{img/7/LnaGain.pdf}
+    \caption{Low Noise Amplifier gain}
+    \label{lna_gain}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.42\paperwidth]{img/7/LnaMatch.pdf}
+    \caption{Low Noise Amplifier return loss (input and output)}
+    \label{lna_match}
+\end{figure}
 
 \subsection{Receiver}
 Due to the custom packet format no commercially available integrated circuits were able to correctly receive packets, therefore a custom solution was required for de-modulation and packet recovery.
@@ -292,7 +286,7 @@ One of the possible and widely used methods is to use radio amateur transceiver 
 
 Another method was to use Software-Defined Radio, performing IQ downconversion and data transmission. The Radio Amateur Satellite Corporation designed an SDR receiver for their mission FUNcube Satellite. After mission success, they released their design and started selling FUNcube dongle shown in the figure \ref{funcube_pic}. Given that is was designed specifically for satellite communication and it was tested using similar CubeSat design, it was selected as the main receiver for PW-Sat2.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\paperwidth]{img/4/funcube.jpg}
     \caption{FUNcube Dongle Pro+. Source: \cite{funcube}}
@@ -313,7 +307,7 @@ The receiver  functionalities:
 
 The block diagram of the designed system is shown in the figure \ref{demodulator_block_diagram}. All of the signal processing blocks were created using GNUradio framework.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\paperwidth]{img/7/demodulator_block_diagram.pdf}
     \caption{Demodulator Block Diagram}
@@ -322,7 +316,7 @@ The block diagram of the designed system is shown in the figure \ref{demodulator
 
 First stage, the SDR / transceiver can be any type of Software-Defined radio working with osmocom device drivers, FUNcube SDR or analog SSB radio using audio card. To mitigate the DC-offset and IQ imbalance, the output of this block is on non-zero IF - the frequency of the PW-Sat2 is shifted from the LO frequency. For SSB transceiver, it has to be tuned \SI{2}{\kHz} below the center frequency due to the limited bandwidth of the audio filters, and for the SDR transceiver to eliminate the DC peak effect, the signal is shifted by 1/4 of the bandwidth. Signal source dialog of the main application is shown in the figure \ref{gs_source_selection}.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\paperwidth]{img/7/gs_source_selection.png}
     \caption{Ground station application - signal source selection}
@@ -331,7 +325,7 @@ First stage, the SDR / transceiver can be any type of Software-Defined radio wor
 
 Doppler correction is build on quadrature mixer and create zero-IF signal for the next processing blocks. Gpredict calculates required frequency shift and sends it to the block via TCP/IP connection. This updates local VCO frequency for the down-conversion. Latter, the signal is fist-stage filtered and saved to the file for logging purposes. GNUradio block diagram is shown in the figure \ref{gs_doppler_gnuradio}.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\paperwidth]{img/7/gs_doppler_gnuradio.png}
     \caption{Doppler correction block GNUradio flowgraph}
@@ -350,21 +344,21 @@ Downlink receiver does the following operations:
     \item frame pass to the higher level software.
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\paperwidth]{img/7/gs_downlink_hier.png}
     \caption{Hierarchial receiver GNUradio flowgraph}
     \label{gs_demodulator_hier}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\paperwidth]{img/7/gs_demodulator_diagram.png}
     \caption{Ground station demodulator GNUradio flowgraph}
     \label{gs_demodulator_diagram}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\paperwidth]{img/7/gs_demodulator_gui.jpg}
     \caption{Ground station demodulator GUI}
@@ -373,7 +367,7 @@ Downlink receiver does the following operations:
 
 After the packet reception, it is shown for the user (as in the figure \ref{gs_frame_view}) and uploaded to the cloud for further analysis by the operations team.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\paperwidth]{img/7/gs_frame_view.png}
     \caption{Ground station received frame view}
@@ -382,8 +376,7 @@ After the packet reception, it is shown for the user (as in the figure \ref{gs_f
 
 
 \subsubsection{Measurements}
-Frequency correction block was tested using already flying satellites, verifying stability of frequency after correction.
-
+%Frequency correction block was tested using already flying satellites, verifying stability of frequency after correction.
 The test setup for evaluating demodulator performance is shown in the figure \ref{sensitivity_test_diagram}, and consist of:
 \begin{itemize}
     \item PlutoSDR - transmitter of the frames with regulated center frequency and output power,
@@ -402,14 +395,14 @@ Frames to be transmitted were recorded with Software-Defined Radio during flatsa
 
 The Costas loop performance and bit sync clock recovery blocks were tested first. The main parameter of the blocks are the bandwidths of the Phase Locked Loops inside them. During the test, input power to the receiver was set to \SI{3}{\dB} above the sensitivity level. The parameters were automatically adjusted and the graphs \ref{sensitivity_costas} and \ref{sensitivity_bitsync} show the number of decoded frames in the function of the parameter. For Costas loop there is a significant maximum, when the bandwidth is wide enough to "catch" sync during the preamble and not lose sync during noisy transition. Changing a loop bandwidth of the symbol sync block does not affect the number of frames significantly, as the clock frequencies are relatively slow and stable.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\paperwidth]{img/7/costasG.pdf}
     \caption{Costas loop tuning}
     \label{sensitivity_costas}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\paperwidth]{img/7/symbolsyncG.pdf}
     \caption{Symbol synchronization tuning}
