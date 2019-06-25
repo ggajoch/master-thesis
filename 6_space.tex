@@ -2,11 +2,11 @@
 Space segment is a part of the satellite communication system that resides on the satellite itself. It is divided into two main parts: communication subsystem (COMM) and antennas (ANTs) connected with two coaxial cables. Space segment is critical in system operation and reliability - there is no possibility to carry out any repairs, perform maintenance or adjustment once on orbit. It is exposed to the space environment - wide temperature range, thermal cycling, cosmic radiation and vacuum. To improve the reliability it was decided to choose commercially available and flight-proven CubeSat components to increase the overall reliability of the system.
 
 \section{Flatsat}
-Most of the tests were performed on Flatsat (an abbreviation from Flat Satellite), an electronic test bench, which consist of mix of flight models, engineering models of the instruments and Electrical Ground Support Equipment (EGSE). EGSE are the test instruments and/or mocks (fake) instruments, which allow testing without the need for actual hardware. PW-Sat2 Flatsat was integrated in Space Research Centre in Warsaw. Flatsat is shown in the figure \ref{flatsat_photo}. To perform the communication tests a Ground Station mock was created on the flatsat. It was built using to Software-Defined Radios: one, as downlink receiver, same as to be installed in the Ground Station (Funcube Pro+), and the second (PlutoSDR) to generate uplink signals. Use of SDR instead of analogue radio transceiver greatly simplified the tests performed.
+Most of the tests were performed on Flatsat (an abbreviation from Flat Satellite), an electronic test bench, which consist of mix of flight models, engineering models of the instruments and Electrical Ground Support Equipment (EGSE). EGSE are the test instruments and/or mocks (fake) instruments, which allow testing without the need for actual hardware. PW-Sat2 Flatsat was integrated in Space Research Centre in Warsaw. Flatsat is shown in the figure \ref{flatsat_photo}. To perform the communication tests a Ground Station mock was created on the flatsat. It was built using to Software-Defined Radios: one, as downlink receiver, same as to be installed in the Ground Station, and the second to generate uplink signals. Use of SDR instead of analogue radio transceiver greatly simplified the tests performed.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.68\paperwidth]{img/6/flatsat.jpg}
+    \includegraphics[width=0.48\paperwidth]{img/6/flatsat.jpg}
     \caption{PW-Sat2 flatsat in Space Research Centre, Warsaw}
     \label{flatsat_photo}
 \end{figure}
@@ -19,9 +19,9 @@ Most of the tests were performed on Flatsat (an abbreviation from Flat Satellite
 \label{section:comm_design}
 CubeSat design specification \cite{cubesat_spec}, with which PW-Sat2 is compliant, defines common PC/104 connector, which is the main data bus for all satellite subsystems. On the connector, two \iic and two CAN buses are defined and most of the components are compatible to each other. However, due to the lack of CAN interface on On-Board Computer (CubeComputer from CubeSpace \cite{cubespace_website}) radio should use \iic communication bus.
 
-When the subsystem was ordered (in year \si{2014}), the choice of available products was very limited, and the only radio which was compliant with above mentioned requirements was ISIS VHF uplink/UHF downlink Full Duplex Transceiver. Its view and block diagram is shown in the figures \ref{ISIS_TRXvU_photo} and \ref{ISIS_TRXvU_block_diagram}.
+When the subsystem was ordered (in year \si{2014}), the choice of available products was very limited, and the only radio which was compliant with above mentioned requirements was ISIS VHF uplink/UHF downlink Full Duplex Transceiver. Its view and block diagram is shown in the figures \ref{ISIS_TRXvU_photo} and \ref{ISIS_TRXvU_block_diagram}. Basic characteristics of the communications module are shown in the table \ref{isis_comm_params}:
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\paperwidth]{img/6/ISIS-radio-UHF-VHF-min.png}
     \caption{ISIS VHF uplink/UHF downlink Full Duplex Transceiver photo. Source: \cite{isis_trxvu}}
@@ -35,7 +35,12 @@ When the subsystem was ordered (in year \si{2014}), the choice of available prod
     \label{ISIS_TRXvU_block_diagram}
 \end{figure}
 
-Basic characteristics of the communications module: \\
+\begin{table}[H]
+\small
+\centering
+\caption{ISIS VHF uplink/UHF downlink Full Duplex Transceiver parameters}
+\label{isis_comm_params}
+\arrayrulecolor{black}
 \begin{tabular}{c|c}
      \textbf{downlink} & \textbf{uplink} \\ \hline
      \multicolumn{2}{c}{dual-\iic ~communication standard} \\
@@ -45,13 +50,16 @@ Basic characteristics of the communications module: \\
      \si{1.2} - \SI{9.6}{\kilo\bit / \second} bitrate & \SI{1.2}{\kilo\bit / \second} bitrate \\ 
      BPSK modulation with G3RUH scrambling & FM-modulated AFSK \\ 
 \end{tabular}
+\end{table}
+
 \vspace{0.5cm}
 
 Transceiver was tested separately for its uplink and downlink capabilities. Tests are critical to make sure that radio parameters are maintained in the system, and to verify manufacturers' data.
 
 \subsection{Sensitivity measurement}
-Sensitivity was measured by the setup shown in the figure \ref{4_uplink_sensitivity}. Test procedure:
+Sensitivity is the minimal input power to the receiver on which it receives the packets correctly. This parameter depends on the receiver construction, Noise Factor of the amplifiers and the demodulator itself. Sensitivity was measured by the setup shown in the figure \ref{4_uplink_sensitivity}. During the test measurement, the input noise on the receiver port is only Johnson-Nyquist noise and transmitter inpairments, without accounting for the antenna-added terrestial noise. For the final application, the antenna temperature has to be taken into account, increasing the spectral noise density on the receiver port.
 
+Sensitivity test procedure:
 \begin{itemize}
     \item measuring output power of PlutoSDR using spectrum analyzer with wide RBW filter (\SI{1}{\MHz}),
     \item calculating input power to the Communications module,

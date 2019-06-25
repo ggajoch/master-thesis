@@ -45,12 +45,14 @@ The antenna gain directly affect the radio link budget. The directional gain of 
 
 
 \section{Medium losses}
-The main signal loss in the spacecraft communication comes from the Free space loss, given by the formula: $\text{Loss [dB]} = 22 + 20 \cdot \log_{10} (\text{d}/\lambda)$, where $d$ - distance in meters, $\lambda$ - wavelength. Other sources of losses taken into the consideration for the sub-GHz bands are atmospheric losses and losses in the ionosphere. Atmospheric absorption strongly depends on the total number of molecules along the path between the spacecraft and the ground station - therefore the elevation angle. Losses due to the atmospheric gases are nearly independent of atmospheric temperature, density and relative humidity at frequencies below 2 GHz. \cite{sat_propagation}. At \SI{5}{\degree} elevation, the atmospheric are estimated at \SI{2.1}{\dB}. The ionosphere limits the lowest frequency at which satellite communications is possible. Below \SI{20}{\MHz}, during solar maximum, signals are usually fully absorbed or reflected by the layers of the ionosphere. VHF, UHF and Microwave frequencies are influenced far less amount, but the value of the attenuation varies with time. For the purpose of calculation above \SI{100}{\MHz} is is sufficient to estimate losses in the ionosphere as below \SI{1}{\dB}.
+The main signal loss in the spacecraft communication comes from the Free space loss, given by the formula: 
+$$\text{Loss [dB]} = 22 + 20 \cdot \log_{10} (\text{d}/\lambda) \text{~~~~where $d$ - distance in meters, $\lambda$ - wavelength}$$ Other sources of losses taken into the consideration for the sub-GHz bands are atmospheric losses and losses in the ionosphere. Atmospheric absorption strongly depends on the total number of molecules along the path between the spacecraft and the ground station - therefore the elevation angle. Losses due to the atmospheric gases are nearly independent of atmospheric temperature, density and relative humidity at frequencies below 2 GHz. \cite{sat_propagation}. At \SI{5}{\degree} elevation, the atmospheric are estimated at \SI{2.1}{\dB}. The ionosphere limits the lowest frequency at which satellite communications is possible. Below \SI{20}{\MHz}, during solar maximum, signals are usually fully absorbed or reflected by the layers of the ionosphere. VHF, UHF and Microwave frequencies are influenced far less amount, but the value of the attenuation varies with time. For the purpose of calculation above \SI{100}{\MHz} is is sufficient to estimate losses in the ionosphere as below \SI{1}{\dB}.
 
+\vspace{0.5cm}
 Total medium losses are equal:
 \begin{itemize}
-    \item Uplink - \SI{145.9}{\MHz} - $FSPL = \SI{146.2}{\dB}$
-    \item Downlink - \SI{145.9}{\MHz} - $FSPL = \SI{155.7}{\dB}$
+    \item Uplink - \SI{145.9}{\MHz} - $\text{Loss} = \SI{146.2}{\dB}$
+    \item Downlink - \SI{145.9}{\MHz} - $\text{Loss} = \SI{155.7}{\dB}$
 \end{itemize}
 
 

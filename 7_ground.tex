@@ -18,7 +18,7 @@ Antenna mast \& rotator were already installed from previous experiments with sa
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\paperwidth]{img/7/elka_antena_mast.jpg}
+    \includegraphics[width=0.45\paperwidth]{img/7/elka_antena_mast.jpg}
     \caption{Ground station picture}
     \label{elka_antena_mast}
 \end{figure}
@@ -40,7 +40,7 @@ Antenna mast \& rotator were already installed from previous experiments with sa
 
 
 \section{Antennas}
-PW-Sat2 is transmitting radio signals with linear polarization, nevertheless ground station  polarization should be circular, due to the random tumbling of the satellite. This will reduce the gain of the antennas, but the signal strength will be constant regardless of the satellite rotation. Cross-Yagi antennas were selected, and two linear planes antennas were phased with coaxial cable and symmetrical splitters/combiners. The diagram of the antenna phasing is shown in the figure \ref{antenna_phasing_diagram}. The length of the cables between the splitter/combiner and the dipoles should, with the dipole shift on the boom, create a \SI{90}{\degree} shift to create circular polarization. Two splitters/combiners were selected for antenna phasing: Tonna 31202 for VHF and Tonna 31270 for UHF.
+PW-Sat2 is transmitting radio signals with linear polarization, nevertheless ground station  polarization should be circular, due to the random tumbling of the satellite. This will reduce the gain of the antennas, but the signal strength will be constant regardless of the satellite rotation. Cross-Yagi antennas were selected, and two linear planes antennas were phased with coaxial cable and symmetrical splitters/combiners. The diagram of the antenna phasing is shown in the figure \ref{antenna_phasing_diagram}. The length of the cables between the splitter/combiner and the dipoles should, with the dipole shift on the boom, create a \SI{90}{\degree} shift to create circular polarization. Two splitters/combiners were selected for antenna phasing: Tonna 31202 for VHF and Tonna 31270 for UHF. Radiation patterns of the antennas are shown in the figures \ref{radiation_144} and \ref{radiation_435} as declared by the manufacturer. Antennas were selected to be the longest possible, limited by the antenna mast height. Selected antenna characteristics are shown in the table \ref{ant_parameters}.
 
 \begin{figure}
     \centering
@@ -49,11 +49,12 @@ PW-Sat2 is transmitting radio signals with linear polarization, nevertheless gro
     \label{antenna_phasing_diagram}
 \end{figure}
 
-
-Radiation patterns of the antennas are shown in the figures \ref{radiation_144} and \ref{radiation_435} as declared by the manufacturer. 
-
-Antennas were selected to be the longest possible, limited by the antenna mast height. Selected antenna characteristics:
-
+\begin{table}[H]
+\small
+\centering
+\caption{Ground station antennas parameters}
+\label{ant_parameters}
+\arrayrulecolor{black}
 \begin{tabular}{c|c}
      \textbf{Downlink} & \textbf{Uplink} \\ \hline
      Tonna 220938 & Tonna 20818 \\
@@ -62,6 +63,7 @@ Antennas were selected to be the longest possible, limited by the antenna mast h
      \SI{16.2}{\dBi} gain & \SI{13.2}{\dBi} gain \\
      \SI{30}{\degree} beamwidth & \SI{40}{\degree} beamwidth
 \end{tabular}
+\end{table}
 
 \begin{figure}
     \centering
@@ -80,7 +82,7 @@ Antennas were selected to be the longest possible, limited by the antenna mast h
 
 
 \subsection{Splitters/combiners measurements}
-Splitters/combiners were tested prior to its mounting. The most important parameters of the splitter is the insertion loss, amplitude and phase imbalance between the paths and the isolation of the splitter. All of the parameters were tested using Rohde \& Schwarz ZVL Vector Network Analyser, in the configurations shown in the figure \ref{splitter_measurement_diagram}. The results of the insertion loss (Fig. \ref{splitter_amplitude}) show that it is negligible - unmeasurable within tolerances of the VNA. Amplitude imbalance is also very good - much less than \SI{0.1}{\dB}. The phase imbalance is also very good for both splitters (Fig. \ref{splitter_phase}) - less than \SI{1}{\degree}. The isolation (Fig. \ref{splitter_isolation}) is the worst parameter of the measured splitters (only about \SI{6}{\dB}), but in the case when both antennas receive the same signal it is not an issue.
+Splitters/combiners were tested prior to their mounting. The most important parameters of the splitter is the insertion loss, amplitude and phase imbalance between the paths and the isolation of the splitter. All of the parameters were tested using Rohde \& Schwarz ZVL Vector Network Analyser, in the configurations shown in the figure \ref{splitter_measurement_diagram}. The results of the insertion loss (Fig. \ref{splitter_amplitude}) show that it is negligible - unmeasurable within tolerances of the VNA. Amplitude imbalance is also very good - much less than \SI{0.1}{\dB}. The phase imbalance is also very good for both splitters (Fig. \ref{splitter_phase}) - less than \SI{1}{\degree}. The isolation (Fig. \ref{splitter_isolation}) is the worst parameter of the measured splitters (only about \SI{6}{\dB}), but in the case when both antennas receive the same signal it is not an issue.
 
 \begin{figure}
     \centering
@@ -140,7 +142,7 @@ AFSK signal is generated by the GNURadio flowgraph shown in the figure \ref{upli
 \section{Uplink - transmitter}
 Analog audio FM transceiver can be used to generate RF signal. The frequency deviation of the modulation was selected to allow to use radio amateur voice transceivers. Audio FSK signal (before FM-modulation) is generated by the software running on the PC. Radio is connected to the computer, which controls the audio to transmit and Push-To-Talk (PTT, transmission enable) signal.
 
-During PW-Sat1 project, the Icom 910H amateur radio transceiver was used for both uplink and downlink, therefore it was proposed to use the the same radio as it do comply with all the requirements. Radio is shown in the figure \ref{Icom_910H_ref}. In case or need of larger output power the high-power amplifier can be connected to the output of the radio.
+During PW-Sat1 project, the Icom 910H amateur radio transceiver was used for both uplink and downlink, therefore it was proposed to use the the same radio as it do comply with all the requirements. Radio is shown in the figure \ref{Icom_910H_ref}. In case or need of larger output power the high-power amplifier can be connected to the output of the radio. Radio VHF FM transmit characteristics are presented in the table \ref{radio_parameters}.
 
 \begin{figure}[h]
     \centering
@@ -149,8 +151,12 @@ During PW-Sat1 project, the Icom 910H amateur radio transceiver was used for bot
     \label{Icom_910H_ref}
 \end{figure}
 
-Radio VHF FM transmit characteristics:
-
+\begin{table}[H]
+\small
+\centering
+\caption{ICOM 910H transceiver VHF FM section parameters}
+\label{radio_parameters}
+\arrayrulecolor{black}
 \begin{tabular}{c|c}
     Frequency & \si{144} - \SI{148}{\MHz} \\
     Frequency stability &  \SI{\pm 3}{\ppm} \\
@@ -158,6 +164,7 @@ Radio VHF FM transmit characteristics:
     Audio input & analog jack \\
     Audio bandwidth & \SI{4}{\kHz} \\
 \end{tabular}
+\end{table}
 
 \newpage
 
