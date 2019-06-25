@@ -18,12 +18,14 @@ Simulations performed using Gpredict software \cite{gpredict_website} shown that
 
 \section{Data link budget}
 PW-Sat2 have couple of data sources to be sent to the ground, and each of them needs to be taken into account for estimating the required transmission throughput. For each data source the average throughput during ground station coverage is calculated, assuming \SI{30}{\minute} contact per day.
+Data to be sent during the primary mission phase (see \ref{sect:mission_phases}):
 \begin{itemize}
     \item housekeeping telemetry (satellite health information, such as temperatures, bus and solar panel voltages and currents, subsystem status etc. Telemetry is \SI{230}{\byte} frame and should be transmitted every \SI{1}{\minute} (average \SI{30}{\bps}),
     \item archival housekeeping telemetry (gathered during orbit, when no ground station is in range), telemetry should be downloaded in \SI{5}{\minute} step from the whole operational time, which sums up to \SI{64}{\kilo\byte} per day (average \SI{300}{\bps}),
     \item experiment data, which are started by the operator from the ground and each of them is planned to run once a week (Sun Sensor -  \SI{32}{\kilo\byte}, RadFET - \SI{4}{\kilo\byte}, Cameras (10 photos) - \SI{300}{\kilo\byte}) - it sums up to \SI{336}{\kilo\byte} per week, average of \SI{220}{\bps},
     \item Sail deployment procedure, which transmits experiment data on-line (during the experiment). Estimated data to be transmitted (sail deployment indicator, photos and gyroscopes) is about \SI{1}{\kbps}.
 \end{itemize}
+During the secondary mission, the satellite is put into deep-sleep mode, and no archival telemetry is archieved and downloaded. The only data sources are periodically executed experiments and photographs of the sail. This reduces the downlink data budget even more.
 
 Data downlink throughput requirement for PW-Sat2 mission sums up to about \SI{1}{\kbps}.
 For uplink, the telecommands sent from the ground are relatively short (less than \SI{200}{\byte} each) and the rate of thelecommands is low. Therefore, no specific requirement was created, with minimal usable rate of about \SI{100}{\bps}.

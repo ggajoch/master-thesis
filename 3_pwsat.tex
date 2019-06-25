@@ -1,17 +1,28 @@
 \chapter{PW-Sat2}
-The presented system was design specifically to be deployed on-board the PW-Sat2 satellite.  The main aim of PW-Sat2 is to test out a new and innovative deorbit technology. PW-Sat2 was launched on Low Earth Orbit or 3rd of December 2018 on-board SpaceX Falon 9 rocket. PW-Sat2 was placed on a sun-synchronous, polar, circular, \SI{590}{\kilo\meter}-orbit.
+The presented system was design specifically to be deployed on-board the PW-Sat2 satellite. PW-Sat2 is a student satellite project started in 2013 at Warsaw University of Technology by the Students Space Association members. Its main technical goal is to test new deorbit technology in form of a large deorbit sail whereas the project purpose is to educate a group of new space engineers. PW-Sat2 is a 2-unit CubeSat satellite, designed specifically for Low Earth Orbit. PW-Sat2 was launched on 3rd of December 2018 on-board SpaceX Falon 9 rocket. PW-Sat2 was placed on a sun-synchronous, polar, circular, \SI{590}{\kilo\meter}~-~orbit.
 In the figure \ref{PW-Sat_render_01} an exploded render of PW-Sat2 is presented.
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\paperwidth]{img/3/PW-Sat2_render_01.png}
+    \includegraphics[width=0.65\paperwidth]{img/3/PW-Sat2_render_01.jpg}
     \caption{PW-Sat2 render. Source: \cite{PW_sat2_photo}}
     \label{PW-Sat_render_01}
 \end{figure}
 
+\section{CubeSat specification}
+In 1999, California Polytechnic State University and Stanford University developed the CubeSat specifications to lower the barrier for developing and sending the satellite to the orbit of the Earth. Over 1000 CubeSats have been launched as of January 2019 (fig. \ref{nanosatellites_launched_by_years}). The Cubesat specification \cite{cubesat_spec} defines the CubeSat as a spacecraft built from number of "CubeSat units", with dimensions \si{10}x\si{10}x\SI{11.35}{\cm} and weight \SI{1.33}{\kilo\gram} each. Having defined requirements on the size, weight and deployment mechanism greatly reduces the cost of satellite launch, as no custom test specification, deployers and rocket parts has to be designed for each launch. CubeSats were designed to serve as educational purpose for future engineers, to learn to design, build and deploy the Low Earth Orbit satellites. Currently most of the CubeSats serve a commercial purpose, as a low-cost testbed for different experiments and subsystems.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.65\paperwidth]{img/3/nanosatellites_launched_by_years.jpg}
+    \caption{Nanosatellites launches. Source: \cite{nanosatellites_launched_by_years}}
+    \label{nanosatellites_launched_by_years}
+\end{figure}
+
+\newpage
 
 \section{Primary mission}
 The primary mission of PW-Sat2 is to test the innovative deorbit technology - the deorbit sail. After satellite operations phase end, the deorbit sail will open and increase the atmospheric drag, shortening the life time. A render of PW-Sat2 with opened sail is shown in the figure \ref{PW-Sat_render_sail}. As seen in the figure, the deorbit sail material is stretched on four flat springs, made of metal. The material of the sail is the \SI{5}{\micro\meter} mylar foil covered with aluminum. The sail is placed very close to the antennas - therefore it can influence the antenna pattern and matching. 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.38\paperwidth]{img/3/PW-Sat2_render_02.png}
     \caption{PW-Sat2 with opened sail and antennas. Source: \cite{PW_sat2_photo}}
@@ -20,7 +31,7 @@ The primary mission of PW-Sat2 is to test the innovative deorbit technology - th
 
 
 \section{Secondary mission goals}
-PW-Sat2 have also three secondary experiments, executed by the command from the operators on the ground. Those experiments will be ran according when the link and power budget will allow to. Secondary experiments include:
+PW-Sat2 have also three secondary experiments, executed by the command from the operators on the ground. Those experiments will be ran when the link and power budget will allow to. Secondary experiments include:
 \begin{itemize}
     \item RadFET - ionizing radiation sensor, which will measure threshold voltages on P-MOS transistors to estimate the TID absorbed by the satellite.
     \item Sun Sensor -  it will provide an orientation data which will be compared with the commercial system readings. During the experiment, \si{12} Ambient Light Sensors will provide information about their illumination, allowing the software to calculate angles to the Sun.
@@ -29,16 +40,16 @@ PW-Sat2 have also three secondary experiments, executed by the command from the 
 
 
 \section{Solar array deployment}
-PW-Sat2 have two solar panels which are deployed by the command from the On-Board Computer on the request of the satellite operator from the ground. Solar panels are mounted on two opposite directions, open and create one large panel as seen on the figure \ref{PW-Sat_solar_panels}. The wings, on which solar panels are mounted, are made from aluminum, therefore their deployment can change the antennas parameters.
-\begin{figure}
+PW-Sat2 have two solar deployable panels which are opened by the command from the On-Board Computer on the request of the satellite operator from the ground. Solar panels are mounted on two opposite walls, its opening create one large panel as seen on the figure \ref{PW-Sat_solar_panels}. The wings, on which solar panels are mounted, are made from aluminum, therefore their deployment can change the antennas parameters as well.
+\begin{figure}[h]
     \centering
-    \includegraphics[width=0.38\paperwidth]{img/3/pwsat_solar_panels.png}
+    \includegraphics[width=0.45\paperwidth]{img/3/pwsat_solar_panels.png}
     \caption{PW-Sat2 with opened solar panels. Source: \cite{PW_sat2_photo}}
     \label{PW-Sat_solar_panels}
 \end{figure}
 
 \section{Attitude Determination and Control Subsystem}
-Attitude Determination and Control Subsystem (ADCS) is responsible for controlling the satellite orientation. PW-Sat2 implement magnetic control of the orientation using magnetorquers, special type of an electromagnet, designed to interact with Earths' magnetic field. The currents of the magnetorquers are controlled by the subsystem. For PW-Sat2, the only implemented ADCS mode is detumbling - the algorithm to reduce the random tumbling of the satellite to a very low rotational rate (in the order of degrees/second). Therefore, the very slow random tumbling of the satellite is assumed, which forces to use omnidirectional antennas, as the pointing is not possible.
+Attitude Determination and Control Subsystem (ADCS) is responsible for controlling the satellite orientation. Random tumbling of the satellite after the deployment is caused by the asymmetric deployment forces and bumping with other CubeSats. To reduce rotational rate, PW-Sat2 use magnetic control of the orientation with magnetorquers, special type of an electromagnet, designed to interact with Earths' magnetic field. The currents of the magnetorquers are controlled by the subsystem. For PW-Sat2, the only implemented ADCS mode is detumbling - algorithm used to reduce the random tumbling to a very low rotational rate (in the order of degrees/second). Therefore, the very slow random tumbling of the satellite is assumed, which forces to use omnidirectional antennas, as the pointing is not possible.
 
 \section{Electrical Power System}
 Electrical Power System is responsible for power conversion from the solar panels, energy storage in the on-board battery and power distribution to the other subsystems. Electrical power is generated with \si{12} space qualified triple-junction solar cells, resulting in total average power of \SI{1}{\watt} (assuming random tumbling). This energy is harvested by the Electrical Power System and distributed to the other subsystems as shown in the figure \ref{pwsat_eps_distribution}. During the mission, the available average power from the solar panels were assumed: \SI{1.5}{\watt} before sail deployment and \SI{0.75}{\watt} after the sail deployment. The total average power for the communication system was presumed to \SI{0.6}{\watt} average, with peak current consumption of \SI{5}{\watt} during transmission.
@@ -50,8 +61,9 @@ Electrical Power System is responsible for power conversion from the solar panel
 \end{figure}
 
 \section{Mission plan and system lifetime}
-PW-Sat2 mission is divided into two phases:
+\label{sect:mission_phases}.
+PW-Sat2 mission is divided into two main phases:
 \begin{itemize}
-    \item Normal phase - planned to take up to 40 days, before the opening of the deorbit sail. The satellite should perform secondary mission goals during this phase.
-    \item Extended phase - activities after the sail deployment. In this phase half of the energy is available for the subsystems. The sail condition and satellite status should be monitored by the operations team up to the moment of satellite deorbitation, by telemetries and photos.
+    \item Normal phase - planned to take up to 40 days, before the opening of the deorbit sail. The satellite should perform secondary mission goals during this phase, by the telecommands from operators on the ground. 
+    \item Extended phase - activities after the sail deployment. In this phase half of the energy is available for the subsystems. The sail condition and satellite status should be monitored by the operations team up to the moment of satellite deorbitation, by telemetries and photos. Extended phase can take up to about \si{2}~years.
 \end{itemize}
