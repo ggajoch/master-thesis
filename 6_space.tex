@@ -1,8 +1,8 @@
 \chapter{Space segment}
-Space segment is a part of the satellite communication system that resides on the satellite itself. It is divided into two main parts: communication subsystem (COMM) and antennas (ANTs) connected with two coaxial cables. Space segment is critical in system operation and reliability - there is no possibility to carry out any repairs, perform maintenance or adjustment once on orbit. It is exposed to the space environment - wide temperature range, thermal cycling, cosmic radiation and vacuum. To improve the reliability it was decided to choose commercially available and flight-proven CubeSat components to increase the overall reliability of the system.
+The space segment is a part of the satellite communication system that resides on the satellite itself. It is divided into two main parts: a communication subsystem (COMM) and antennas (ANTs) connected with two coaxial cables. The space segment is critical in system operation and reliability - there is no possibility to carry out any repairs, perform maintenance or adjustment once on orbit. It is exposed to space environment – with wide temperature range, thermal cycling, cosmic radiation and vacuum. To improve reliability, it was decided to choose commercially available and flight-proven CubeSat components to increase the overall reliability of the system.
 
 \section{Flatsat}
-Most of the tests were performed on Flatsat (an abbreviation from Flat Satellite), an electronic test bench, which consist of mix of flight models, engineering models of the instruments and Electrical Ground Support Equipment (EGSE). EGSE are the test instruments and/or mocks (fake) instruments, which allow testing without the need for actual hardware. PW-Sat2 Flatsat was integrated in Space Research Centre in Warsaw. Flatsat is shown in the figure \ref{flatsat_photo}. To perform the communication tests a Ground Station mock was created on the flatsat. It was built using to Software-Defined Radios: one, as downlink receiver, same as to be installed in the Ground Station, and the second to generate uplink signals. Use of SDR instead of analogue radio transceiver greatly simplified the tests performed.
+Most of the tests were performed on Flatsat (an abbreviation from Flat Satellite), an electronic test bench, which consists of a mix of flight models, engineering models of the instruments and Electrical Ground Support Equipment (EGSE). EGSE are the test instruments and mocks (fake) instruments, which allow testing without the need for actual hardware. PW-Sat2 Flatsat was integrated in the Space Research Centre in Warsaw. Flatsat is shown in figure \ref{flatsat_photo}. To perform the communication tests, a Ground Station mock was created on the flatsat. It was built using to Software-Defined Radios: one, as downlink receiver, same as to be installed in the Ground Station, and the second to generate uplink signals. Use of SDR instead of analogue radio transceiver greatly simplified the tests performed.
 
 \begin{figure}[H]
     \centering
@@ -17,9 +17,9 @@ Most of the tests were performed on Flatsat (an abbreviation from Flat Satellite
 
 \section{Spacecraft communication transceiver}
 \label{section:comm_design}
-CubeSat design specification \cite{cubesat_spec}, with which PW-Sat2 is compliant, defines common PC/104 connector, which is the main data bus for all satellite subsystems. On the connector, two \iic and two CAN buses are defined and most of the components are compatible to each other. However, due to the lack of CAN interface on On-Board Computer (CubeComputer from CubeSpace \cite{cubespace_website}) radio should use \iic communication bus.
+CubeSat design specification \cite{cubesat_spec}, with which PW-Sat2 is compliant, defines common PC/104 connector, which is the main data bus for all satellite subsystems. On the connector, two \iic and two CAN buses are defined, and most of the components are compatible with each other. However, due to the lack of CAN interface on the On-Board Computer (CubeComputer from CubeSpace \cite{cubespace_website}) radio should use \iic communication bus.
 
-When the subsystem was ordered (in year \si{2014}), the choice of available products was very limited, and the only radio which was compliant with above mentioned requirements was ISIS VHF uplink/UHF downlink Full Duplex Transceiver. Its view and block diagram is shown in the figures \ref{ISIS_TRXvU_photo} and \ref{ISIS_TRXvU_block_diagram}. Basic characteristics of the communications module are shown in the table \ref{isis_comm_params}:
+When the subsystem was ordered (in year \si{2014}), the choice of available products was very limited, and the only radio which was compliant with above-mentioned requirements was ISIS VHF uplink/UHF downlink Full Duplex Transceiver. Its view and block diagram is shown in the figures \ref{ISIS_TRXvU_photo} and \ref{ISIS_TRXvU_block_diagram}. Basic characteristics of the communications module are shown in table \ref{isis_comm_params}.
 
 \begin{figure}[H]
     \centering
@@ -54,16 +54,16 @@ When the subsystem was ordered (in year \si{2014}), the choice of available prod
 
 \vspace{0.5cm}
 
-Transceiver was tested separately for its uplink and downlink capabilities. Tests are critical to make sure that radio parameters are maintained in the system, and to verify manufacturers' data.
+The transceiver was tested separately for its uplink and downlink capabilities. Tests are critical to make sure that radio parameters are maintained in the system and to verify the manufacturers' data.
 
 \subsection{Sensitivity measurement}
-Sensitivity is the minimal input power to the receiver on which it receives the packets correctly. This parameter depends on the receiver construction, Noise Factor of the amplifiers and the demodulator itself. Sensitivity was measured by the setup shown in the figure \ref{4_uplink_sensitivity}. During the test measurement, the input noise on the receiver port is only Johnson-Nyquist noise and transmitter inpairments, without accounting for the antenna-added terrestial noise. For the final application, the antenna temperature has to be taken into account, increasing the spectral noise density on the receiver port.
+Sensitivity is the minimal input power to the receiver on which it receives the packets correctly. This parameter depends on the receiver construction, Noise Factor of the amplifiers and the demodulator itself. Sensitivity was measured by the setup shown in the figure \ref{4_uplink_sensitivity}. During the test measurement, the input noise on the receiver port is only Johnson-Nyquist noise and transmitter impairments, without accounting for the antenna-added terrestrial noise. For the final application, the antenna temperature has to be taken into account, increasing the spectral noise density on the receiver port.
 
 Sensitivity test procedure:
 \begin{itemize}
     \item measuring output power of PlutoSDR using spectrum analyzer with wide RBW filter (\SI{1}{\MHz}),
     \item calculating input power to the Communications module,
-    \item PER is calculated by transmitting \si{1000} data frames using PlutoSDR (with GNUradio) and receing them by On-Board Computer connected to the PC, the output power of PlutoSDR is regulated for each point.
+    \item PER is calculated by transmitting \si{1000} data frames using PlutoSDR (with GNUradio) and receiving them by the On-Board Computer connected to the PC, the output power of PlutoSDR was regulated for each data point.
 \end{itemize}
 
 \begin{figure}[h]
@@ -73,7 +73,7 @@ Sensitivity test procedure:
     \label{4_uplink_sensitivity}
 \end{figure}
 
-Measured PER chart is shown in the figure \ref{4_uplink_sensitivity_graph}. It is compared to the ideal BFSK curve. For assumed usable PER of about \SI{1}{\percent} the sensitivity of the communication module is \SI{-97}{\dBm}.
+Measured PER chart is shown in the figure \ref{4_uplink_sensitivity_graph}. It is compared to the ideal BFSK curve. For assumed usable PER of about \SI{1}{\percent}, the sensitivity of the communication module is \SI{-97}{\dBm}.
 
 \begin{figure}[H]
     \centering
@@ -84,9 +84,9 @@ Measured PER chart is shown in the figure \ref{4_uplink_sensitivity_graph}. It i
 
 
 \subsection{Doppler effect influence on uplink}
-Doppler effect is caused when fast-moving object is emitting/receiving radio waves. For uplink frequency (VHF band) Doppler effect influence can shift frequency up to about \SI{5}{\kHz}. The receiver bandwidth should be measured to estimate allowable frequency inaccuracies.
+Doppler effect is caused when a fast-moving object is emitting/receiving waves, such as acoustic or radio frequencies. For uplink frequency (VHF band) Doppler effect can shift received frequency up to about \SI{5}{\kHz}. The receiver bandwidth should be measured to estimate allowable frequency inaccuracies.
 
-Test setup is the same as in previous setup, shown in the figure \ref{4_uplink_sensitivity}. During the test the PER was measured for a range of frequency offsets from the center frequency of the module. The input power to the module was set to \SI{3}{\dB} above sensitivity level (\SI{-94}{\dBm}).  The result is shown in the figure \ref{4_uplink_doppler_measurement}.
+The test setup is the same as in the previous setup, shown in the figure \ref{4_uplink_sensitivity}. During the test, the PER was measured for a range of frequency offsets from the center frequency of the module. The input power to the module was set to \SI{3}{\dB} above sensitivity level (\SI{-94}{\dBm}). The result is shown in figure \ref{4_uplink_doppler_measurement}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\paperwidth]{img/6/uplink_doppler.pdf}
@@ -118,11 +118,11 @@ The spectrum of the signal was recorded (fig. \ref{tx_spectrum}), showing signif
 
 
 \section{Spacecraft Antennas}
-Because of the selected radio system, two antennas has to be installed - one for uplink (VHF) and one for downlink (UHF). Antennas should be omnidirectional, as PW-Sat2 does not have an nadir-pointing capability and random tumbling during operation is assumed.
+Because of the selected radio system, two antennas have to be installed - one for uplink (VHF) and one for downlink (UHF). Antennas should be omnidirectional, as PW-Sat2 does not have a nadir-pointing capability and random tumbling during operation is assumed.
 
-Self-made dipole antenna was considered at the design stage, but due to mechanical and time constraints, satellite antenna was decided to be bought as well. Innovative Solutions In Space company sells antenna with with the transceiver as CubeSat communication Kit \texttt{CubeSat dipole antenna system}. Both elements are compatibile and the whole system (transceiver + antenna) is tuned for specific communication frequency and mounting option.
+Self-made dipole antenna was considered at the design stage, but due to mechanical and time constraints, satellite antenna was decided to be bought as well. Innovative Solutions In Space company sells antenna with the transceiver as CubeSat communication Kit \texttt{CubeSat dipole antenna system}. Both elements are compatible and the whole system (transceiver + antenna) is tuned for specific communication frequency and mounting option.
 
-This system is deployable by the command from the on-board computer. Thermal knife (resistor) is heated up and thermal link is burnt, resulting is antenna deploy by the spring action. Antenna is shown in the figure \ref{ISIS_antenna}.
+This system is deployable by the command from the On-Board Computer. Thermal knife (resistor) is heated up, and the thermal link is burnt, resulting is antenna deploy by the spring action. Figure \ref{ISIS_antenna} shows an antenna system.
 
 \begin{figure*}
    \centering
@@ -137,7 +137,7 @@ This system is deployable by the command from the on-board computer. Thermal kni
 
 
 \subsection{Tests}
-First automatic task of the satellite it to deploy the antennas. During the test campaign antenna deployment procedure was executed four times, due to the issues with Antenna opening. Satellite during antenna deployment is shown in the figure \ref{pwsat_with_deployed_antennas}.
+The first automatic task of the satellite it to deploy the antennas. During the test campaign, antenna deployment procedure was executed four times, due to the issues with Antenna opening. In figure \ref{pwsat_with_deployed_antennas} the satellite during antenna deployment is shown.
 
 \begin{figure}
     \centering
@@ -146,7 +146,7 @@ First automatic task of the satellite it to deploy the antennas. During the test
     \label{pwsat_with_deployed_antennas}
 \end{figure}
 
-Manufacturer of the antennas provide a test report with the measured antennas matchins ($s_{11}$ parameter), for VHF and UHF frequencies they are shown in the figures \ref{isis_s11_vhf} and  \ref{isis_s11_uhf}, respectively.
+Manufacturer of the antennas provides a test report with the measured antennas matching ($s_{11}$ parameter), for VHF and UHF frequencies they are shown in figures \ref{isis_s11_vhf} and \ref{isis_s11_uhf}, respectively.
 
 \begin{figure}[H]
     \centering
@@ -167,7 +167,7 @@ Manufacturer of the antennas provide a test report with the measured antennas ma
 Both forward and reflected power from the antenna are measured by the radio module during radio frame transmission. Correct antenna deployment can be verified also by using the telemetry. During the test antenna deployment both forward and reflected power were captured. Average measured value of the forward power: \textbf{\SI{28.8}{\dBm} $\pm$ \SI{0.43}{\dBm}} and reflected power: \textbf{\SI{19.6}{\dBm} $\pm$ \SI{0.54}{\dBm}}. This means that the antenna matching for UHF frequencies is: SWR~$= 2.1$, $s_{11} = -9.2~dB$. This means that the power lost in the mismatch is \SI{0.5}{\dB}. Measured value is similar to measured by the manufacturer ($s_{11} = \SI{-14}{\dB}$).
 
 \subsection{Antennas on orbit}
-Reflected and forward power are being captured during the mission, the chart of the reflected and forward power, from the ground testing up to mission completion is shown in the figure \ref{4_rf_power_comm}. This shows that VSWR of the antenna didn't change much during the mission, however Sail and Solar Arrays deploments are clearly seen on the measurements. Picture of the shadow of the satellite on the Sail, showing opened antennas is shown in the figure \ref{antennas_deployed_orbit}.
+Reflected and forward powers are being measured throughout the mission, the chart of the reflected and forward power, from the ground testing up to mission completion is shown in the figure \ref{4_rf_power_comm}. This graph shows that VSWR of the antenna did not change much during the mission. However, Sail and Solar Arrays deployments can be clearly seen on the measurements. Picture of the shadow of the satellite on the Sail, showing opened antennas is shown in figure \ref{antennas_deployed_orbit}.
 
 \begin{figure}[H]
     \centering
@@ -193,14 +193,14 @@ Reflected and forward power are being captured during the mission, the chart of 
 
 % On-board PW-Sat2 are two main deployables: solar panels and deorbitation sail.
 
-% During design stage, influence of the solar panels was discussed with antenna manufacturer - the outcome was to place longed dipoles (VHF) along the solar panels, and shorter ones orthogonally to it, as shown in the figure \ref{???}
+% During the design stage, the influence of the solar panels was discussed with antenna manufacturer - the outcome was to place longed dipoles (VHF) along with the solar panels, and shorter ones orthogonally to it, as shown in the figure \ref{???}
 
 % % TODO: zdjęcie z otwartymi panelami i antenami
 
 % The influence of the deorbit sail was also simulated during Critical Design stage.
 
-% Deorbitation sail is made by very thin (\SI{5}{\micro\meter}) mylar foil with aluminium coating. Using % TODO
-% simulation tool, it was shown that the sail will increase directivity of the cubesat antennas, acting as a reflector.
+% Deorbitation sail is made by very thin (\SI{5}{\micro\meter}) mylar foil with aluminum coating. Using % TODO
+% simulation tool, it was shown that the sail would increase the directivity of the CubeSat antennas, acting as a reflector.
 % % TODO: jakieś zdjęcie z symulacji, wynik o ile dB się pogorszyło
 
 

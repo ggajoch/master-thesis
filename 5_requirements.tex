@@ -1,7 +1,7 @@
 \chapter{System requirements}
 \section{Communication sessions}
-Commmunication with the satellite is possible only during the direct line-of-sight conditions. For Low Earth Orbit, this limits the radio link to the satellite communication sessions when satellite is above the horizon. Typically, on low angled above the horizon the communication is very weak, due to the ionosphere, increased losses and diffraction.
-PW-Sat2 was designed to be deployed on \SI{600}{\kilo\meter}, Sun-synchronous, polar orbit. Due to the Earts rotation, ground station coverage is bounded by the horizon, and communication with the satellite is limited to communication session during satellite overpass. Simulations performed using Gpredict software \cite{gpredict_website} shown that communication sessions will happen \si{5}-\si{6} times per day, \si{5}-\SI{10}{\minute} each. This summarizes to the total communication time to average \SI{30}{\minute} per day. Typical radio coverage of the satellite is shown in the figure \ref{gpredict_pass}.
+Communication with the satellite is possible only during the direct line-of-sight conditions. For Low Earth Orbit, this limits the radio link to the satellite communication sessions when a satellite is above the horizon. Typically, on low angled above the horizon, the communication is very weak, due to the ionosphere, increased losses and diffraction.
+PW-Sat2 was designed to be deployed on \SI{600}{\kilo\meter}, Sun-synchronous, polar orbit. Due to the Earths rotation, ground station coverage is bounded by the horizon, and communication with the satellite is limited to communication session during satellite overpass. Simulations performed using Gpredict software \cite{gpredict_website} shown that communication sessions will happen \si{5}-\si{6} times per day, \si{5}-\SI{10}{\minute} each. This summarizes to the total communication time to average \SI{30}{\minute} per day. Typical radio coverage of the satellite is shown in figure \ref{gpredict_pass}.
 
 \begin{figure}[h]
     \centering
@@ -12,22 +12,22 @@ PW-Sat2 was designed to be deployed on \SI{600}{\kilo\meter}, Sun-synchronous, p
 
 
 \section{Data link budget}
-PW-Sat2 have couple of data sources to be sent to the ground, and each of them needs to be taken into account for estimating the required transmission throughput. For each data source the average throughput during ground station coverage is calculated, assuming \SI{30}{\minute} contact per day.
+PW-Sat2 have a couple of data sources to send to the ground, and each of them needs to be taken into account for estimating the required transmission throughput. For each data source the average throughput during ground station coverage is calculated, assuming \SI{30}{\minute} contact per day.
 Data to be sent during the primary mission phase (see section \ref{sect:mission_phases}):
 \begin{itemize}
-    \item housekeeping telemetry (satellite health information, such as temperatures, bus and solar panel voltages and currents, subsystem status etc. Telemetry is \SI{230}{\byte} frame and should be transmitted every \SI{1}{\minute} (average \SI{30}{\bps}),
+    \item housekeeping telemetry (satellite health information, such as temperatures, bus and solar panel voltages and currents, subsystem status, etc. Telemetry is one \SI{230}{\byte} frame and should be transmitted every \SI{1}{\minute} (average \SI{30}{\bps}),
     \item archival housekeeping telemetry (gathered during orbit, when no ground station is in range), telemetry should be downloaded in \SI{5}{\minute} step from the whole operational time, which sums up to \SI{64}{\kilo\byte} per day (average \SI{300}{\bps}),
     \item experiment data, which are started by the operator from the ground and each of them is planned to run once a week (Sun Sensor -  \SI{32}{\kilo\byte}, RadFET - \SI{4}{\kilo\byte}, Cameras (10 photos) - \SI{300}{\kilo\byte}) - it sums up to \SI{336}{\kilo\byte} per week, average of \SI{220}{\bps},
     \item Sail deployment procedure, which transmits experiment data on-line (during the experiment). Estimated data to be transmitted (sail deployment indicator, photos and gyroscopes) is about \SI{1}{\kbps}.
 \end{itemize}
-During the secondary mission, the satellite is put into deep-sleep mode, and no archival telemetry is archieved and downloaded. The only data sources are periodically executed experiments and photographs of the sail. This reduces the downlink data budget even more.
+During the secondary mission, the satellite is put into the deep-sleep mode, and no archival telemetry is achieved and downloaded. The only data sources are periodically executed experiments and photographs of the sail. This reduces the downlink data budget even more.
 
 Data downlink throughput requirement for PW-Sat2 mission sums up to about \SI{1}{\kbps}.
-For uplink, the telecommands sent from the ground are relatively short (less than \SI{200}{\byte} each) and the rate of thelecommands is low. Therefore, no specific requirement was created, with minimal usable rate of about \SI{100}{\bps}.
+For the uplink, the telecommands sent from the ground are relatively short (less than \SI{200}{\byte} each), and the rate of telecommands is low. Therefore, no specific requirement was created, with a minimal usable rate of about \SI{100}{\bps}.
 
 \section{Frequency band selection}
 Due to the low data throughput requirements, the most viable solution is to use VHF/UHF bands. This simplifies the construction and the requirements for the rest of the system.
-PW-Sat1 \cite{pwsat1_website_ska} used full-duplex VHF-downlink and UHF-uplink radio. During its mission, operation team was reporting uplink stability issues, which was caused by very low Signal to Noise ratio on the satellite. The design team narrowed down the issue to very high level of interference in the UHF band on the orbit, which probably is caused by the high power signal sources on the ground, such as radars. The selected bands for PW-Sat2 operation were full-duplex: VHF-up, UHF-down.
+PW-Sat1 \cite{pwsat1_website_ska} used full-duplex VHF-downlink and UHF-uplink radio. During its mission, the operation team was reporting uplink stability issues, which was caused by very low Signal to Noise ratio on the satellite. The design team narrowed down the issue to a very high level of interference in the UHF band on the orbit, which probably is caused by the high power signal sources on the ground, such as radars. The selected bands for PW-Sat2 operation were full-duplex: VHF-up, UHF-down.
 
 \section{Power and thermal budget}
 The power gathered by the Solar panels is the only power source on PW-Sat2. Total average power from the solar panels is around \SI{1}{\watt}. For the communication module, the allocated power in the power budget was average \SI{0.6}{\watt}, with peak current consumption of \SI{5}{\watt} during transmission. The current also affects the thermal construction, as the power dissipated in the radio module needs to be transferred and radiated out. Thermal simulations \cite{PWSAT_TCS_CDR} shown that during the long transmissions, the temperature of the power amplifier can rise to the dangerous values and the power amplifier can be destroyed. The maximum transmission time was assumed for \SI{60}{\second}.
@@ -36,7 +36,7 @@ The power gathered by the Solar panels is the only power source on PW-Sat2. Tota
 Selected satellite radio module (as described in \autoref{section:comm_design}) imposes the modulation and data packets used in the communication. This section briefly describes used modulations, frame formats and implications to the ground segment of the system.
 
 \subsection{Downlink modulation}
-Downlink signal is modulated using Binary Phase Shift Keying (BPSK). Schematic BPSK modulator is shown in the figure \ref{bpsk_modulator}. BPSK is a modulation which changes the phase of the signal depending on the actual bit, \SI{-90}{\degree} or \SI{90}{\degree}. The data rate can be changed dynamically by the spacecraft On-Board Computer, in range \si{1.2} - \SI{9.6}{\kbps}, allowing to improve the link quality when necessary. Baseband signal is also filtered using Raised Root Cosine filter, to reduce side lobes power. Signal bandwidth varies between \SI{2.4}{\kHz} (for \SI{1.2}{\kbps}) and \SI{19.2}{\kHz} (for \SI{9.6}{\kbps}). Additionally, downlink data is scrambled using G3RUH scrambling polynomial to maximize randomness and ensure proper bit synchronization in the receiver.
+The downlink signal is modulated using Binary Phase Shift Keying (BPSK). Schematic BPSK modulator is shown in figure \ref{bpsk_modulator}. BPSK is a modulation which changes the phase of the signal depending on the actual bit, \SI{-90}{\degree} or \SI{90}{\degree}. The data rate can be changed dynamically by the spacecraft On-Board Computer, in range \si{1.2} - \SI{9.6}{\kbps}, allowing to improve the link quality when necessary. The baseband signal is also filtered using Raised Root Cosine filter to reduce side lobes power. Signal bandwidth varies between \SI{2.4}{\kHz} (for \SI{1.2}{\kbps}) and \SI{19.2}{\kHz} (for \SI{9.6}{\kbps}). Additionally, downlink data is scrambled using G3RUH scrambling polynomial to maximize randomness and ensure proper bit synchronization in the receiver.
 
 \begin{figure}[H]
     \centering
@@ -47,7 +47,7 @@ Downlink signal is modulated using Binary Phase Shift Keying (BPSK). Schematic B
 
 
 \subsection{Uplink}
-Uplink modulation is two-staged (fig. \ref{afsk_modulator}): first, data is modulated using Frequency Shift Keying with Bell 202 modem tones (0s and 1s translated to tones \SI{1200}{\hertz} and \SI{2200}{\hertz}) with \SI{1200}{\bps} bitrate, later to be Frequency Modulated on the RF carrier (with frequency deviation of $\pm\SI{5}{\kilo\hertz}$). This type of modulation is most popular in radioamateur community (for example for Automatic Packet Reporting System), where typical FM transceivers are used for RF modulation and the PC with TNC for baseband generation/reception. 
+Uplink modulation is two-staged (fig. \ref{afsk_modulator}): first, data is modulated using Frequency Shift Keying with Bell 202 modem tones (0s and 1s translated to tones \SI{1200}{\hertz} and \SI{2200}{\hertz}) with \SI{1200}{\bps} bitrate, later to be Frequency Modulated on the RF carrier (with frequency deviation of $\pm\SI{5}{\kilo\hertz}$). This type of modulation is most popular in radio amateur community (for example for Automatic Packet Reporting System), where typical FM transceivers are used for RF modulation and the PC with TNC for baseband generation/reception. 
 
 \begin{figure}[H]
     \centering
@@ -57,9 +57,9 @@ Uplink modulation is two-staged (fig. \ref{afsk_modulator}): first, data is modu
 \end{figure}
 
 \subsection{Frame format}
-Physical layer data format is reduced-functionality AX.25 packet \cite{AX25_standard}. Only connectionless transmission mode and UI frames are supported. Packet framing is typical for many radioamateur solutions, such as Automatic Packet Reporting System. Is is also the same as in SwissCube CubeSat \cite{SwissCube_AX25}.
+Physical layer data format is reduced-functionality AX.25 packet \cite{AX25_standard}. Only connectionless transmission mode and UI frames are supported. Packet framing is typical for many radio amateur solutions, such as Automatic Packet Reporting System. It is also the same as in SwissCube CubeSat \cite{SwissCube_AX25}.
 
-Basic frame format is shown in the table \ref{AX25_frame}. All the fields except flags are bit-stuffed to ensure that the \textit{Flag} field does not appear in the data: if there are six '1' bits to be send, transmitter inserts '0' bit before the last one. Adressing in this system in inherent, but unused - this is point-to-point connection, therefore adresses are fixed. Frame-Check Sequence is a CRC (CITT standard) of the whole frame (without \textit{Flags}). \textit{Information Field} is variable-length, between \si{4} and \SI{256}{\byte} length - it is the place for the actual data transmitted by the On-Board Computer.
+The basic frame format is shown in table \ref{AX25_frame}. All the fields except flags are bit-stuffed to ensure that the \textit{Flag} field does not appear in the data: if there are six '1' bits to be sent, transmitter inserts '0' bit before the last one. Addressing in this system in inherent, but unused - this is a point-to-point connection, with fixed addresses. Frame-Check Sequence is a CRC (CITT standard) of the whole frame (without \textit{Flags}). \textit{Information Field} is variable-length, between \si{4} and \SI{256}{\byte} length - it is the place for the actual data transmitted by the On-Board Computer.
 
 \begin{table}[H]
 \small
