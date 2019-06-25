@@ -1,33 +1,25 @@
-\chapter{Radio communication with the nanosatellites - state of the art}
+\chapter{Nanosatellite radiocommunication - state of the art}
 
-\section{Frequency allocation}
-For non-commercial, radio amateur CubeSats
-% The most common radio bands used in CubeSat designs are VHF, UHF and S-band. S-band is usually used when high data rate (~\SI{10}{\Mbps}) are necessary. Typical designs for low-rate data link are full-duplex combo or simplex VHF/UHF radio.
-
-% PW-Sat1 \cite{pwsat1_website_ska} used full-duplex VHF-downlink and UHF-uplink radio. During its mission, operation team was reporting uplink stability issues, which was caused by very low Signal to Noise ratio on the satellite. The design team narrowed down the issue to very high level of interference in the UHF band on the orbit, which probably is caused by the high power signal sources on the ground, such as radars.
-
-% The selected bands for PW-Sat2 operation were either simplex VHF or full-duplex: VHF-up, UHF-down.
-
+\section{Frequency bands}
+Most commonly, the CubeSats use the VHF, UHF, L-, S-, C- or X-band radio communication. L-band and higher frequencies are usually used when high data rate (in order of \SI{1}{\Mbps} or more) is necessary. For telecommands and telemetry, usual designs use VHF and UHF bands due to their lower loss and less demanding equipment, with additional link on higher band for data download if necessary. When satelite does not have a pointing ability, there is no possibility to use a directional antenna, therefore higher bands than UHF have to be discarded because of their increased path loss. When pointing is available, the high-gain directional anntenas can be used, allowing to establish a high-data rate link on S-, C- or X-band. Typical designs for low-rate data link are full-duplex combo or simplex using VHF/UHF bands. This allows to use simple omnidirectional antenna on the satellite, such as monopole or dipole.
 
 \section{Subsystem review}
-There are number of commercially available solutions and subsystems. Usually they are divided into subsystems, allowing user to mix different suppliers depending on the requirements, assuring they are compatible.
-
-\subsection{Cubesat commmunication diagram}
 Typical Low Earth Orbit satellite communication systems is shown in the figure \ref{comm_diagram}.
+On the CubeSat market, there are number of commercially available subsystems. The CubeSat specification allowed to create a common interfaces between the subsystems, allowing for end users to buy or build their satellite subsystems independently. This allow the satellite designer to mix subsystems from different suppliers with their own experiments and designs.
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.7\paperwidth]{img/4/comm_diagram.eps}
     \caption{General communication system diagram}
     \label{comm_diagram}
 \end{figure}
 
-It consists of:
+Basic radio communication system consists of:
 \begin{enumerate}
-    \item On-Board Computer - controls the satellite, generates data and receives telecommands,
+    \item On-Board Computer - controls the satellite state, generates data and receives telecommands from the operator,
     \item Telemetry/Telecommand generator - translates between packets and baseband signal (modulator and demodulator),
     \item COMM - communications module, performs up/down conversion, amplification and antenna matching, usually on smaller missions it is integrated with TMTC on one module,
-    \item Satellite antenna(s), typically omnidirectional to provide coverage during random satellite tumbling
+    \item Satellite antenna(s), typically omnidirectional to provide coverage during random satellite tumbling,
     \item Ground station antenna(s), directional to maximize gain of the radio link,
     \item RADIO - radio system, typically a low noise amplifier with up/down converter and modulator, converts radio frequencies to baseband signals,
     \item Terimnal Network Controller - translates between packets and baseband signal, can be done as a separate device or in software in the PC,
@@ -35,60 +27,40 @@ It consists of:
 \end{enumerate}
 
 \subsection{Cubesat antennas}
-Cubesat dimensions are strict and defined in the CubeSat Design Specification \cite{cubesat_spec} as \si{100}x\si{100}~mm square \ref{CubeSat_max_dim}. This poses a requirement of antenna unfolding for antennas larger than side width. Usually this is required for all sub-GHz band, such as considered VHF and UHF bands. Higher bands, such an S-band, usually use patch antennas mounted on the wall.
+Cubesat dimensions are strict and defined in the CubeSat Design Specification \cite{cubesat_spec} as \si{100}x\si{100}~mm square \ref{CubeSat_max_dim}. This poses a requirement of antenna unfolding for antennas larger than side width. Usually this is required for all sub-GHz band, such as considered VHF and UHF bands. Higher bands, such an S-band, usually use patch antennas mounted on the wall. 
+Antennas are usually unfolded by the spring action of the antennas itself and they are released by the on-board computer (by the thermal knife) after the deployment on orbit. Three typical antenna deployment systems are shown in the figures \ref{stiff_antenna_pic}, \ref{m_cubed}, \ref{isis_dipole_antenna}.
+Typical unidirectional VHF/UHF antennas are dipoles, monopoles or turnstille. Selecting one depends on the mission requirements and link budget. Turnstille antenna, providing best link budget and circular polarization require that radiation elements are mounted on two sides of the CubeSat. Dipole option uses two elements is not as dependent on the ground reference (main structure) as the monopole antenna.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\paperwidth]{img/4/cubesat_dimensions.eps}
+    \includegraphics[width=0.45\paperwidth]{img/4/cubesat_dimensions.eps}
     \caption{CubeSat maximum dimensions, top view. Source \cite{cubesat_spec}.}.
     \label{CubeSat_max_dim}
 \end{figure}
 
-Antennas are usually unfolded by the spring action of the antennas itself and they are released by the on-board computer (by the thermal knife). Three typical antenna deployment systems are shown in the figures \ref{stiff_antenna_pic}, \ref{m_cubed}, \ref{isis_dipole_antenna}.
-
-Typical unidirectional VHF/UHF antennas are dipoles, monopoles or turnstille. Selecting one depends on the mission requirements and link budget. Turnstille antenna, providing best link budget and circular polarization require that radiation elements are mounted on two sides of the CubeSat. Dipole option uses two elements is not as dependent on the ground reference (main structure) as the monopole antenna.
-
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\paperwidth]{img/4/antenna_stiff.png}
     \caption{Deployed stiff antenna. In the stowed configuration they are along the solar panels. Source \cite{stiff_antenna_paper}.}.
     \label{stiff_antenna_pic}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\paperwidth]{img/4/m-cubed.jpg}
     \caption{Tape measure antenna in the stowed configuration. Flat spring action forces antenna to deploy itself after its release. Source \cite{m_cubed}.}.
     \label{m_cubed}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\paperwidth]{img/4/isis_dipole.png}
     \caption{Flat spring antennas rolled inside the CubeSat square. Released by the thermal knife burning the lock of the antenna doors. Source \cite{isis_dipole_antenna}.}.
     \label{isis_dipole_antenna}
 \end{figure}
 
-\subsection{Ground station antennas}
-Space communication antennas require very large gain due to the distance between the stations and the omnidirectivity of the CubeSat antennas. Transmit power of the satellite is usually rather low (\SI{1}{\watt} or less).
-
-Most of the designs use Yagi-Uda antennas, in circular polarization (cross-yagi with phasing). They are typically 9-11 elements long for VHF and 17-19 elements for UHF. Yagi-Uda antennas can be also phased as an array of antennas (1x2, 2x2 configuration etc.) improving gain and directivity. This however requires the antenna mast to withstand the size and weight of the system. Required power gain is dependent on the mission itself and the reliability of the link. Random tumbling and CubeSat antennas with dips in the radiation pattern (as monopole and dipole) require more directivity and power gain than attitude-controlled satellites. Direcitivity of the antenna also affects antenna noise temperature.
-
-Depending on the mission, one, two or more antennas can be required due to the number of bands used. 
-
-Due to the directivity of the antennas, their half-power beam width is around \si{2}-\SI{10}{\degree}. Therefore another required element of the ground station is the antenna rotator, which has to support the required weight, size and the location of the ground station.
-
-In the figure \ref{isis_gs} the commercially available ISIS VHF/UHF ground station is shown, which employs two cross-yagi antennas (VHF, UHF), antenna mast and rotator and rotator controller.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\paperwidth]{img/4/isis_gs.jpg}
-    \caption{ISIS Ground Station. Source \cite{isis_gs}.}.
-    \label{isis_gs}
-\end{figure}
-
 \subsection{Satellite communication subsystem}
-Communication subsystem of the satellite is responsible of transmitting and receiving radio signals, modulating/demodulating them and providing data link for the On Board Computer. It has to be compatible with selected mechanical configuration, available data interfaces and the antennas to be installed. Most of the designs use custom design radio systems, using heterodyne receivers/transmitters (Fig. \ref{clyde_comm}), however there are an Software-Defined Radio systems, such as Gomspace SDR Platform \ref{gomspace_comm}.
+Communication subsystem of the satellite is responsible of transmitting and receiving radio signals, modulating/demodulating them and providing data link for the On Board Computer. It has to be compatible with selected mechanical configuration, available data interfaces and the antennas to be installed. For different commmunication bands there is a number of different available communication solutions. Most of the designs use custom design radio systems, using heterodyne receivers/transmitters (Fig. \ref{clyde_comm}), however there also a Software-Defined Radio systems, such as Gomspace SDR Platform \ref{gomspace_comm}, which can operate on VHF/UHF/L/S-band. The typical output powers of the CubeSat radio transceivers are between \SI{0.1}{\watt} and \SI{2}{\watt} due to the power and thermal constraints. The sensitivity of the modems are not very high - due to the radiation and reliability effects, components used in a space devices are not the newest technologies with bleeding-edge parameters.
 
 \begin{minipage}{\linewidth}
     \centering
@@ -111,13 +83,28 @@ Communication subsystem of the satellite is responsible of transmitting and rece
     \end{minipage}
 \end{minipage}
 
+\subsection{Ground station antennas}
+Due to the highly non-symmetrical radio link, the ground station has to compensate for the satellite segment impairments. Space communication antennas require very large gain due to the distance between the stations, omnidirectivity of the CubeSat antennas and low output power. Most of the ground station designs use Yagi-Uda antennas, in circular polarization (cross-yagi with phasing) or helical antennas. Circular polarization eliminates signal strength variation due to the angle between the antennas, which changes during the pass over the ground station. Yagi antennas are typically 9-11 elements long for VHF and 17-19 elements for UHF. Antennas can be also phased as an array of antennas (1x2, 2x2 configuration etc.) improving gain and directivity. This however requires the antenna mast to withstand the size and weight of the system. Required power gain is dependent on the mission itself and the reliability of the link. Direcitivity of the antenna also affects antenna noise temperature, as less sky and other interferences are "seen" by the antenna. Depending on the mission, one, two or more antennas can be required due to the number of bands used. Due to the directivity of the antennas, their half-power beam  width is around \si{2}-\SI{30}{\degree}. Therefore another required element of the ground station is the antenna rotator, which has to support the required weight, size and the location of the ground station with the appropriate pointing accuracy.
+In the figure \ref{isis_gs} the commercially available ISIS VHF/UHF ground station is shown, which employs two cross-yagi antennas (VHF, UHF), antenna mast and rotator and rotator controller. Figure \ref{gs:satnogs} present a SatNOGS \cite{satnogs} community-based open source rotator design and ground station solution for Low Earth Orbit satellites, in this configuraion with UHF helical antenna installed.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\paperwidth]{img/4/isis_gs.jpg}
+    \caption{ISIS Ground Station. Source \cite{isis_gs}}.
+    \label{isis_gs}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\paperwidth]{img/4/satnogs_gs.jpg}
+    \caption{SatNOGS Ground Station with Helical UHF antenna. Source \cite{satnogs}}.
+    \label{gs:satnogs}
+\end{figure}
 
 \subsection{Ground segment communication subsystem}
 \subsubsection{Transmitter}
-Due to the typically lower sensitivity and omnidirectional antenna on the satellite the uplink EIRP has to be very large, requiring not only directional antennas but also high output power (\si{100}-\SI{1500}{\watt}).
-Depending on the modulation required, relatively cheap radio amateur transceivers can be used to modulate and amplify transmit signals, such as ICOM 910H or KENWOOD TS-2000 E (Fig. \ref{kenwood_ts2000}). As those types of radios were designed to transmit speech (bandwidth up to about \SI{10}{\kHz}) they can be used only to transmit signals which are FM, AM or SSB modulated. For other modulation and/or bandwidth the radio signal has to be generated by other type of radio (integrated or software-defined) and power amplifier.
-
-Depending on the required output power, high-power amplifier can be used to further increase output power up to several kilo-watts. 
+Due to the typically lower sensitivity and omnidirectional antenna on the satellite the uplink EIRP has to be very large, requiring not only directional antennas but also high output power (in the range \si{100}-\SI{1500}{\watt}).
+Depending on the modulation required, relatively cheap radio amateur transceivers can be used to modulate and amplify transmit signals, such as ICOM 910H or KENWOOD TS-2000 E (Fig. \ref{kenwood_ts2000}). Many communication modules are designed to use the radio amateur transmitters as the high power amplifiers. As those types of radios were designed to transmit speech (bandwidth up to about \SI{10}{\kHz}) they can be used only to transmit signals which are FM, AM or SSB modulated. For other modulation and/or bandwidth the radio signal has to be generated by other type of radio (integrated or software-defined) and power amplifier. Depending on the required output power, high-power amplifier can be used to further increase output power up to several kilo-watts. 
 
 \begin{minipage}{\linewidth}
     \centering
@@ -141,9 +128,7 @@ Depending on the required output power, high-power amplifier can be used to furt
 \end{minipage}
 
 \subsubsection{Receiver}
-The receiver on the ground has to complement the space segment. Due to relatively low transmit power on the satellite, the receiver sensitivity should be very high. Additionally, receiver intermodulation performance should withstand possible blocking signals which are present on the ground.
-
-To increase the sensitivity, Low Noise Amplifier has to be installed close to the antenna, such as LNA SSB-70 for UHF band (Fig. \ref{ssb_lna70}), which has Noise Figure of about \SI{0.35}{\dB}. Intermodulation and blocking is provided at the first stage by placing low-loss filter before the LNA, such as Cavity filters (Fig. \ref{cavity_uhf}).
+The receiver on the ground has to complement the space segment. Due to relatively low transmit power on the satellite, the receiver sensitivity should be very high. Additionally, receiver intermodulation performance should withstand possible blocking signals which are present on the ground. To increase the sensitivity, Low Noise Amplifier is installed close to the antenna, such as LNA SSB-70 for UHF band (Fig. \ref{ssb_lna70}), which has Noise Figure of about \SI{0.35}{\dB}. Intermodulation and blocking is provided at the first stage by placing low-loss filter before the LNA, such as Cavity filters (Fig. \ref{cavity_uhf}). However, the simplest solution used by the SatNOGS ground station is to install RTL-SDR dongle or FUNcube dongle (fig. \ref{funcube}) close to the antenna, eliminating the low noise amplifier. This solution however doesn't have the higher pareters achievable.
 
 \begin{minipage}{\linewidth}
     \centering
@@ -167,7 +152,7 @@ To increase the sensitivity, Low Noise Amplifier has to be installed close to th
 \end{minipage}
 
 
-Radio signal, pre-amplified by the low-noise amplifier is down-converted to the baseband and de-modulated. This can be performed by the integrated radio transceiver (same as the transmitter, this emposes the same modulation constraints as for the transmitter) or by the software-defined radio, such as an NI-USRP 2901 (Fig. \ref{ni_2901}) or FUNcube Dongle Pro+ (which was specifically designed for the FUNcube CubeSat - Fig. \ref{funcube}).
+Radio signal, pre-amplified by the low-noise amplifier is down-converted to the baseband and de-modulated. This can be performed by the integrated radioamateur transceiver (same as the transmitter, this emposes the same modulation constraints as for the transmitter) or by the software-defined radio, such as an NI-USRP 2901 (Fig. \ref{ni_2901}) or FUNcube Dongle Pro+ (fig. \ref{funcube}) which was specifically designed for the reception of the signal from FUNcube CubeSat.
 
 \begin{minipage}{\linewidth}
     \centering
@@ -190,19 +175,41 @@ Radio signal, pre-amplified by the low-noise amplifier is down-converted to the 
     \end{minipage}
 \end{minipage}
 
-After down-conversion baseband signal has to be de-modulated, which is done by the Terminal Network Controller. This can be implemeneted as a custom hardware solution (analog-to-digital converter and custom digital signal processor, for example TNC-X shown in the figure \ref{tncx}) or by pure software. Software solution has more flexibility but require a PC to perform signal processing, as is the only option for software-defined radio. One of the available TNC software using audio card is the Direwolf \cite{direwolf}.
+After down-conversion baseband signal has to be de-modulated, which is done by the Terminal Network Controller. This can be implemeneted as a custom hardware or by the software solution. Custom Terminal Network Controller (such as TNC-X shown in the figure \ref{tncx}) is built using analog-to-digital converter and custom digital signal processor, with the data interface to the PC, such as RS-232. Software TNC is created by the software modulator (for example Direwolf \cite{direwolf}) with the interface between the transceiver and the computer (such as TinyGate \ref{tnc:tinygate}, \ref{tnc:tinygate_schema}). Software solution has more flexibility in the modulation and packet format, if necessary.
 
-\begin{figure}
+\begin{minipage}{\linewidth}
     \centering
-    \includegraphics[width=0.3\paperwidth]{img/4/tncx.jpg}
-    \caption{Terminal Network Controller TNC-X. Source: \cite{tncx}}
-    \label{tncx}
+    \begin{minipage}{0.45\linewidth}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.3\paperwidth]{img/4/tncx.jpg}
+            \caption{TNC-X. Source: \cite{tncx}}
+            \label{tncx}
+        \end{figure}
+    \end{minipage}
+    \hspace{0.05\linewidth}
+    \begin{minipage}{0.45\linewidth}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.3\paperwidth]{img/4/tinygate_view.jpg}
+            \caption{TinyGate. Source: \cite{tinygate_manual}}
+            \label{tnc:tinygate}
+        \end{figure}
+    \end{minipage}
+\end{minipage}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\paperwidth]{img/4/tinygate_schematic.jpg}
+    \caption{TinyGate internal block diagram. Source: \cite{tinygate_manual}}
+    \label{tnc:tinygate_schema}
 \end{figure}
 
-
+\newpage
 
 \section{Similar missions and designs}
-In this section, three already flown satellite missions are described: PW-Sat, SwissCube and MOVE-I. 
+In this section, three already flown satellite missions are described: PW-Sat, SwissCube and MOVE-I. Selected CubeSats share similar requirements and mission tasks with PW-Sat2, therefore are a good comparision.
+
 \subsection{PW-Sat}
 First polish satellite, PW-Sat, was launched in year \si{2012}. It was build on Warsaw Univeristy of Technology, with Space Research Centre PAS support. 
 
