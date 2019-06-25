@@ -1,21 +1,15 @@
-% \subsection{Flatsat}
-
-% Most of the tests were performed on Flatsat (an abbreviation from Flat Satellite), an electronic test bench, which consist of mix of flight models, engineering models of the instruments and Electrical Ground Support Equipment (EGSE). EGSE are the test instruments and/or mocks (fake) instruments, which allow testing without the need for actual hardware.
-
-% PW-Sat2 Flatsat was integrated in Space Research Centre in Warsaw. Flatsat is shown in the figure \ref{TODO}.
-
-% \subsubsection{Flatsat Ground Station mock}
-% To perform the communication tests a Ground Station mock was created of flatsat. It was built using to Software-Defined Radios: one, as downlink receiver, same as to be installed in the Ground Station (Funcube Pro+), and the second (PlutoSDR) to generate uplink signals. Use of SDR instead of analogue radio transceiver greatly simplified the tests performed. Ground station mock is shown in the figure \ref{TODO}. 
-
-
-
-
 \chapter{Space segment}
-Space segment is a part of the satellite communication system that resides on the satellite itself. It is divided into two main parts: communication subsystem (COMM) and antennas (ANTs) connected with two coaxial cables.
+Space segment is a part of the satellite communication system that resides on the satellite itself. It is divided into two main parts: communication subsystem (COMM) and antennas (ANTs) connected with two coaxial cables. Space segment is critical in system operation and reliability - there is no possibility to carry out any repairs, perform maintenance or adjustment once on orbit. It is exposed to the space environment - wide temperature range, thermal cycling, cosmic radiation and vacuum. To improve the reliability it was decided to choose commercially available and flight-proven CubeSat components to increase the overall reliability of the system.
 
-Space segment is critical in system operation and reliability - there is no possibility to carry out any repairs, perform maintenance or adjustment once on orbit. It is exposed to the space environment - wide temperature range, thermal cycling, cosmic radiation and vacuum.
+\section{Flatsat}
+Most of the tests were performed on Flatsat (an abbreviation from Flat Satellite), an electronic test bench, which consist of mix of flight models, engineering models of the instruments and Electrical Ground Support Equipment (EGSE). EGSE are the test instruments and/or mocks (fake) instruments, which allow testing without the need for actual hardware. PW-Sat2 Flatsat was integrated in Space Research Centre in Warsaw. Flatsat is shown in the figure \ref{flatsat_photo}. To perform the communication tests a Ground Station mock was created on the flatsat. It was built using to Software-Defined Radios: one, as downlink receiver, same as to be installed in the Ground Station (Funcube Pro+), and the second (PlutoSDR) to generate uplink signals. Use of SDR instead of analogue radio transceiver greatly simplified the tests performed.
 
-Because of the mentioned requirements it was decided to choose commercially available and flight-proven CubeSat components to increase the overall reliability of the system.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.68\paperwidth]{img/6/flatsat.jpg}
+    \caption{PW-Sat2 flatsat in Space Research Centre, Warsaw}
+    \label{flatsat_photo}
+\end{figure}
 
 % -----------------------------------------------------------------------------------------------------------
 % -----------------------------------------------------------------------------------------------------------
@@ -29,7 +23,7 @@ When the subsystem was ordered (in year \si{2014}), the choice of available prod
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\paperwidth]{img/6/ISIS-radio-UHF-VHF-min.png}
+    \includegraphics[width=0.7\paperwidth]{img/6/ISIS-radio-UHF-VHF-min.png}
     \caption{ISIS VHF uplink/UHF downlink Full Duplex Transceiver photo. Source: \cite{isis_trxvu}}
     \label{ISIS_TRXvU_photo}
 \end{figure}
@@ -41,7 +35,7 @@ When the subsystem was ordered (in year \si{2014}), the choice of available prod
     \label{ISIS_TRXvU_block_diagram}
 \end{figure}
 
-Basic characteristics: \\
+Basic characteristics of the communications module: \\
 \begin{tabular}{c|c}
      \textbf{downlink} & \textbf{uplink} \\ \hline
      \multicolumn{2}{c}{dual-\iic ~communication standard} \\
@@ -51,6 +45,7 @@ Basic characteristics: \\
      \si{1.2} - \SI{9.6}{\kilo\bit / \second} bitrate & \SI{1.2}{\kilo\bit / \second} bitrate \\ 
      BPSK modulation with G3RUH scrambling & FM-modulated AFSK \\ 
 \end{tabular}
+\vspace{0.5cm}
 
 Transceiver was tested separately for its uplink and downlink capabilities. Tests are critical to make sure that radio parameters are maintained in the system, and to verify manufacturers' data.
 
@@ -60,20 +55,19 @@ Sensitivity was measured by the setup shown in the figure \ref{4_uplink_sensitiv
 \begin{itemize}
     \item measuring output power of PlutoSDR using spectrum analyzer with wide RBW filter (\SI{1}{\MHz}),
     \item calculating input power to the Communications module,
-    \item PER is calculated by transmitting data frames using PlutoSDR (with GNUradio) and receing them by On-Board Computer connected to the PC,
-    \item decreasing output power of PlutoSDR and measuring PER for each point (\si{1000}~frames).
+    \item PER is calculated by transmitting \si{1000} data frames using PlutoSDR (with GNUradio) and receing them by On-Board Computer connected to the PC, the output power of PlutoSDR is regulated for each point.
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.6\paperwidth]{img/6/uplink_sensitivity.eps}
     \caption{Uplink sensitivity measurement block diagram.}
     \label{4_uplink_sensitivity}
 \end{figure}
 
-Measured PER chart is shown in the figure \ref{4_uplink_sensitivity_graph}. It is compared to the ideal BFSK curve. For usable PER of about \SI{1}{\percent} the sensitivity of the communication module is \SI{-95}{\dBm}.
+Measured PER chart is shown in the figure \ref{4_uplink_sensitivity_graph}. It is compared to the ideal BFSK curve. For assumed usable PER of about \SI{1}{\percent} the sensitivity of the communication module is \SI{-97}{\dBm}.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\paperwidth]{img/6/uplink_per.pdf}
     \caption{Uplink sensitivity measurement.}
@@ -84,9 +78,8 @@ Measured PER chart is shown in the figure \ref{4_uplink_sensitivity_graph}. It i
 \subsection{Doppler effect influence on uplink}
 Doppler effect is caused when fast-moving object is emitting/receiving radio waves. For uplink frequency (VHF band) Doppler effect influence can shift frequency up to about \SI{5}{\kHz}. The receiver bandwidth should be measured to estimate allowable frequency inaccuracies.
 
-Test setup is the same as in previous setup, shown in the figure \ref{4_uplink_sensitivity}. During the test the PER was measured for a range of frequency offsets from the center frequency of the module. The input power to the module was set to \SI{3}{\dB} above sensitivity level (\SI{-92}{\dBm}) and for each point the number of packets sent was \si{500}.  The result is shown in the chart \ref{4_uplink_doppler_measurement}.
-
-\begin{figure}
+Test setup is the same as in previous setup, shown in the figure \ref{4_uplink_sensitivity}. During the test the PER was measured for a range of frequency offsets from the center frequency of the module. The input power to the module was set to \SI{3}{\dB} above sensitivity level (\SI{-94}{\dBm}).  The result is shown in the figure \ref{4_uplink_doppler_measurement}.
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\paperwidth]{img/6/uplink_doppler.pdf}
     \caption{Uplink Doppler effect influence measurement.}
@@ -95,9 +88,16 @@ Test setup is the same as in previous setup, shown in the figure \ref{4_uplink_s
 
 
 \subsection{Transmitter spectrum and output power}
-Output power was measured using spectrum analyzer with wide resolution bandwidth. Output power was measured to be \SI{28}{\dBm}, which is in the manufacturers specification.
-The spectrum of the signal was recorded, showing significant side lobes (first lobe TODO\SI{10}{\dB} lower than main carrier).
-TODO
+Output power was measured using spectrum analyzer with wide resolution bandwidth. Output power was measured to be \SI{28}{\dBm}, which is within the manufacturer specification.
+The spectrum of the signal was recorded (fig. \ref{tx_spectrum}), showing significant side lobes (first lobe \SI{18}{\dB} lower than main carrier).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\paperwidth]{img/6/tx_spectrum.jpg}
+    \caption{Communications module transmit spectrum}
+    \label{tx_spectrum}
+\end{figure}
+
 
 
 
@@ -128,39 +128,40 @@ This system is deployable by the command from the on-board computer. Thermal kni
 \end{figure*}
 
 
-\subsection{Measurements}
+\subsection{Tests}
 First automatic task of the satellite it to deploy the antennas. During the test campaign antenna deployment procedure was executed four times, due to the issues with Antenna opening. Satellite during antenna deployment is shown in the figure \ref{pwsat_with_deployed_antennas}.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.6\paperwidth]{img/6/pwsat_with_deployed_antennas.JPG}
+    \includegraphics[width=0.8\paperwidth]{img/6/pwsat_with_deployed_antennas.JPG}
     \caption{PW-Sat2 with deployed solar panels during antenna verification.}
     \label{pwsat_with_deployed_antennas}
 \end{figure}
 
 Manufacturer of the antennas provide a test report with the measured antennas matchins ($s_{11}$ parameter), for VHF and UHF frequencies they are shown in the figures \ref{isis_s11_vhf} and  \ref{isis_s11_uhf}, respectively.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\paperwidth]{img/6/isis_s11_vhf.png}
     \caption{VHF antenna matching. Source: \cite{isis_ant_test_report}}
     \label{isis_s11_vhf}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\paperwidth]{img/6/isis_s11_uhf.png}
     \caption{UHF antenna matching. Source: \cite{isis_ant_test_report}}
     \label{isis_s11_uhf}
 \end{figure}
 
+\newpage
 
 Both forward and reflected power from the antenna are measured by the radio module during radio frame transmission. Correct antenna deployment can be verified also by using the telemetry. During the test antenna deployment both forward and reflected power were captured. Average measured value of the forward power: \textbf{\SI{28.8}{\dBm} $\pm$ \SI{0.43}{\dBm}} and reflected power: \textbf{\SI{19.6}{\dBm} $\pm$ \SI{0.54}{\dBm}}. This means that the antenna matching for UHF frequencies is: SWR~$= 2.1$, $s_{11} = -9.2~dB$. This means that the power lost in the mismatch is \SI{0.5}{\dB}. Measured value is similar to measured by the manufacturer ($s_{11} = \SI{-14}{\dB}$).
 
 \subsection{Antennas on orbit}
 Reflected and forward power are being captured during the mission, the chart of the reflected and forward power, from the ground testing up to mission completion is shown in the figure \ref{4_rf_power_comm}. This shows that VSWR of the antenna didn't change much during the mission, however Sail and Solar Arrays deploments are clearly seen on the measurements. Picture of the shadow of the satellite on the Sail, showing opened antennas is shown in the figure \ref{antennas_deployed_orbit}.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\paperwidth]{img/6/rf_power_comm.pdf}
     \caption{RF power during mission.}
