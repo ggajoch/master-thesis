@@ -1,0 +1,15 @@
+\chapter{Abstract}
+
+This thesis aimed to design, verify, validate, and deploy the communication system for a second Polish satellite, PW-Sat2. PW-Sat2 is a student satellite project started in 2013 at Warsaw University of Technology by the Students Space Association members. It is a 2-unit CubeSat satellite, designed for Low Earth Orbit operations, launched on 3rd of December 2018 onboard SpaceX Falon 9 rocket.
+The thesis covers all aspects of communication practical link design from the system point of view:
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item analysis of the PW-Sat2 system,
+    \item selecting and tailoring the requirements for the communication system,
+    \item link parameter selection and tradeoff - data rate, frequency bands, modulations,
+    \item design of the space segment - the satellite part, with communication module and antennas,
+    \item design of the ground station to complement the space segment part - with antennas, communication transceiver, Low Noise Amplifiers, and filters, with GNUradio based Software Defined Radio demodulator,
+    \item measurement, verification, and validation of the components, end-to-end system testing,
+    \item system commissioning and on-orbit operation.
+\end{itemize}
+The thesis describes the choices, and the practical design of the low-cost satellite link using both off-the-shelf hardware, custom-designed components, and Software Defined Radio, with custom digital signal processing. The designed system provides a two-way data link between the operator and the satellite for PW-Sat2 project. Finally, the system was tested on the orbit, proving its parameters and reliability. Since $3^{rd}$ of December, PW-Sat2 is continuously communicating with its ground stations, sending telemetry data and performing experiments. Up to date (25.06.2019), satellite, on the commands from operators, took \si{572} photographs and sent them to Earth. \si{1343} communication sessions were executed, and during which, \SI{95.7}{\percent} of them the two-way communication was successfully established. At total, \SI{26.3}{\mega\byte} of data was sent to the ground.
