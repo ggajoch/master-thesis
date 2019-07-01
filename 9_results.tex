@@ -53,11 +53,23 @@ During the extended mission, PW-Sat2 is continuously monitored via its radio lin
 \section{Summary}
 This thesis described the challenges and requirements for building a CubeSat communication system. All of the design has been verified on the ground by various tests, calculations and predictions. Full end-to-end tests verified the correctness of the bought and designed components. The final test, during the satellite deployment and operations, proving the correctness of the designed radio link.
 
+During the thesis, a full communication link was designed, consisting of:
+\begin{itemize}
+    \item analysis of the PW-Sat2 system,
+    \item selecting and tailoring the requirements for the communication system,
+    \item link parameter selection and tradeoff - data rate, frequency bands, modulations,
+    \item design of the space segment - the satellite part, with communication module and antennas,
+    \item design of the ground station to complement the space segment part,
+    \item measurement, verification, and validation of the components, end-to-end system testing,
+    \item system commissioning and on-orbit operation.
+\end{itemize}
+
+
 Since $3^{rd}$ of December, PW-Sat2 is continuously communicating with its ground stations, sending telemetry data and performing experiments. Thanks to the radio link the main mission was a success, delivering video footage from the sail opening. Up to date (25.06.2019), $15^{th}$ RadFET run has been performed, with $7^{th}$ Sun Sensor experiments. Satellite, on the commands from operators, took \si{572} photographs and sent them to Earth. \si{1343} communication sessions were executed, and during which, \SI{95.7}{\percent} of them the two-way communication was successfully established. At total, \SI{26.3}{\mega\byte} of data was sent to the ground.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\paperwidth]{img/9/sail_photo.jpg}
+    \includegraphics[width=0.58\paperwidth]{img/9/sail_photo.jpg}
     \caption{Sail photograph taken on 16.06.2019}
     \label{sail_photo}
 \end{figure}
