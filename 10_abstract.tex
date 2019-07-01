@@ -1,7 +1,7 @@
 \chapter{Abstract}
 
 This thesis aimed to design, verify, validate, and deploy the communication system for a second Polish satellite, PW-Sat2. PW-Sat2 is a student satellite project started in 2013 at Warsaw University of Technology by the Students Space Association members. It is a 2-unit CubeSat satellite, designed for Low Earth Orbit operations, launched on 3rd of December 2018 onboard SpaceX Falon 9 rocket.
-The thesis covers all aspects of communication practical link design from the system point of view:
+The thesis covers all practical aspects of communication link design from the system point of view:
 \begin{itemize}
     \setlength\itemsep{0em}
     \item analysis of the PW-Sat2 system,
@@ -13,3 +13,19 @@ The thesis covers all aspects of communication practical link design from the sy
     \item system commissioning and on-orbit operation.
 \end{itemize}
 The thesis describes the choices, and the practical design of the low-cost satellite link using both off-the-shelf hardware, custom-designed components, and Software Defined Radio, with custom digital signal processing. The designed system provides a two-way data link between the operator and the satellite for PW-Sat2 project. Finally, the system was tested on the orbit, proving its parameters and reliability. Since $3^{rd}$ of December, PW-Sat2 is continuously communicating with its ground stations, sending telemetry data and performing experiments. Up to date (25.06.2019), satellite, on the commands from operators, took \si{572} photographs and sent them to Earth. \si{1343} communication sessions were executed, and during which, \SI{95.7}{\percent} of them the two-way communication was successfully established. At total, \SI{26.3}{\mega\byte} of data was sent to the ground.
+
+\chapter{Streszczenie pracy}
+
+Celem tej pracy było zaprojektowanie, weryfikacja i wdrożenie systemu łączności dla drugiego polskiego satelity - PW-Sat2. PW-Sat2 jest projektem studenckim  rozpoczętym w 2013 roku na Politechnice Warszawskiej przez członków Studenckiego Koła Astronautycznego, którego celem było zbudowanie satelity w standardzie CubeSat 2U, przeznaczonego na niską orbitę ziemską. Został wystrzelony 3 grudnia 2018 roku na pokładzie rakiety SpaceX Falcon 9.
+Praca dyplomowa obejmuje wszystkie aspekty projektowania satelitarnych łączy komunikacyjnych:
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item analiza misji PW-Sat2
+    \item określenie oraz doprecyzowanie wymagań dotyczących projektowanego systemu,
+    \item wybór parametrów łącza - przepływności, pasma komunikacyjne, użyte modulacje,
+    \item projekt segmentu kosmicznego - części satelitarnej, składającej się z modułu komunikacyjnego oraz anten,
+    \item projekt stacji naziemnej - anten, nadajnika, wzmacniaczy niskoszumnych, filtrów, demodulatora w technice Software Defined Radio opartego o GNUradio,
+    \item pomiary i weryfikacja komponentów, projektu oraz testy end-to-end,
+    \item uruchomienie systemu na orbicie, oszacowanie jego parametrów oraz wdrożenie docelowej pracy na orbicie.
+\end{itemize}
+Praca dyplomowa opisuje możliwości wyboru i praktyczną konstrukcję taniego łącza satelitarnego przy użyciu zarówno gotowych modułów jak i zaprojektowanych komponentów, z użyciem Software Defined Radio. Zaprojektowany system zapewnia dwukierunkowe łącze danych pomiędzy operatorem i satelitą dla projektu PW-Sat2. System został przetestowany na orbicie, co potwierdziło jego parametry i niezawodność. Od 3-go grudnia, PW-Sat2 jest w stałej łączności ze stacjami naziemnymi, przesyłając dane telemetryczne i przeprowadzając eksperymenty. Do chwili obecnej (25.06.2019) satelita, na komendy od operatorów, wykonał \si{572} zdjęcia i wysłał je łączem radiowym. Przeprowadzono \si{1343} sesji komunikacyjnych, podczas których \SI{95.7}{\percent} z nich udało się nawiązać dwukierunkową łączność. W sumie \SI{26.3}{\mega\byte} danych zostało przesłanych na Ziemię.
